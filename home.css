@@ -1,0 +1,52 @@
+.ul
+{
+    list-style-type:none;
+    margin:0;
+    margin-left:30px;
+    padding:0;
+    overflow:hidden;
+}
+
+a
+{
+    color:#2200BB;
+}
+
+.a:link,.a:visited
+{
+    display:block;
+    width:160px;
+    font-weight:bold;
+    /*color:Blue;*/
+    background-color:#EEEEFF;
+    text-decoration:none;
+    padding:2px;
+    margin:1px;
+    
+    border-width:1px;
+    border-style:solid;
+    border-color:#EEEEFF;
+}
+
+.a:hover,.a:active
+{
+    background-color:#FFFF88;
+    border-color:Gray;
+    border-width:1px;
+    border-style:solid;
+}
+
+.indent
+{
+    margin-left:30px;
+    margin-right:30px;
+}
+
+.underline
+{
+    text-decoration: underline;
+}
+a
+{
+    text-decoration: none;
+}
