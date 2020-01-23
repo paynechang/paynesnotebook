@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    video
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #19</h2>
+    <h3>
+                                                                2D Rendering</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    2D Rendering</h4>
+                <p>
+                    The baseline fluorescence intensity (F0) will be the example in this tutorial.</p>
+                <p>
+                    The default display mode is shown on the right.</p>
+            </td>
+            <td>
+                <img alt="Original" height="400" src="Images/02.png" width="401" /></td>
+            <td>
+                <img alt="2D Rendering" height="477" src="Images/01.png" width="461" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Reference Lines</h4>
+                <p>
+                    To display reference lines indicating the boundaries between the four quads, 
+                    check &quot;Reference&quot;.</p>
+            </td>
+            <td>
+                <img alt="Reference Lines" height="400" src="Images/03.png" width="400" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Normalization</h4>
+                <p>
+                    In some cases, the image is too dim to see it clearly. To take advantage of the 
+                    full dynamic range of the monitor, check &quot;Normalization&quot;.</p>
+            </td>
+            <td>
+                Original<br />
+                <img alt="Original F0" height="400" src="Images/04.png" width="400" /></td>
+            <td>
+                Normalized Rendering<br />
+                <img alt="Normalized Rendering" height="400" src="Images/05.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Linear Interpolation</h4>
+                <p>
+                    To linearly interpolate the values in monitor pixels between the centers of 
+                    camera pixels, check &quot;Interpolation&quot;.</p>
+                <p>
+                    By default, Ephic converts quad mesh to triangle mesh. You can leave this job to 
+                    OpenGL by unchecking &quot;Triangle&quot;.</p>
+            </td>
+            <td>
+                Original<br />
+                <img alt="Original" height="400" src="Images/02.png" width="401" /></td>
+            <td>
+                Linear Interpolated<br />
+                <img alt="Linear Interpolated" height="400" src="Images/06.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Dynamic Range Control - Upper Boundary</h4>
+                <p>
+                    By default, Ephic displays the data in full dynamic range (0 to 100 %) 
+                    of the camera. To 
+                    change the upper boundary, adjust &quot;High (%)&quot; slider and you will see the change 
+                    in the imaging window.</p>
+            </td>
+            <td>
+                Original<br />
+                <img alt="Linear Interpolated" height="400" src="Images/06.png" width="400" /></td>
+            <td>
+                Upper Boundary Changed to 36%<br />
+                <img alt="Upper Boundary Adjusted" height="400" src="Images/07.png" 
+                    width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Dynamic Range Control - Lower Boundary</h4>
+                <p>
+                    To change the lower boundary, adjust &quot;Low (%)&quot; slider and you will see the change 
+                    in the imaging window.</p>
+            </td>
+            <td>
+                Upper Boundary: 36%; Lower Boundary: 0%<br />
+                <img alt="Upper Boundary Adjusted" height="400" src="Images/07.png" 
+                    width="400" /></td>
+            <td>
+                Upper Boundary: 36%; Lower Boundary: 11%<br />
+                <img alt="Lower Boundary" height="400" src="Images/08.png" width="400" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    video
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #17</h2>
+    <h3>
+                                                                Data Type and Buffers</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Data Type</h4>
+                <p>
+                    Ephic can display a snapshot (required for movie), F0 (baseline intensity), the 
+                    maximum, the minimum, the difference between maximum and minimum (Max-Min), the 
+                    RMS value, the signal to noise ratio (Signal/Noise (max/rms)), the latency, the 
+                    excluded pixels, and the values in the buffer.</p>
+                <p>
+                    To display one of these data properties, click &quot;Data Type&quot; and select.</p>
+            </td>
+            <td>
+                <img alt="Data Type" height="209" src="Images/01.png" width="225" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Buffers</h4>
+                <p>
+                    Ephic has two buffers to store data and do some arithmetic. For example, if you 
+                    want to see the difference in the calcium imaging data before and after 
+                    theta-burst pairing, you can go to the baseline record and save the maximum data 
+                    to buffer B by click &quot;Save to Buf.&quot; button in the B row. Then, go to the record 
+                    after TBP and click &quot;Save to Buf.&quot; button in the A row. Click &quot;Buffer&quot; and 
+                    select &quot;A-B&quot;. Last, click &quot;Data Type&quot; and select &quot;Buffer&quot; and you will see the 
+                    difference is displayed in the imaging window.</p>
+                <p>
+                    When &quot;Buffer&quot; is selected in &quot;Data Type&quot;, you can display the values stored in 
+                    buffer A (A), the values stored in buffer B (B), the difference between A and B 
+                    (A-B), the values in A divided by those in B (A/B), or the values of (A-B)/B by 
+                    clicking &quot;Buffer&quot; and make the respective choice.</p>
+                <p>
+                    You can swap the values in buffer A and buffer B by clicking &quot;Swap A and B&quot;.</p>
+                <p>
+                    You can save values in the buffer to a file by clicking &quot;Buf. to File&quot;.</p>
+                <p>
+                    You can load values from a saved file to a buffer by clicking &quot;File to Buf.&quot;.</p>
+            </td>
+            <td>
+                <img alt="Buffer" height="65" src="Images/02.png" width="436" /><br />
+                <br />
+                <img alt="A-B" height="106" src="Images/03.png" width="161" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

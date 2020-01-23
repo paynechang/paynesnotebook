@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial #20</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    video
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #20</h2>
+    <h3>
+                                                                3D Rendering</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    3D Rendering</h4>
+                <p>
+                    To go to the 3D mode, check &quot;3D&quot;. The rendered image will be similar to linearly 
+                    interporated 2D data.</p>
+                <p>
+                    The default settings are displayed on the right.</p>
+            </td>
+            <td>
+                Original<br />
+                <img alt="Original" height="400" src="Images/01.png" width="400" /><br />
+                <br />
+                <img alt="3D Rendering Controls" height="296" src="Images/03.png" width="399" /></td>
+            <td>
+                3D Rendering<br />
+                <img alt="3D Rendering" height="400" src="Images/02.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Gray Scale</h4>
+                <p>
+                    You can display the data in three gray scales. There are 16 levels in Gray (16), 
+                    32 levels in Gray (32), and 256 levels in Gray (256). To select one of them, 
+                    click &quot;Scale Bar&quot; and pick your choice.</p>
+            </td>
+            <td>
+                Gray (16)<br />
+                <img alt="Gray (16)" height="400" src="Images/04.png" width="400" /><br />
+                Gray (256)<br />
+                <img alt="3D Rendering" height="400" src="Images/02.png" width="400" /></td>
+            <td>Gray (32)<br />
+                <img alt="Gray (32)" height="400" src="Images/05.png" width="400" /><br />
+                Scale Bar<br />
+                <img alt="Scale Bar" height="125" src="Images/06.png" width="168" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Color Scale</h4>
+                <p>
+                    You can display the data in three color scales. There are 16 levels in Color 
+                    (16), 32 levels in Color (32), and 256 levels in Color (256). To select one of 
+                    them, click &quot;Scale Bar&quot; and pick your choice.</p>
+            </td>
+            <td>
+                Color (16)<br />
+                <img alt="Color (16)" height="400" src="Images/07.png" width="400" /><br />
+                Color (256)<br />
+                <img alt="Color (256)" height="400" src="Images/09.png" width="400" /></td>
+            <td>
+                Color (32)<br />
+                <img alt="Color (32)" height="400" src="Images/08.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Z Scale</h4>
+                <p>
+                    To change the scale in the Z axis, adjust the &quot;Z Scale&quot; slide.</p>
+            </td>
+            <td>
+                Original<br />
+                <img alt="Color (256)" height="400" src="Images/09.png" width="400" /></td>
+            <td>
+                Z Scale Changed to 3.26<br />
+                <img alt="Z Scale" height="400" src="Images/10.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Rotation around The X Axis</h4>
+                <p>
+                    To rotate the data aroung the x axis, adjust &quot;x&quot; slider in the 
+                    rotation panel.</p>
+            </td>
+            <td>
+                Original<br />
+                <img alt="Z Scale" height="400" src="Images/10.png" width="400" /></td>
+            <td>
+                X-axis Rotation: -34<br />
+                <img alt="X-axis Rotation" height="400" src="Images/11.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Rotation around The Z Axis</h4>
+                <p>
+                    To rotate the data around the z axis, 
+                    adjust &quot;z&quot; slider in the &quot;Rotation&quot; panel.</p>
+            </td>
+            <td>
+                X-axis Rotation: -34; Z-axis Rotation: 0<br />
+                <img alt="X-axis Rotation" height="400" src="Images/11.png" width="400" /></td>
+            <td>
+                X-axis Rotation: -34; Z-axis Rotation: 30<br />
+                <img alt="Z-axis Rotation" height="400" src="Images/12.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Translation along The Y Axis</h4>
+                <p>
+                    To translate the data along the y axis, 
+                    adjust &quot;y&quot; slider in the &quot;Translation&quot; 
+                    panel.</p>
+            </td>
+            <td>
+                X-axis Rotation: -34; Z-axis Rotation: 30<br />
+                Y-axis Translation: 0<br />
+                <img alt="Z-axis Rotation" height="400" src="Images/12.png" width="400" /></td>
+            <td>
+                X-axis Rotation: -34; Z-axis Rotation: 30<br />
+                Y-axis Translation: -20<br />
+                <img alt="Y-axis Translation" height="400" src="Images/13.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Zoom</h4>
+                <p>
+                    To change the zoom, 
+                    adjust &quot;Zoom&quot; slider.</p>
+            </td>
+            <td>
+                X-axis Rotation: -54; Z-axis Rotation: 30<br />
+                X-axis Translation: -7; Y-axis Translation: -20<br />
+                Zoom: 1.00<br />
+                <img alt="Zoom 1.00" height="400" src="Images/14.png" width="400" /></td>
+            <td>
+                X-axis Rotation: -54; Z-axis Rotation: 30<br />
+                X-axis Translation: -7; Y-axis Translation: -20<br />
+                Zoom: 1.25<br />
+                <img alt="Zoom 1.25" height="400" src="Images/15.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Mesh Rendering</h4>
+                <p>
+                    The default rendering mode in 3D is surface rendering. To change 
+                    it to the mesh 
+                    rendering mode, check &quot;Lines&quot;. The mesh displayed on the right is rendered by 
+                    quads. To change the elements to triangles, check &quot;Triangle&quot; in the 2D panel.</p>
+            </td>
+            <td>
+                Surface Rendering<br />
+                <img alt="Surface Rendering" height="400" src="Images/16.png" width="400" /></td>
+            <td>
+                Mesh Rendering<br />
+                <img alt="Mesh Rendering" height="400" src="Images/17.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Original</h4>
+                <p>
+                    You can switch to the data rendering without rotation, translation, and zoom by 
+                    checking &quot;Original&quot;. To go back to the rendering with rotation, translation, and 
+                    zoom, uncheck the &quot;Original&quot; button.</p>
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4 id="Movie">
+                    Movie of The Steps</h4>
+                <ol>
+                    <li>Change the rendering mode to 3D in color 256 scale.</li>
+                    <li>Change z scale.</li>
+                    <li>Rotate around the x axis.</li>
+                    <li>Rotate around the z axis.</li>
+                    <li>Translate along the x axis.</li>
+                    <li>Translate along the y axis.</li>
+                    <li>Change the zoom.</li>
+                    <li>Switch to the mesh mode.</li>
+                    <li>Adjust z scale again.</li>
+                    <li>Rotate aroung the z axis.</li>
+                    <li>Switch back to surface rendering mode.</li>
+                    <li>Check &quot;Original&quot; button.</li>
+                    <li>Uncheck &quot;Original&quot; button.</li>
+                </ol>
+            </td>
+            <td>
+<!----------------------------------------------------->
+<div>Video</div>
+<video controls width="400" height="400">
+    <source src="Videos/Steps.x264.aac.mp4" type="video/mp4" />
+    <source src="Videos/Steps.vp8.vorbis.webm" type="video/webm" />
+    <source src="Videos/Steps.theora.vorbis.ogg" type="video/ogg" />
+
+    <object width="400" height="400" data="Videos/Steps.x264.aac.mp4" type="video/mp4">
+        <embed width="400" height="400" src="Videos/Steps.flv.swf" loop="false" />
+    </object>
+</video>
+<!----------------------------------------------------->
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Movie of Two bAPs</h4>
+                <p>
+                    This is a movie displaying calcium imaging signals evoked by two bAPs.</p>
+            </td>
+            <td>
+<!----------------------------------------------------->
+<div>Video</div>
+<video controls width="400" height="400">
+    <source src="Videos/TwoBAPs.x264.aac.mp4" type="video/mp4" />
+    <source src="Videos/TwoBAPs.vp8.vorbis.webm" type="video/webm" />
+    <source src="Videos/TwoBAPs.theora.vorbis.ogg" type="video/ogg" />
+
+    <object width="400" height="400" data="Videos/TwoBAPs.x264.aac.mp4" type="video/mp4">
+        <embed width="400" height="400" src="Videos/TwoBAPs.flv.swf" loop="false" />
+    </object>
+</video>
+<!----------------------------------------------------->
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>
