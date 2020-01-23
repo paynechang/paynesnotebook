@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial #1</title>
+    <!-- Style  -->
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" 
+        type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 183px;
+            height: 73px;
+        }
+        .style3
+        {
+            width: 197px;
+            height: 168px;
+        }
+        .style4
+        {
+            width: 190px;
+            height: 170px;
+        }
+        .style5
+        {
+            width: 188px;
+            height: 168px;
+        }
+        .style6
+        {
+            width: 440px;
+            height: 30px;
+        }
+        .style7
+        {
+            width: 188px;
+            height: 68px;
+        }
+        td
+        {
+            vertical-align:top;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr />
+    <!-- Main  -->
+    <h2>
+        Tutorial #1</h2>
+    <ul>
+        <li>File structure</li>
+        <li>Data acquisition</li>
+    </ul>
+    <hr />
+    <h2>
+        File Structure</h2>
+    <p class="indent">
+        The structure of the files is organized to facilatate recording and data analysis.
+        There are three layers in the file structure. The first layer is the date folder,
+        which contains all data collected on one day. The second layer is the neuron folder,
+        which contains all data collected from one neuron or one slice. The third layer
+        is the record folder, which contains settings (Settings.set), electrophysiology 
+        data (ITC.dat), and imaging
+        data (EDT.dat).</p>
+    <ul>
+        <li>Date folder<ul>
+            <li>Neuron folder<ul>
+                <li>Record folder<ul>
+                    <li>Settings.set<ul>
+                        <li>This file contains all information about this record.</li>
+                    </ul>
+                    </li>
+                    <li>ITC.dat<ul>
+                        <li>Thie file contains the electrophysiology data.</li>
+                    </ul>
+                    </li>
+                    <li>EDT.dat<ul>
+                        <li>This file contains the imaging data.</li>
+                    </ul>
+                    </li>
+                </ul>
+                </li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2>
+        Date Folder</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                    Before doing the first data acquisition, you need to create a date folder.<br />
+                    <br />
+                    To create a new date folder, click &quot;File -&gt; New Date Folder&quot;. Follow the instructions to create a new date folder.</td>
+            <td>
+                <img alt="" class="style1" src="Images/01.png" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                The current date folder is shown in a light yellow box.
+                    </td>
+            <td>
+                <img class="style6" src="Images/02.png" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                The current neuron number is displayed in the &quot;Neuron No&quot; box. To increase or 
+                        decrease the neuron number, click the respective triangle button on the right. 
+                        To go to a specific neuron number, type in the number in the &quot;Neuron No&quot; box and 
+                        press &quot;Enter&quot;.<br />
+                <br />
+                The current record number is displayed in the &quot;Record No&quot; box. To increase or 
+                        decrease the record number, click the respective triangle button on the right. 
+                        To go to a specific record number, type in the number in the &quot;Record No&quot; box and 
+                        press &quot;Enter&quot;.<br />
+                <br />
+                To exit Ephic, press &quot;Esc&quot; on the keyboard.</td>
+            <td>
+        <img class="style7" src="Images/06.png" /></td>
+        </tr>
+    </table>
+    <h2>
+        Data Acquisition</h2>
+        <table><tr><td style="width: 500px">
+                To do the first recording with the default settings, click &quot;ACQ -&gt; ACQ&quot;.<br />
+                <br />
+                To save the data, click &quot;ACQ -&gt; Save&quot;.</td><td>
+        <img class="style3" src="Images/03.png" /></td></tr><tr><td style="width: 500px">
+                    You can save the data automatically during data acquisition by checking &quot;Auto
+        Save&quot; box.</td><td>
+        <img class="style4" src="Images/04.png" /></td></tr><tr><td style="width: 500px">
+                    Ephic can repeat data acquisition. For example, if you want to repeat data acquisition
+        every 10 seconds, type 10 in &quot;Interval (sec):&quot; box, press &quot;Enter&quot; to update
+        the change, then click &quot;Repeat&quot; button. To stop the repetition, click
+        &quot;Repeat&quot; button again. When &quot;Auto Save&quot; is checked, Ephic saves the data 
+                    and increases
+        record number automatically.<br />
+                    <br />
+                    In some rare occations, you might want to save the data to a differenct record 
+                    folder. To do so, click &quot;Save As&quot; button and follow the instructions.</td><td>
+        <img class="style5" src="Images/05.png" /></td></tr></table>
+    <hr />
+</body>
+</html>

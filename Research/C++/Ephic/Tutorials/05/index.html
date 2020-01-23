@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial #5</title>
+    
+    <!-- Style  -->
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    
+    </head>
+
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    
+    <hr />
+    
+    <!-- Main  -->
+
+    <h2>
+        Tutorial #5</h2>
+    <ul>
+        <li>Analysis Tab
+        <ul>
+            <li>You can find a record that matchs a setting file.</li>
+            <li>Ephic can automatically go through the records of one neuron.</li>
+            <li>You can average several traces.</li>
+        </ul>
+    </ul>
+    <hr />
+    
+    <h2>
+        Analysis Tab</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                To go to the &quot;Analysis&quot; tab, click the &quot;Analysis&quot; tab.</td>
+            <td>
+                <img alt="Analysis Tab" height="292" src="Images/01.png" width="187" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To find a record with specific settings, click &quot;Load&quot; 
+                button to load the setting file. 
+                Check &quot;Setting Match Check&quot; and click &quot;&gt;&quot; by the &quot;Record No&quot; box.</td>
+            <td>
+                <img alt="Load Settings" height="290" src="Images/02.png" width="186" /><br />
+                <br />
+                <img alt="Increase Record No" height="67" src="Images/03.png" width="186" /></td>
+            <td>
+                <img alt="Traces" height="395" src="Images/04.png" width="552" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To display the records of one neuron one by one every 0.5 second, type &quot;0.5&quot; 
+                in the &quot;sec&quot; box and press &quot;Enter&quot;. Click &quot;&gt;&quot; and Ephic will increase the record 
+                number and display the data. Click &quot;&lt;&quot; and Ephic will decrease the record number 
+                and display the data. If &quot;Setting Match Check&quot; is checked, Ephic will only 
+                display records that match the loaded settings.</td>
+            <td>
+                <img alt="Load Settings" height="290" src="Images/02.png" width="186" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                In some situations, you will need to average traces in a subset of your data. 
+                For example, you might want to average traces before theta-burst stimulation and 
+                the last few traces at the end of an LTP experiment. To do so, you need to 
+                specify the first and the last record numbers. You can type the numbers in 
+                the &quot;First Rec.&quot; and &quot;Last Rec.&quot; boxes and press &quot;Enter&quot;. This topic will be 
+                discussed in other tutorials.</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To average two traces, go to the first record and click &quot;Add&quot; 
+                button. Then, go to the 
+                second record and click &quot;Add&quot; button again. You will see &quot;2&quot; appear in the &quot;NumRec&quot; box, 
+                indicating two traces have been saved to a buffer. To 
+                display the averaged trace, check &quot;show&quot; and the averaged trace will be 
+                displayed in green.<br />
+                <br />
+                To analyze the averaged trace, check &quot;Active&quot;. This will be discussed in other 
+                tutorials.<br />
+                <br />
+                To clear the 
+                buffer, click &quot;Clear&quot;.</td>
+            <td>
+                <img alt="Average" height="89" src="Images/05.png" width="174" /></td>
+            <td>
+                <img alt="Average Traces" height="397" src="Images/06.png" width="560" /></td>
+        </tr>
+        </table>
+    
+    <hr />
+    
+</body>
+</html>

@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #9</h2>
+    <ul>
+        <li>Analysis of one action potential
+            <ul>
+                <li>Ephic measures the voltage and the latency of the first peak, the threshold and the latency to 
+                    reach the threshold, the half-height width, and the first inter spike interval 
+                    (ISI).</li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2>
+        Analysis of One Action Potential</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                Ephic counts the number of action potentials (above 0 mV, 7 action potentials in 
+                this example).<br />
+                <br />
+                To save peak latencies of 
+                all spikes, click &quot;Save Spike Latency&quot; and follow the 
+                instructions.<br />
+                <br />
+                The peak voltage and the peak latency of the first action potential are 
+                displayed.<br />
+                <br />
+                The threshold and the shreshold latency of the first action potential are 
+                displayed. The threshold is defined as the voltage at which dV/dt crosses 20 
+                mV/ms. You can change this value by typing the new value in the &quot;Criterion (V&#39;)&quot; 
+                box and press &quot;Enter&quot;.<br />
+                <br />
+                The half-height width of the first action potential is displayed.<br />
+                <br />
+                The first inter spike interval (ISI) is displayed.<br />
+                <br />
+                The baseline to define the height of the action potential is defined in 
+                measurement #12. In this example, the baseline is defined as the period from 0 
+                to 99 ms.</td>
+            <td>
+                <img alt="Action Potential" height="193" src="Images/01.png" width="409" />&nbsp;
+            </td>
+            <td>
+                <img alt="Action Potential" height="398" src="Images/02.png" width="571" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

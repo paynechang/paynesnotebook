@@ -1,0 +1,266 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 245px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #8</h2>
+    <ul>
+        <li>Procedure control
+            <ul>
+                <li>Ephic can automatically perform experiments according to the procedure specified
+                    in a predefined file (.pro file).</li>
+                <li>For example, you can monitor Vm, Rin, action potentials, synaptic transmissions, 
+                    and do calcium imaging during a long-term potentiation experiment.</li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2>
+        Procedure Control</h2>
+    <table>
+        <tr>
+            <td style="width: 600px">
+                <div>
+                    <p>
+                        Let&#39;s consider one LTP experiment. The following are the aims of this experiment.</p>
+                    <ul>
+                        <li>The membrane potential is held at -65 mV.</li>
+                        <li>The series resistance (Rs) is monitored.</li>
+                        <li>The membrane potential (Vm) is monitored.</li>
+                        <li>The input resistance (Rin) is monitored.</li>
+                        <li>The impedance profile (Chirp) is monitored.</li>
+                        <li>The threshold, height, and width of action potentials (APs) is monitored.</li>
+                        <li>The amplitude of after-depolarization (ADP) is monitored.</li>
+                        <li>The slope and amplitude of excitatory postsynaptic potentials (EPSPs) is 
+                            monitored.</li>
+                        <li>One calcium imaging and the other are performed 2 minutes before and 30 minutes 
+                            after LTP induction.</li>
+                        <li>Theta-burst pairing (TBP) protocol is performed after 10 minutes of baseline 
+                            recording.</li>
+                    </ul>
+                    <p>
+                        Ephic can do this for you.</p>
+                </div>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 600px">
+                First, you need to save the settings of each individual protocol to a &quot;.set&quot; file. For 
+                example, you will need &quot;Vm.set&quot;, &quot;Rin.set&quot;, &quot;Chirp.set&quot;, &quot;AP.set&quot;, &quot;ADP.set&quot;, &quot;EPSP.set&quot;, 
+                &quot;CalciumImaging.set&quot;, and &quot;TBP.set&quot;.</td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 600px">
+                Next, create 
+                three text files like the following. The commands are explained at the end of 
+                this page.
+                <pre>
+// Monitor.pro
+AdjustVm -65       // Adjust Vm to -65 mV
+Run Rs.set 5 1     // 5 sec, once
+Run Vm.set 5 1     // 5 sec, once
+Run Rin.set 5 1    // 5 sec, once
+Run Chirp.set 15 1 // 15 sec, once
+Run AP.set 10 1    // 10 sec, once
+Run ADP.set 10 1   // 10 sec, once
+Run EPSP.set 10 1  // 10 sec, once
+</pre><hr />
+
+<pre>
+// TBP.pro
+AdjustVm -65     // Adjust Vm to -65 mV
+Run TBP.set 20 1 // Run TBP every 20 seconds, once 
+</pre><hr />
+
+<pre>
+// Experiment.pro
+Exe Monitor.pro 60 10        // Repeat Monitor.pro every 60 seconds,
+                             // 10 times (totally 10 minutes).
+Run CalciumImaging.set 60 1  // 60 sec, once.
+Exe TBP.pro 20 3             // Execute TBP.pro every 20 sec, 3 times.
+Exe Monitor.pro 60 30        // Repeat Monitor.pro every 60 seconds,
+                             // 30 times.
+Run CalciumImaging.set 60 1  // 60 sec, once. </pre>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 600px">
+                Click &quot;Load Procedure&quot; button and load &quot;Experiment.pro&quot; by following the 
+                instructions.<br />
+                <br />
+                Click the triangle 
+                button and Ephic will start the procedure. To stop the procedure, 
+                click the triangle button again.<br />
+                <br />
+                After finishing the procedure, Ephic will pop up the triangle button to indicate 
+                that 
+                the procedure is done.</td>
+            <td>
+                <img alt="Procedure Control" height="90" src="Images/01.png" width="175" />&nbsp;
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <h2>
+        Commands</h2>
+    <table>
+        <tr>
+            <td class="style1">
+                Command</td>
+            <td>
+                Description</td>
+            <td>
+                Notes</td>
+            <td style="width: 280px">
+                Example</td>
+            <td>
+                Explanation</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                //</td>
+            <td>
+                Comment.</td>
+            <td>
+                Characters following // are ignored.</td>
+            <td style="width: 280px">
+                // From here to the end of the line is ignored.</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Set Amp <em>Current</em></td>
+            <td>
+                Set amplitude.</td>
+            <td>
+                In current clamp mode, it sets the amplitude of injected current in nA.</td>
+            <td style="width: 280px">
+                Set Amp 0.5</td>
+            <td>
+                This sets injected current to 0.5 nA.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Load <em>SetFileName</em></td>
+            <td>
+                Load saved settings.</td>
+            <td>
+                <em>SetFileName </em>is the SET file in &quot;/EphicFiles&quot; 
+                folder.</td>
+            <td style="width: 280px">
+                Load Vm.set</td>
+            <td>
+                Loads &quot;/EphicFiles/Vm.set&quot;.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Wait <em>Period</em></td>
+            <td>
+                Wait a certain time in seconds.</td>
+            <td>
+                <em>Period</em> is the time in seconds.</td>
+            <td style="width: 280px">
+                Wait 10</td>
+            <td>
+                Waits 10 seconds without doing anything.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                ResetInjectedI</td>
+            <td>
+                Reset continuous injected current to 0.</td>
+            <td>
+                &quot;/EphicFiles/AdjustVm.set&quot; is required</td>
+            <td style="width: 280px">
+                ResetInjectedI</td>
+            <td>
+                Reset holding current.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                AdjustVm <em>Voltage</em></td>
+            <td>
+                Sets membrane potential to <em>Voltage</em> in mV.</td>
+            <td>
+                &quot;/EphicFiles/AdjustVm.set&quot; is 
+                required.</td>
+            <td style="width: 280px">
+                AdjustVm -70</td>
+            <td>
+                Adjusts membrane potential to -70 mV.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Acq <em>Interval Repetition</em></td>
+            <td>
+                Does data acquisition.</td>
+            <td>
+                <em>Interval</em>: interval between acquisitions in 
+                seconds. <em>Repetition</em>: number of repetitions.</td>
+            <td style="width: 280px">
+                Acq 10 3</td>
+            <td>
+                Does data acquisition every 10 seconds, 3 times.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Run <em>SetFileName Interval Repetition</em></td>
+            <td>
+                Runs saved settings in <em>SetFileName.</em></td>
+            <td>
+                Repeats <em>Repetition</em> 
+                    times with <em>Interval</em> second interval.</td>
+            <td style="width: 280px">
+                Run TBF.set 10 3</td>
+            <td>
+                Loads TBF.set and runs three times with 10 second interval.</td>
+        </tr>
+        <tr>
+            <td class="style1">
+                Exe <em>ProFileName</em> <em>Interval</em> <em>Repetition</em></td>
+            <td>
+                Loads saved procedures in <em>ProFileName.</em></td>
+            <td>
+                Repeats <em>Repetition</em> 
+                    times with <em>Interval</em> second interval.</td>
+            <td style="width: 280px">
+                Exe 1min.pro 60 3</td>
+            <td>
+                Loads 1min.pro and executes three times with 60 second interval.</td>
+        </tr>
+    </table>
+    <hr />
+    </body>
+</html>

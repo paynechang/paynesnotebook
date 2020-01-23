@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial #2</title>
+    <!-- Style  -->
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style3
+        {
+            color: #00FF00;
+        }
+        .style4
+        {
+            color: #0000FF;
+        }
+        .style5
+        {
+            color: #FF3300;
+        }
+        .style6
+        {
+            color: #00FFFF;
+        }
+        .style9
+        {
+            width: 585px;
+            height: 398px;
+        }
+        .style11
+        {
+            width: 219px;
+            height: 289px;
+        }
+        .style12
+        {
+            width: 557px;
+            height: 324px;
+        }
+        .style13
+        {
+            width: 564px;
+            height: 336px;
+        }
+        .style14
+        {
+            width: 561px;
+            height: 335px;
+        }
+        .style16
+        {
+            width: 219px;
+            height: 401px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr />
+    <!-- Main  -->
+    <h2>
+        Tutorial #2</h2>
+    <ul>
+        <li>Electrophysiology Window</li>
+        <li>Electrophysiology Controls</li>
+        <li>Command waveform: Pulse</li>
+    </ul>
+    <hr />
+    <h2>
+        Electrophysiology Window</h2>
+    <table cellpadding="10">
+        <tr>
+            <td valign="top" style="width: 500px">
+                    The electrophysiology window displays the command (<span class="style3">light green</span>),
+                    the current trace (<span class="style4">blue</span>), the voltage trace (<span class="style5">red</span>),
+                    and the extracellular stimulator command (<span class="style6">cyan</span>). The 
+                    voltage
+                    scale is on the left. The current scale is on the right. The time
+                    scale is on the bottom.<br/><br/>
+
+                    To move the voltage or the current trace up or down, click and hold the left mouse
+                    button at the respective scale and drag up or down.<br/><br/>
+
+                    To move traces left or right, click and hold the left mouse button at the time sacle
+                    and drag left or right.<br/><br/>
+
+                    To change the 
+                    voltage scale or the current scale, click and hold the right
+                    mouse button at the respective scale and drag away from or closer to the reference
+                    line.<br/><br/>
+
+                    To change the time scale, click and hold the right mouse button at the time scale
+                    and drag away from or closer to the left border line.<br/><br/>
+
+                    To reset the electrophysiology window, press and hold &quot;Ctrl&quot; and click
+                    the left mouse button inside the window.<br/>
+            </td>
+            <td valign="top">
+                &nbsp;<img alt="Electrophysiology Window" height="448" src="Images/02.png" width="731" /></td>
+        </tr>
+    </table>
+    <h2>
+        Electrophysiology Controls</h2>
+    <table cellpadding="10" cellspacing="0">
+        <tr>
+            <td valign="top" style="width: 500px">
+                In this example, Ephic is in&nbsp; 
+                the &quot;V Clamp&quot; mode. To change to the &quot;I Clamp&quot; mode, click the
+                &quot;I Clamp&quot; button.<br />
+                <br />
+                There are five basic waveforms for command: Pulse, Alpha, Chirp, Ramp, and Sine.<br />
+                <br />
+                In this example, the Pulse waveform is used.<br />
+                <br />
+                With this default settings, Ephic calculates the resistance and displays it in &quot;Rin
+                (MOhm)&quot; box.
+            </td>
+            <td>
+                <img src="Images/01.png" />
+            </td>
+        </tr>
+    </table>
+    <h2>
+        Command Waveform: Pulse</h2>
+    <table cellpadding="10" cellspacing="0">
+        <tr>
+            <td valign="top" style="width: 500px">
+                In this example, Ephic is in 
+                the &quot;I Clamp&quot; mode. The command waveform is Pulse.<br />
+                <br />
+                The amplitude is 0.18 nA.<br />
+                <br />
+                The pulse starts at 100 ms. The width of the pulse is 30 ms. There is only one pulse
+                in a burst and one burst in the command. Thus, the interval between pulses and the
+                interval between bursts do not have any effect on the command.<br />
+                <br />
+                The figure 
+                on the right displays the command waveform and the voltage response from a mouse
+                CA1 pyramidal neuron.
+            </td>
+            <td valign="top">
+                <img class="style16" src="Images/04.png" />
+            </td>
+            <td valign="top">
+                <img class="style9" src="Images/03.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                This is a pulse command waveform during a TBP experiment. For each pulse, the amplitude
+                is 2 nA. The first pulse starts at 205 ms. The width of pulse is 1 ms.<br />
+                <br />
+                There are 5 pulses in each burst and the interval between two pulses is 10 ms.
+                <br />
+                <br />
+                There are 10 bursts and the interval between two bursts is 200 ms.</td>
+            <td valign="top">
+                <img class="style11" src="Images/05.png" />
+            </td>
+            <td valign="top">
+                <img class="style12" src="Images/06.png" /><br />
+                <br />
+                <img class="style13" src="Images/07.png" /><br />
+                <br />
+                <img class="style14" src="Images/08.png" />
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

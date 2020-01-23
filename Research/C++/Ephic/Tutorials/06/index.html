@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial #6</title>
+    
+    <!-- Style  -->
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    
+    </head>
+
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    
+    <hr />
+    
+    <!-- Main  -->
+
+    <h2>
+        Tutorial #6</h2>
+    <ul>
+        <li>Series resistance (Rs) compensation
+        <ul>
+            <li>Ephic can automatically compensate the deviation in Rs.</li>
+        </ul>
+    </ul>
+    <hr />
+    
+    <h2>
+        Series Resistance (Rs) Compensation</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                Let&#39;s first 
+                follow the steps to compensate the capacitance and the Rs of a pipette in an amplifier.<br />
+                <br />
+                The figure on the right displays the voltage (red) in response to a 
+                hyperpolarizing current pulse (blue, -0.3 nA). The capacitance and the Rs of the pipette are not compensated.<br />
+            </td>
+            <td>
+                <img alt="Whole Cell Model" height="443" src="Images/01.png" width="544" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To remove the capacitance introduced by the pipette, we adjust the knob in the 
+                amplifier to make the slope of the initial voltage trace as steep as possible, 
+                but not to cause oscillation. When you start to see ripples after the edge of 
+                the falling voltage, the setting of the capacitance compensation is too much. 
+                Back off a bit so you don&#39;t see ripples.</td>
+            <td>
+                <img alt="Capacitance Compensation" height="452" src="Images/02.png" 
+                    width="553" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To remove the 
+                Rs indroduced by the pipette, adjust the bridge 
+                balance knob in the amplifier so you don&#39;t see the sharp edge in the voltage 
+                trace at the beginning 
+                of current injection. At this point, the capacitance and the Rs 
+                of the pipette are well compensated.</td>
+            <td>
+                <img alt="Series Resistance Compensation" height="444" src="Images/03.png" 
+                    width="547" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                During experiments, it is often that the Rs of the 
+                pipette changed due to various reasons (for example, clogs acculumate at the 
+                tip). Therefore, it is a common practice to monitor Rs and make appropriate 
+                adjustments so that the change in Rs does not affect the measurements. In 
+                general, this works well. However, if continuous monitoring and correction of Rs 
+                is not feasible for the experiment, an alternative is to correct it offline. By 
+                giving a test current pulse and measuring the deviation from the original 
+                corrected voltage trace, we can calculate the change in Rs. With this 
+                information, we can correct the voltage trace according to the calculated change 
+                in Rs.</td>
+            <td>
+                <img alt="Calculation of Rs" height="504" src="Images/04.png" width="558" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                The figure on the right gives an example of how improper Rs compensation affects 
+                voltage measurement. In this example, the amplifier is measureing voltage 
+                in response to one hyperpolarizing current pulse (0.2 ~ 0.4 ms) and one 
+                depolarizing current pulse (0.7 ~ 0.9 ms). The Rs of the pipette is 10 MOhm. 
+                When the bridge balance is correctly set to 10 MOhm (red), the recorded voltage 
+                reflects the real voltage of the cell. When the bridge balance is set to 8 MOhm 
+                (black), the Rs is under-compensated and the voltage is deviated from the real 
+                voltage during current injection. When the bridge balance is set to 12 MOhm 
+                (green), Rs is over-compensated and the recorded voltage is also deviated from 
+                the real voltage. Rs does not affect voltage measurement where there is no current 
+                injection.</td>
+            <td>
+                <img alt="Change in Rs" height="402" src="Images/05.png" width="497" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                The figure on the right is a real neuron example. The current command is 
+                composed of a hyperpolarizing current pulse (1~2 ms) and a depolarizing current 
+                pulse (2~3 ms).</td>
+            <td>
+                <img alt="Whole Cell Rs" height="401" src="Images/06.png" width="500" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <strong>Automatic Rs Compensation</strong></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                In an experiment, load the settings in &quot;Rs.set&quot;. Repeat this protocol and make 
+                appropriate capacitance and Rs compensation in the amplifier. Save this data, 
+                which will be the original corrected Rs. During the experiment, repeat this 
+                protocol and save the data once a minute.</td>
+            <td>
+                <img alt="Rs Cp Compensation" height="396" src="Images/08.png" width="579" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                During analysis, click &quot;Load&quot; in the Rs tab and load &quot;Rs.set&quot; by following the 
+                instructions. Check &quot;Rs correction&quot;. Go to the original corrected Rs data and 
+                click &quot;Update&quot;. Measurement #3 measures the average voltage, current, and 
+                voltage slope from 0 to 1 ms. Measurement #4 measures these characteristics from 
+                2 to 3 ms. The difference in average votage between measurements #3 and #4 is 
+                shown in &quot;dV&quot; box. The calculated resistance is in &quot;R (M)&quot; box. These values are 
+                saved for automatic Rs compensation. Every voltage trace after one &quot;Rs.set&quot; 
+                reording is corrected according to the newly loaded values until Ephic loads the 
+                next &quot;Rs.set&quot; recording.</td>
+            <td>
+                <img alt="Rs Compensation" height="174" src="Images/07.png" width="319" /></td>
+        </tr>
+        </table>
+    
+    <hr />
+    
+</body>
+</html>

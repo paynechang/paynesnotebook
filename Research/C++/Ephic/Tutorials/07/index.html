@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    
+    <hr />
+    
+    <!-- Main  -->
+
+    <h2>
+        Tutorial #7</h2>
+    <ul>
+        <li>Holding potential control
+        <ul>
+            <li>Ephic can automatically hold membrane potential.</li>
+        </ul>
+    </ul>
+    <hr />
+    
+    <h2>
+        Holding Potential Control</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                The &quot;Vm&quot; box displays the average voltage.
+                <br />
+                <br />
+                You can ask Ephic to hold the voltage at a specific value. For example, to hold 
+                membrane potential at -65 mV, type &quot;-65&quot; in the &quot;Target Vm&quot; box and press 
+                &quot;Enter&quot;. Click &quot;Adjust Vm&quot; and Ephic will load &quot;/EphicFiles/AdjustVm.set&quot; and inject current 
+                to move the voltage to the target Vm. Ephic will keep adjusting injected current 
+                until three consecutive recordings is within the tolerance value specified in the &quot;Tolerance&quot; box.<br />
+                <br />
+                You can change the value of tolerance by type the value in the &quot;Tolerance&quot; 
+                box and press &quot;Enter&quot;.<br />
+                <br />
+                You can adjust the step size of current injection by adjusting the &quot;Step&quot; slider.<br />
+                <br />
+                You can manually type the value of injected current in the &quot;(pA) Injected I&quot; 
+                box and press &quot;Enter&quot;.<br />
+                <br />
+                You can increase or decrease one step of current injection by clicking &quot;+&quot; or 
+                &quot;-&quot;.<br />
+                <br />
+                To reset injected current 
+                to 0, click &quot;Reset&quot;.<br />
+                <br />
+                You can do &quot;Adjust Vm&quot; once a minute so that the membrane potential is constant 
+                during the experiment.</td>
+            <td>
+                <img alt="Holding Potential Control" height="149" src="Images/01.png" 
+                    width="279" /></td>
+        </tr>
+        </table>
+    
+    <hr />
+    
+</body>
+</html>
