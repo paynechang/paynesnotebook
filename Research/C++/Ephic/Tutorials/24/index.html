@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial #x</title>
+    <!-- Style  -->
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 182px;
+            height: 78px;
+        }
+        .style2
+        {
+            width: 509px;
+            height: 420px;
+        }
+        .style3
+        {
+            width: 100%;
+        }
+        .style4
+        {
+            width: 192px;
+            height: 71px;
+        }
+        .style5
+        {
+            width: 188px;
+            height: 102px;
+        }
+        .style6
+        {
+            width: 500px;
+            height: 410px;
+        }
+        .style7
+        {
+            width: 192px;
+            height: 168px;
+        }
+        .style8
+        {
+            width: 163px;
+            height: 208px;
+        }
+        .style9
+        {
+            width: 317px;
+            height: 245px;
+        }
+        .style10
+        {
+            width: 364px;
+            height: 96px;
+        }
+        .style11
+        {
+            width: 403px;
+            height: 403px;
+        }
+        .style12
+        {
+            width: 155px;
+            height: 72px;
+        }
+        .style13
+        {
+            width: 174px;
+            height: 86px;
+        }
+        .style14
+        {
+            width: 185px;
+            height: 70px;
+        }
+        .style15
+        {
+            width: 167px;
+            height: 63px;
+        }
+        .style16
+        {
+            width: 177px;
+            height: 75px;
+        }
+        .style17
+        {
+            width: 370px;
+            height: 260px;
+        }
+        .style18
+        {
+            width: 364px;
+            height: 94px;
+        }
+        .style19
+        {
+            width: 401px;
+            height: 401px;
+        }
+        .style20
+        {
+            width: 300px;
+            height: 110px;
+        }
+        .style21
+        {
+            width: 404px;
+            height: 403px;
+        }
+        .style22
+        {
+            width: 402px;
+            height: 400px;
+        }
+        .style23
+        {
+            width: 97px;
+            height: 29px;
+        }
+        .style24
+        {
+            width: 154px;
+            height: 99px;
+        }
+        .style25
+        {
+            width: 169px;
+            height: 171px;
+        }
+        .style26
+        {
+            width: 239px;
+            height: 115px;
+        }
+        .style27
+        {
+            width: 363px;
+            height: 255px;
+        }
+        .style28
+        {
+            width: 239px;
+            height: 113px;
+        }
+        .style29
+        {
+            width: 364px;
+            height: 260px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr />
+    <!-- Main  -->
+    <h2>
+        Tutorial #24</h2>
+    <h3>
+        Analysis of Calcium Imaging Data</h3>
+    <table cellpadding="10" cellspacing="0" class="style3" border="1" style="border-collapse: collapse;
+        width: 1000px;" width="800">
+        <tr>
+            <td valign="top" style="width: 500px">
+                Start Ephic.
+            </td>
+            <td valign="top">
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Change the date folder.
+            </td>
+            <td valign="top">
+                <img class="style1" src="01.png" /><br />
+                <br />
+                <img class="style2" src="02.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Select the neuron (or slice).
+            </td>
+            <td valign="top">
+                <img class="style4" src="03.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                To find the first baseline recording, Check &quot;Setting Match Check&quot;.<br />
+                <br />
+                Load &quot;Imaging-Baseline.set&quot; by clicking the &quot;Load&quot; button and
+                following the instructions.<br />
+                <br />
+                Click &quot;&gt;&quot; button by &quot;Record No&quot;.
+            </td>
+            <td valign="top">
+                <img class="style5" src="04.png" /><br />
+                <br />
+                <img class="style6" src="05.png" /><br />
+                <br />
+                <img class="style7" src="06.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Switch from &quot;Snapshot&quot; to &quot;F0&quot;.
+            </td>
+            <td valign="top">
+                <img class="style8" src="07.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Click &quot;Save Slope&quot;.<br />
+                Check &quot;Bleach Correction&quot;.<br />
+                Check &quot;Data Inversion&quot;.<br />
+                Check &quot;Temporal Filter&quot;.
+            </td>
+            <td valign="top">
+                <img class="style9" src="08.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Check &quot;ROI Mode&quot;.<br />
+                Click &quot;+ ROI&quot;.
+            </td>
+            <td valign="top">
+                <img class="style10" src="09.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Click and drag to change the location and the size of ROI.
+            </td>
+            <td valign="top">
+                <img class="style11" src="10.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Click &quot;Save ROIs&quot; and save ROI information to a file.
+            </td>
+            <td valign="top">
+                <img class="style12" src="11.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Uncheck &quot;Setting Match Check&quot;.
+            </td>
+            <td valign="top">
+                <img class="style13" src="12.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                1. Click &quot;&gt;&quot; button by &quot;Record No&quot;.<br />
+                2. Click &quot;Add&quot; button.<br />
+                <br />
+                Repeat steps 1 and 2 until all traces are added to the memory.<br />
+                <br />
+                Check &quot;Active&quot; to show the averaged traces.<br />
+                <br />
+                The trace window shows the baseline corrected and averaged trace (red).<br />
+                The blue trace indicates the intervals between two consecutive points (in this case,
+                2 ms). You can ignore this blue trace.
+            </td>
+            <td valign="top">
+                <img class="style14" src="13.png" /><br />
+                <br />
+                <img class="style15" src="14.png" /><br />
+                <br />
+                <img class="style16" src="15.png" /><br />
+                <br />
+                <img class="style17" src="16.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                You can adjust the contrast by sliding &quot;High&quot; and &quot;Low&quot; boundary
+                sliders. It won&#39;t affect the calculated values.
+            </td>
+            <td valign="top">
+                <img class="style18" src="17.png" /><br />
+                <br />
+                <img class="style19" src="18.png" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                If the offset is not correct, adjust &quot;#1&quot; to &quot;#3&quot; channels in
+                &quot;Fine Offset (%)&quot; panel so the background is uniform.
+            </td>
+            <td valign="top">
+                <img class="style20" src="19.png" /><br />
+                <br />
+                <img class="style21" src="20.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Click and drag to change the location and the size of ROI. Save it to a .roi file.<br />
+                <br />
+                Click &quot;Save BG2 (F0)&quot; to save the background level in the computer. Ephic finds 
+                the pixel with the lowest F0 and saves it&#39;s F0 as the background fluorescence.</td>
+            <td valign="top">
+                <img class="style22" src="21.png" /><br />
+                <br />
+                <img class="style23" src="22.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Click &quot;Load ROIs&quot; and select the file containing the region of interest.
+            </td>
+            <td valign="top">
+                <img class="style24" src="23.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                Check &quot;Background Subtraction&quot;.<br />
+                Check &quot;Baseline Removal&quot;.<br />
+                Check &quot;Data Divided by F0&quot;.
+            </td>
+            <td valign="top">
+                <img class="style25" src="24.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                To measure the first peak, check &quot;On&quot; 
+                box and type &quot;20&quot; in the &quot;Start&quot;
+                box and press &quot;Enter&quot;.
+                Type &quot;25&quot; in the &quot;Width&quot; box and press &quot;Enter&quot;. 
+                These settings correspond to an analysis window from 40 ms to 90 ms since the 
+                sampling rate is 500 Hz (2 ms between two consecutive points). The two orange 
+                vertical lines indicate the boundaries of the analysis period.<br />
+                <br />
+                &quot;15.228&quot; in &quot;Max&quot; is the peak value.
+            </td>
+            <td valign="top">
+                <img class="style26" src="25.png" /><br />
+                <br />
+                <img class="style27" src="26.png" />
+            </td>
+        </tr>
+        <tr>
+            <td valign="top" style="width: 500px">
+                To measure the second peak, type &quot;45&quot; in 
+                the &quot;Start&quot; box and press &quot;Enter&quot;.<br />
+                <br />
+                &quot;23.087&quot; in &quot;Max&quot; is the peak value of the second peak.
+            </td>
+            <td valign="top">
+                <img class="style28" src="27.png" /><br />
+                <br />
+                <img class="style29" src="28.png" />
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

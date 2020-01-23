@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    video
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #22</h2>
+    <h3>
+                                                                Processing of Imaging Data</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                Let&#39;s consider this example. We have one baseline record and two bAP records. 
+                Each bAP record contains two bAPs separated by 200 ms. We want to measure the 
+                peak amplitude of calcium imaging signals evoked by individual bAPs.<br />
+                <br />
+                We first load the baseline record and click &quot;Save Slope&quot;. Check &quot;Bleach 
+                Correction&quot; and &quot;Data Inversion&quot;.<br />
+                <br />
+                We check &quot;Temporal Filter&quot; with &quot;Half Width = 1&quot; to reduce noise.</td>
+            <td>
+                <img alt="Imaging Data Processing" height="244" src="Images/01.png" 
+                    width="309" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                The voltage trace in the bAP record is displayed on the right.<br />
+                <br />
+                Create ROIs along the dendrite. The corresponding traces are displayed in the 
+                imaging trace window.<br />
+                <br />
+                The blue trace in the imaging trace window indicates the interval between two 
+                consecutive points. The height is one unit from the beginning to the end, 
+                indicating the interval is 1 ms from the beginning to the end without missing 
+                any frame. You can hide this trace by unchecking the &quot;Interval&quot; box.<br />
+                <br />
+                The number at the top left corner is the upper boundary of the window.</td>
+            <td>
+                <img alt="Two bAPs" height="335" src="Images/02.png" width="470" /></td>
+            <td>
+                <img alt="Imaging Traces" height="400" src="Images/03.png" width="400" /><br />
+                <br />
+                <img alt="Imaging Traces" height="295" src="Images/04.png" width="410" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Average Two Records</h4>
+                <p>
+                    Click &quot;Add&quot; button in the &quot;Averaging&quot; panel.</p>
+                <p>
+                    Go to the next record and click &quot;Add&quot; button again. You will see the &quot;NumRec&quot; 
+                    box display &quot;2&quot;, indicating there are two records in the buffer.</p>
+                <p>
+                    Check &quot;Active&quot; and the imaging window and the imaging trace window will display 
+                    the averaged data. You might notice the noise is lower.</p>
+                <p>
+                    To clear the data in the buffer, click &quot;Clear&quot; button. The number in the 
+                    &quot;NumRec&quot; box will become &quot;0&quot; and the &quot;Active&quot; box will be unchecked 
+                    automatically.</p>
+            </td>
+            <td>
+                <img alt="Averaging" height="114" src="Images/05.png" width="173" />
+                <img alt="Averaging" height="113" src="Images/06.png" width="172" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To remove baseline, check &quot;Baseline Removal&quot;.<br />
+                <br />
+                To translate the baseline to the middle of the window, check &quot;Centered&quot;.</td>
+            <td>
+                Baseline Removed<br />
+                <img alt="Baseline Removed" height="257" src="Images/07.png" width="363" /><br />
+                <br />
+                <img alt="Baseline Removal" height="110" src="Images/13.png" width="165" /></td>
+            <td>
+                Centered<br />
+                <img alt="Centered" height="260" src="Images/08.png" width="365" /><br />
+                <br />
+                <img alt="Centered" height="91" src="Images/14.png" width="187" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To divide the data by baseline intensity, check &quot;Data Divided by F0&quot;.<br />
+                <br />
+                To adjust the y scale, slide the &quot;Y Scale&quot; slider. Now, the upper boundary is 
+                14.48%.<br />
+                <br />
+                You can adjust the x scale by sliding the &quot;X Scale&quot; slider. You can also 
+                translate the trace along the x axis by sliding the &quot;X Shift&quot; slider.<br />
+                <br />
+                You can change the background color to white by clicking &quot;Background&quot; and select 
+                &quot;White&quot;.<br />
+                <br />
+                You can save the imaging trace window to a TGA file by clicking &quot;Save Image&quot; and 
+                following the instructions.<br />
+                <br />
+                You can save the traces to a plain text file by clicking &quot;Save Traces&quot; and 
+                following the instructions.</td>
+            <td>
+                Data Divided by F0<br />
+                <img alt="Data Divided by F0" height="256" src="Images/09.png" width="366" /><br />
+                <br />
+                <img alt="Divided by F0" height="109" src="Images/12.png" width="164" /></td>
+            <td>
+                Y Scale Adjusted<br />
+                <img alt="Y Scale Adjusted" height="260" src="Images/10.png" width="371" /><br />
+                <br />
+                <img alt="Imaging Trace Window Control" height="71" src="Images/11.png" 
+                    width="467" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                Ephic measures the average, the standard deviation, and the peak amplitude of 
+                the whole trace of the active ROI and displays the values in the &quot;Analysis of 
+                Signals in ROIs&quot; panel.<br />
+                <br />
+                To measure these characteristics in a specified period, check &quot;On&quot; box, type in 
+                the start point and the width in the &quot;Start&quot; and the &quot;Width&quot; boxes, and press 
+                &quot;Enter&quot;. You will see two orange vertical lines indicating the boundaries of 
+                this analysis window.</td>
+            <td>
+                Characteristics of The Active ROI<br />
+                <img alt="Characteristics" height="107" src="Images/15.png" width="233" /></td>
+            <td>
+                Analysis Window<br />
+                <img alt="Analysis Window On" height="108" src="Images/16.png" width="233" /><br />
+                <br />
+                <img alt="Analysis Window" height="257" src="Images/17.png" width="368" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To save the peak value of each trace, click &quot;Save Max&quot; and the values will be 
+                saved to &quot;Max.txt&quot;.<br />
+                <br />
+                To subtract RMS value from the max, check &quot;RMS Removal&quot; box. The RMS value is 
+                calculated in the period defined in the &quot;Data Processing&quot; tab.</td>
+            <td>
+                <img alt="Save Max" height="171" src="Images/18.png" width="162" />
+                <img alt="RMS" height="119" src="Images/19.png" width="321" /></td>
+            <td>
+                <p>
+                    &quot;Max.txt&quot;</p>
+                <pre>
+No	Max
+0	11.2013
+1	6.5584
+2	5.56005
+3	4.8601
+4	4.183
+5	3.751
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To save the peak values of both calcium transients, type in &quot;90&quot;, &quot;200&quot;, &quot;2&quot; in 
+                &quot;Start&quot;, &quot;Width&quot;, and &quot;Numver&quot; boxes and press &quot;Enter&quot;. Click &quot;Save Maxima&quot; 
+                button and the values will be saved to &quot;Maxima.txt&quot;.</td>
+            <td>
+                <img alt="Two Peaks" height="171" src="Images/20.png" width="161" /></td>
+            <td>
+                <p>
+                    &quot;Maxima.txt&quot;</p>
+                <pre>
+No	Max1	Max2
+0	11.2013	11.8885
+1	6.5584	7.38292
+2	5.56005	7.11527
+3	4.8601	5.44764
+4	4.183	4.79142
+5	3.751	3.58588
+</pre>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Background Subtraction</h4>
+                <p>
+                    Create background ROIs. Click &quot;Save BG&quot; to save the minimum F0 in the box to a 
+                    background buffer.</p>
+                <p>
+                    Load original ROIs and check &quot;Background Subtraction&quot;.</p>
+            </td>
+            <td>
+                Background ROIs<br />
+                <img alt="" height="400" src="Images/21.png" width="400" /></td>
+            <td>
+                <img alt="Save BG" height="175" src="Images/22.png" width="362" /><br />
+                <br />
+                <img alt="Background Subtraction" height="106" src="Images/23.png" 
+                    width="161" /><br />
+                <br />
+                <img alt="Background Subtracted" height="256" src="Images/24.png" width="369" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

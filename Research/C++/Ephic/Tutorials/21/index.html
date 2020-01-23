@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    video
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #21</h2>
+    <h3>
+                                                                Controlling Regions of Interest (ROIs)</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    ROI Controls</h4>
+                <p>
+                    The figure on the right is the default settings of ROI Controls.</p>
+                <p>
+                    In the imaging window, you can see a magenta box, which is called selection box 
+                    and is used to create ROIs. The cross inside the selection box is for better 
+                    visualization only.</p>
+                <p>
+                    To hide ROIs and the selection box, uncheck &quot;ROI&quot;.</p>
+                <p>
+                    To show ROIs only, check &quot;ROI Mode&quot; and Ephic will hide the selection box, which 
+                    is still effective but not visible.</p>
+                <p>
+                    To move the selection box, click inside the selection box, hold and drag.</p>
+                <p>
+                    To change the size and shape of the selection box, click ouside the selection 
+                    box, hold and drag.</p>
+            </td>
+            <td>
+                <img alt="ROI Controls" height="304" src="Images/01.png" width="376" /></td>
+            <td>
+                <img alt="Selection Box" height="400" src="Images/02.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <p>
+                    To create the first ROI at the proximal trunk, click and drag along the proximal 
+                    trunk.</p>
+                <p>
+                    Click &quot;+ ROI&quot; button. Move the selection box to the side and you will see the 
+                    first ROI displayed as a red box. The imaging data is also displayed in the 
+                    imaging trace window. The color of the trace matches the color of the ROI box. 
+                    This is a calcium imaging signal evoked by one bAP. The data displayed in the 
+                    imaging trace window is the average of signals from all pixels in the ROI.</p>
+            </td>
+            <td>
+                <img alt="Selection Box" height="400" src="Images/03.png" width="400" /></td>
+            <td>
+                <img alt="First ROI" height="400" src="Images/04.png" width="400" /><br />
+                <br />
+                <img alt="Trace" height="295" src="Images/05.png" width="410" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <p>
+                    One ROI can contain several boxes. Ephic calls them Boxes Of Interest (BOIs).</p>
+                <p>
+                    To add another BOI to the current ROI, click and drag along the trunk. Click &quot;+ 
+                    BOI&quot;. Move the selection box to the side and you will see the newly added BOI. 
+                    You can add many BOIs to one ROI.</p>
+            </td>
+            <td>
+                <img alt="BOI" height="400" src="Images/06.png" width="400" /></td>
+            <td>
+                <img alt="Trace" height="295" src="Images/07.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To create another ROI, click and drag along the trunk. Click &quot;+ ROI&quot;. Move the 
+                selection box to the side and you will see the newly added ROI. The newest ROI 
+                is in red. The second new ROI is in orange. You will find two traces in the 
+                imaging trace window. The colors of these traces correspond to the colors of the 
+                ROIs.</td>
+            <td>
+                <img alt="Another ROI" height="400" src="Images/08.png" width="400" /></td>
+            <td>
+                <img alt="Traces" height="295" src="Images/09.png" width="410" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To move an ROI, check &quot;ROI Mode&quot;. Click inside the ROI and drag. When you click 
+                an ROI, it will become the active one, which becomes red.<br />
+                <br />
+                Ephic keeps index of each ROI and BOI. When an ROI is selected and becomes the 
+                active one, its index becomes the first and the indexes of all ROIs previously 
+                have lower indexes than the original index of the activated ROI will increase by 
+                one. It is also true for BOIs in one ROI.<br />
+                <br />
+                You can move one BOI by click inside the BOI and drag.<br />
+                <br />
+                You can delete the active ROI by clicking &quot;- ROI&quot;.<br />
+                <br />
+                You can delete the active BOI by clicking &quot;- BOI&quot;.<br />
+                <br />
+                In the ROI Mode, you can change the size and the shape of ROI or BOI by clicking 
+                outside the ROI or BOI and drag.<br />
+                <br />
+                To move all ROIs by one pixel, click the respective arrow heads.<br />
+                <br />
+                To save ROIs to an ROI file, click &quot;Save ROIs&quot; and follow the instructions.<br />
+                <br />
+                To load reviously saved ROIs from an ROI file, click &quot;Load ROIs&quot; and follow the 
+                instructions.<br />
+                <br />
+                To delete all ROIs, click &quot;Clear ROIs&quot;.<br />
+                <br />
+                To display ROI information in a command window, click &quot;ROI Information&quot;.</td>
+            <td>
+                <img alt="ROI Controls" height="304" src="Images/01.png" width="376" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4 id="Tracing">
+                    Automatic 
+                    Dendrite Tracing</h4>
+                <p>
+                Ephic can trace the dendrite for you. In this 
+                experiment configuration, the length of 7 
+                pixels is 25 &micro;m. To trace the dendrite for 150 µm, type in 6 in the the 
+                box next to the &quot;Auto Tracer&quot; button and press &quot;Enter&quot;. Press and hold &quot;Shift&quot;. 
+                Click the base of the trunk and drag toward the direction of the dendrite. Two 
+                seed pixels is good. Click &quot;Auto Tracer&quot; and you will see the tracer along the 
+                dendrite. The tracer is in dark red.<br />
+                <br />
+                Click &quot;Create ROIs&quot; button to create ROIs.<br />
+                <br />
+                Click &quot;Clear Tracer&quot; button to clear the tracer.<br />
+                <br />
+                You will see six ROIs are created. Each ROI contains seven BOIs, which contain 
+                one pixel only. The corresponding calcium imaging traces are displayed in the 
+                imaging trace window.</p>
+            </td>
+            <td>
+                <img alt="Auto Tracer" height="400" src="Images/10.png" width="400" /><br />
+                <br />
+                <img alt="ROIs" height="400" src="Images/12.png" width="400" /></td>
+            <td>
+                <img alt="Auto Tracer" height="400" src="Images/11.png" width="400" /><br />
+                <br />
+                <img alt="Traces" height="295" src="Images/13.png" width="410" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Ruler</h4>
+                <p>
+                    To display a blue ruler, check &quot;Ruler&quot; box. To change the location and the 
+                    direction of the ruler, press and hold &quot;Ctrl&quot;. Click and drag. One square is a 
+                    25 x 25 &micro;m box.</p>
+            </td>
+            <td>
+                <img alt="Ruler" height="400" src="Images/14.png" width="400" /></td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>
