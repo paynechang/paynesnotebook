@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- Head  -->
+<head>
+    <title>Ephic</title>
+    <!-- Style  -->
+    <link href="Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+</head>
+<!-- Body  -->
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Navigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="Notes/index.html">Notes</a></li>
+    </ul>
+    <!-- End of Navigation Bar -->
+    <hr />
+    <h2>
+        Introduction</h2>
+    <p class="indent">
+        Ephic is developed by Dr. Payne Chang in <a href="http://clm.utexas.edu/djlab">Dr. Daniel
+            Johnston&#39;s lab</a> in <a href="http://clm.utexas.edu/">the Center for Learning and
+                Memory</a>, <a href="http://www.utexas.edu/">the University of Texas at Austin</a>.</p>
+    <p class="indent">
+        The main purpose of Ephic is to simultaneously control a fast, low noise, and quantitative
+        CCD camera (<a href="http://www.redshirtimaging.com/redshirt_neuro/hardware_neuroccdsm.htm">RedShirtImaging
+            CCD-SMQ camera</a>) through an <a href="http://www.edt.com/pcidv_cl.html">EDT DV C-Link
+                frame grabber board</a>, and an amplifier through a <a href="http://www.heka.com/physio/equipment/interfaces/itc18.html">
+                    HEKA ITC-18</a> data acquisition interface. The system is good for voltage
+        imaging, calcium imaging, whole cell recording, and field potential recroding. Ephic
+        is equipped with intuitive and versatile tools to control the experiment. It also
+        contains several powerful tools to analyze both imaging and electrical data.</p>
+    <table>
+        <tr>
+            <td>
+                <h3 style="margin-bottom: 0px">
+                    Required Devices:</h3>
+                <p style="margin-top: 0px; font-weight: 700; font-style: italic;">
+                    (These devices are required to acquire data, but not required to run Ephic for data
+                    analysis.)
+                </p>
+                <ul>
+                    <li><a href="http://www.redshirtimaging.com/redshirt_neuro/hardware_neuroccdsm.htm">
+                        CCD-SMQ camera (RedShirtImaging)</a></li>
+                    <li><a href="http://www.edt.com/pcidv_cl.html">PCI DV C-Link frame grabber board (Engineering
+                        Design Team)</a></li>
+                    <li><a href="http://www.heka.com/physio/equipment/interfaces/itc18.html">ITC-18 16-bit
+                        data acquisition interface (HEKA)</a></li>
+                </ul>
+                <h3>
+                    Optional Devices:</h3>
+                <ul>
+                    <li><a href="http://www.dagan.com/bvc-700.htm">BVC-700 bridge and voltage clamp amplifier
+                        (Dagan)</a></li>
+                    <li><a href="http://www.digitimer.com/neurolog/nl_stim.htm">NeuroLog stimulator (Digitimer)</a></li>
+                    <li>Shutter and shutter controller</li>
+                </ul>
+                <h3>
+                    Required Drivers:</h3>
+                <ul>
+                    <li>Drivers for PCI DV C-Link board (<a href="http://www.edt.com/dvsoftware.php">EDT-PDV</a>)</li>
+                    <li>Drivers for ITC-18 interface (<a href="http://www.heka.com/download/download.html#itcdrivers">ITC-18</a>)</li>
+                </ul>
+                <h3>
+                    Development Environment:</h3>
+                <ul>
+                    <li>Operating System: Windows XP</li>
+                    <li>Programming Language: C++</li>
+                    <li>Graphical User Interface: <a href="http://www.fltk.org/">FLTK</a></li>
+                    <li>3D Graphics Library: <a href="http://www.opengl.org/">OpenGL</a></li>
+                    <li>Display: 1680 x 1050 pixels</li>
+                </ul>
+            </td>
+            <td>
+                <h3>
+                    Setup Configuration</h3>
+                <p>
+                    <img src="Images/01.png" style="width: 670px; height: 373px" alt="Setup Configuration" /></p>
+            </td>
+        </tr>
+    </table>
+    <h3>
+        Sample Videos</h3>
+    <table style="border-color: #FFFFFF">
+        <tr>
+            <td style="border-color: #FFFFFF; text-align: center;">
+                <div>
+                    &Delta;F/F of Five bAPs at 20 Hz (3D)</div>
+                <!----------------------------------------------------->
+                <video controls width="580" height="282">
+                    <source src="Features/Videos/Train-3D.x264.aac.mp4" type="video/mp4" />
+                    <source src="Features/Videos/Train-3D.vp8.vorbis.webm" type="video/webm" />
+                    <source src="Features/Videos/Train-3D.theora.vorbis.ogg" type="video/ogg" />
+                </video>
+                <!----------------------------------------------------->
+            </td>
+            <td style="border-color: #FFFFFF; text-align: center;">
+                <div>
+                    &Delta;F/F of Five bAPs at 100 Hz (3D)</div>
+                <!----------------------------------------------------->
+                <video controls width="580" height="282">
+                    <source src="Features/Videos/Burst-3D.x264.aac.mp4" type="video/mp4" />
+                    <source src="Features/Videos/Burst-3D.vp8.vorbis.webm" type="video/webm" />
+                    <source src="Features/Videos/Burst-3D.theora.vorbis.ogg" type="video/ogg" />
+                </video>
+                <!----------------------------------------------------->
+            </td>
+        </tr>
+    </table>
+    <h3>
+        Snapshot</h3>
+    <p>
+        <img alt="Snapshot" height="803" src="Images/02.PNG" width="1344" /></p>
+    <hr />
+</body>
+</html>
