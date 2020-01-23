@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #12</h2>
+    <h3>
+        Analysis of Rin, Rp, and ADP</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                In this examle, a 40 pA, 500 ms hyperpolarizaing current pulse is used to 
+                measure Rin. Measurement #0 culculate the average voltage, current, and slope in 
+                the period from 100 to 200 ms. Measure #1 culculate similar characteristics in 
+                the period from 600 to 700 ms. Thus, (V(#1)-V(#0))/(-0.04 nA) is the 
+                steady-state input resistance. Measure #2 can be used to measure the 
+                characteristics in other period.</td>
+            <td>
+                <img alt="Rin" height="156" src="Images/01.png" width="363" /></td>
+            <td>
+                <img alt="Rin" height="399" src="Images/02.png" width="571" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                During establishing whole cell configuration, we monitor the pipette resistance 
+                in the voltage clamp mode. After break in, we can also estimate the input 
+                resistance from this recording protocol. The right is the command protocol to do 
+                this. A 5 mV, 10 ms hyperpolarizing voltage command is used to monitor the 
+                resistance. In this exammple, the patch is just ruptured and the resistance is 
+                estimated to be 106.8 MOhm.</td>
+            <td>
+                <img alt="Rp" height="89" src="Images/03.png" width="342" /><br />
+                <br />
+                <img alt="Rp" height="30" src="Images/04.png" width="219" /></td>
+            <td>
+                <img alt="Rp" height="397" src="Images/05.png" width="573" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To measure ADP, a 1 ms current injection is used to evoke an action potential. 
+                ADP is the difference between vMax(#15) and vAve(#14).</td>
+            <td>
+                <img alt="ADP" height="93" src="Images/06.png" width="303" /></td>
+            <td>
+                <img alt="ADP" height="397" src="Images/07.png" width="575" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

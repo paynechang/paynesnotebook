@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #15</h2>
+    <h3>
+                                                                EDT Controls</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                <p>
+                    To connect to 
+                    the EDT DV C-link frame grabber, check &quot;EDT&quot; button. If the EDT frame 
+                    grabber is connected, the &quot;CCD Settings&quot; 
+                    panel will become active.</p>
+                <p>
+                    To acquire imaging data during recording, check &quot;Active&quot; button.</p>
+                <p>
+                    To change the number of frames, type the number in &quot;# of Frames&quot; box and press 
+                    &quot;Enter&quot;.</p>
+                <p>
+                    You can select one of eight programs for your experiment by clicking &quot;Program 
+                    No.&quot; and select the right one. In this example, the camera will acquire imaging 
+                    data at 500 Hz from 80 x 80 pixels, no binning.</p>
+                <p>
+                    <a href="../../../../Equipments/Camera/index.html">Here is a link to a webpage 
+                    containing more camera information.</a></p>
+                <p>
+                    This CCD camera has four quads (#0, #1, #2, and #4). There are two identical but 
+                    independent circuits controlling the gain, the filter, clamp delay, and sample 
+                    delay of these quads. The first circuit (#0, left) controls quads #0 and #1. The 
+                    second circuit (#1, right) controls quads #2 and #3. In general, you will set 
+                    the gain and the filter of these circuits to the same values. The gain controls 
+                    the amplification of the signals (0: highest; 3: lowest). The filter controls 
+                    low pass filters in the circuits. The filter setting usually follows the 
+                    acquisition rate. The clamp delay and the sample delay are used to optimize the 
+                    CCD camera circuit to achieve the best signal to noise ratio. You can load the 
+                    factory settings from the memory in the camera and these settings should be 
+                    good. The offsets are used to set the background level. You can ask Ephic to 
+                    automaticlly calibrate offsets by closing the shutter and click &quot;Find&quot; 
+                    button.</p>
+                <p>
+                    There are eight saved settings in the camera memory. To load one of these 
+                    settings to the camera, type in the setting number (0~8) in &quot;Recall Settings&quot; 
+                    box and press &quot;Enter&quot;. You can change Baud Rate by typing the value in &quot;Baud 
+                    Rate&quot; box and press &quot;Enter&quot;. 38400 is the default value.</p>
+                <p>
+                    There are three external control modes: local control (0), freeze mode (1), and 
+                    repeat mode (2). Local control is the default. To change the external control 
+                    mode, click &quot;External Control&quot; and select.</p>
+                <p>
+                    You can check the temperatures at the case, CCD #1, and CCD #2 by clicking 
+                    &quot;Check&quot; button.</p>
+                <p>
+                    &quot;Create Offset Map&quot; and &quot;Create Map Set&quot; buttons are for engineers to optimize 
+                    the settings in clamp delay and sample delay.</p>
+            </td>
+            <td>
+                <img alt="EDT Controls" height="333" src="Images/01.png" width="602" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

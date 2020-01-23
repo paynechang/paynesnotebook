@@ -1,0 +1,254 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    video
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #16</h2>
+    <h3>
+                                                                Imaging Signal Processing</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                It is a good practice to have a baseline record before imaging recordings. This 
+                baseline data can be used to correct baseline deviation. The right is a snapshot 
+                of one baseline data. The dark red pixels are saturated and the data collected 
+                there are meaningless. Since the aim of this experiment is to examine calcium imaging 
+                signals in dendrites, it is fine to have saturated pixels in the soma while 
+                maximizing the light intensity in dendrites. The bright spot close to the center 
+                of the field is the tip of a stimulating electrode. The whole cell patch clamp electrode is 
+                at the lower right corner.</td>
+            <td>
+                <img alt="Original" height="400" src="Images/01.png" width="400" /> <img 
+                    alt="Baseline" height="398" src="Images/02.png" width="569" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Bleach Correction</h4>
+                <p>
+                    Five regions of interest (ROIs) were automatically selected along the apical 
+                    dendrite (a). The automatic dendrite tracing procedure will be covered in 
+                    <a href="../21/index.html">tutorial #21</a>. The imaging data in these ROIs are displayed in the imaging trace 
+                    window (c). The color of each trace corresponds to the color of the respective ROI.</p>
+                <p>
+                    In the original data (c), you can see a deviation of the baseline. To correct 
+                    this, click &quot;Save Slope&quot; button and check &quot;Bleach Correction&quot; (b). Now, the 
+                    baseline deviation is corrected.</p>
+            </td>
+            <td>
+                (a) <img alt="ROIs" height="400" src="Images/03.png" width="400" /> (b) <img 
+                    alt="Baseline Correction" height="169" src="Images/06.png" width="315" /><br />
+                <br />
+                (c) <img alt="Baseline" height="213" src="Images/04.png" width="329" /> (d) <img 
+                    alt="Baseline Corrected" height="211" src="Images/05.png" width="328" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Data Inversion</h4>
+                In this record, an action potential was initiated from the soma by current 
+                injection (a). The neuron was filled with 100 &micro;M bis-fura 2. The excitation 
+                wave length is 380 nm and the fluorescence light is collected from 470~550 nm. 
+                Due to this configuration, an increase in calcium concentration causes a 
+                decrease in fluorescence intensity (c). To inverse the data so an increase in 
+                calcium concentration corresponds to an increase in the trace, check &quot;Data 
+                Inversion&quot; (b) and the traces are inversed (d).</td>
+            <td>
+                (a)<img alt="Data Inversion" height="396" src="Images/08.png" width="563" /><br />
+                (b) <img alt="Data Inversion" height="167" src="Images/09.png" width="312" />
+                <br /><br />
+                (c) <img alt="Data Inversion" height="215" src="Images/07.png" width="330" />
+                (d) <img alt="Data" height="210" src="Images/10.png" width="326" />
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Temporal Filter</h4>
+                <p>
+                    To reduce noise, you can use a digital temporal filter. Ephic provides a moving 
+                    average filter. To specify the half width of the filter, type the number of 
+                    points in &quot;Half Window&quot; box and press &quot;Enter&quot; (a). In this example, the half 
+                    width is 1 point and Ephic will calculate the average from three points (2 x 
+                    halfwidth + 1). By checking &quot;Temporal Filter&quot;, the noise is reduced (b).</p>
+                </td>
+            <td>
+                (a) <img alt="Temporal Filter" height="75" src="Images/11.png" width="305" /> (b) <img 
+                    alt="Temporal Filter" height="213" src="Images/12.png" width="322" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Spatial Filter</h4>
+                <p>
+                    To reduce the noise in space, Ephic provides a 2-D filter. The kernal is a 3x3 
+                    matrix. You can control the sharpness of this filter by typing the sharpness 
+                    index in &quot;Sharpness&quot; box and press &quot;Enter&quot;. With larger index, you will have 
+                    higher spatial resolution but larger noise in space. With lower index, you will have 
+                    lower spatial resolution but lower noise in space.</p>
+                <p>
+                    In this example, the level of the original data is adjusted to show the spatial 
+                    noise (b). To apply a spatial filter with a sharpness index of 4, type 4 in 
+                    the &quot;Sharpness&quot; box and check &quot;Spatial Filter&quot;. The spatial noise is lower now (c) 
+                    but the spatial resolution is also lower. </p>
+            </td>
+            <td>
+                (a) <img alt="Spatial Filter" height="73" src="Images/13.png" width="299" /><br />
+                <br />
+                (b) <img alt="Original Snapshot" height="400" src="Images/14.png" width="400" /> 
+                (c) <img alt="Filtered Snapshot" height="400" src="Images/15.png" width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Calculate &Delta;F/F</h4>
+                <p>
+                    To show &Delta;F/F in the imaging window, check &quot;F0 Removal&quot; 
+                    box and &quot;Data Divided 
+                    by F0&quot; box (a). To see the first frame, select &quot;Snapshot&quot; from the drop down menu. In 
+                    this example, the signal amplitude of each pixel is seudocolored. The pixel 
+                    between the centers of camera pixels is linearly interpolated.</p>
+                </td>
+            <td>
+                (a) <img alt="dF/F" height="138" src="Images/19.png" width="308" /> (b)
+                <img alt="Snapshot" height="29" src="Images/20.png" width="153" /><br />
+                <br />
+                (c)
+                <img alt="Snapshot" height="401" src="Images/21.png" width="402" />
+                </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4 id="Movie">
+                    Movie</h4>
+                <p>
+                    In this 
+                    example record, six action potentials were evoked by current injection (a). 
+                    To see the movie of back-propagating action potentials, click &quot;Trace Window&quot; tab 
+                    (b). In &quot;Movie&quot; panel, enter the start point (250 pt), the end point (800 pt), 
+                    and the interval between two frames (40 ms). The &quot;Frame #&quot; box displays the current 
+                    frame number. Click play (the triangle button) and Ephic will display the movie. To 
+                    pause the play, click play again. Panel (c) is the movie of calcium imaging signals evoked by these action 
+                    potentials. You can ask Ephic to repeat the playback by check &quot;Repeat&quot;. You can 
+                    jump to the start frame by click the button with a bar and a triangle (b).</p>
+                </td>
+            <td>
+                (a)<img alt="Trains of Action Potentials" height="397" src="Images/18.png" 
+                    width="569" />
+                <br />
+                (b) <img alt="Movie Control" height="262" src="Images/22.png" 
+                    width="381" /><br />
+                <br />
+                (c)
+<!----------------------------------------------------->
+<div>Video</div>
+<video controls width="520" height="268">
+    <source src="Videos/bAPs.x264.aac.mp4" type="video/mp4" />
+    <source src="Videos/bAPs.vp8.vorbis.webm" type="video/webm" />
+    <source src="Videos/bAPs.theora.vorbis.ogg" type="video/ogg" />
+
+    <object width="520" height="268" data="Videos/bAPs.x264.aac.mp4" type="video/mp4">
+        <embed width="520" height="268" src="Videos/bAPs.flv.swf" loop="false" />
+    </object>
+</video>
+<!----------------------------------------------------->
+                </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Maximum Amplitude Map</h4>
+                <p>
+                    To display the maximum amplitude in the 
+                    imaging window, select &quot;Maximum&quot; (a) and the 
+                    imaging window will display the maximum amplitude map. From this map, you can 
+                    see how far bAPs reach.</p>
+                </td>
+            <td>
+                (a) <img alt="Maximum Amplitude" height="202" src="Images/23.png" width="165" /> 
+                (b) <img alt="Maximum Amplitude Map" height="400" src="Images/24.png" 
+                    width="400" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Pixel Exclusion</h4>
+                <p>
+                    In some cases, you might want to exclude some pixels from analysis due to 
+                    saturation of the pixels, low signal to noise ratio, or very noisy pixels. To 
+                    do this, you need to set the period to calculate RMS values by entering the start 
+                    and the width (pts) in the boxes by the label &quot;Baseline (F0, RMS)&quot; (b).</p>
+                <p>
+                    To mark saturated pixels and exclude them, click &quot;Saturation&quot; 
+                    button and check the box 
+                    next to it.</p>
+                <p>
+                    To set the S/N threshold, type the value in the box and press &quot;Enter&quot;. To mark 
+                    the mixels with S/N ratio lower the threshod and exclude them, click &quot;Low S/N&quot; 
+                    button and check the box next to it.</p>
+                <p>
+                    To set the RMS threshold, type the value in the 
+                    &quot;RMS Threshold&quot; box and press &quot;Enter&quot;. To mark 
+                    the mixels with RMS higher than the threshold, click &quot;High RMS&quot; button and check the 
+                    box next to it.</p>
+                <p>
+                    By default, Ephic finds the maximum and other characteristics from the whole 
+                    trace. If you want Ephic to find the maximum in a period (for example, to find 
+                    the maximum amplitude in response to the second action potential), check the box 
+                    next to &quot;Analysis Window&quot; (b) and enter the values (pts) in the boxes to specify 
+                    the start and the width of this period.</p>
+                </td>
+            <td>
+                (a) <img alt="Pixel Removal" height="119" src="Images/16.png" width="304" /> (b) <img 
+                    alt="Pixel Exclusion" height="121" src="Images/17.png" width="314" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Latency</h4>
+                <p>
+                    To display the latency of an event, set the threshold of the level in the box 
+                    &quot;Level&quot;. The pixel with the maximum amplitude lower than the level is considered 
+                    as the background. Set the period to examine the latency. For example, to examine the events 
+                    in the period from 100 to 110 ms, set values like panel (a). Ephic calculate 
+                    the relative latency. For example, an event reaches the level of 0.01 at 100 ms 
+                    is assigned an index of 1. An event reaches the level at 110 ms is assigned 0. 
+                    An event reaches the level at 102 ms is assigned an index of 0.8. Thus, a larger 
+                    index indicates a shorter latency.</p>
+                <p>
+                    To display the latency in the imaging window, click &quot;Data Type&quot; and select 
+                    &quot;Latency&quot; (b).</p>
+                </td>
+            <td>
+                (a) <img alt="Latency" height="128" src="Images/25.png" width="326" /> (b) <img 
+                    alt="Latency" height="198" src="Images/26.png" width="221" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

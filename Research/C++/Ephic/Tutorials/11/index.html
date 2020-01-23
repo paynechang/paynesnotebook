@@ -1,0 +1,101 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #11</h2>
+    <ul>
+        <li>Analysis of postsynaptic potentials
+            <ul>
+                <li>Ephic can analyze the voltage data and provide values of the average, the 
+                    maximum, the minimum, and the slope.</li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2>
+        Analysis of Postsynaptic Potential</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                To average voltage data from 
+                all records, which match the setting file &quot;VSD-100b.set&quot; and are in the data set 
+                from record number 1 to 100, follow these steps.<br />
+                <br />
+                (1) Load &quot;VSD-100b.set&quot;.<br />
+                (2) Check &quot;Setting Match Check&quot;.<br />
+                (3) Set &quot;First Rec.&quot; to 1 and &quot;Last Rec.&quot; to 100.<br />
+                (4) Check &quot;Show&quot; and &quot;Active&quot;.<br />
+                (5) Click &quot;PSP -&gt; Save Data to Buffer&quot;.<br />
+                <br />
+                In this example, there are four matched files and &quot;4&quot; is displayed in &quot;NumRec&quot;. 
+                The average voltage trace is displayed in the electrophysiology window as a 
+                green trace.<br />
+                <br />
+                In the &quot;PSP&quot; tab, the average voltage, maximum voltage, minimum voltage, and 
+                slope of the trace from 0 to 50 ms are displayed in measurement #16. The slope 
+                is calculated by a linear fit to the data in the period.<br />
+                <br />
+                Measurement #17 displays 
+                the same characteristics in the period from 50 to 100 ms. This 
+                data is a field potential recording. You can see large stimulation artifacts in 
+                front of each response. To measure the ampligude of the response, we need to 
+                remove the artifacts and calculate the difference between the minimum in the 
+                period from 50 to 100 ms and the average in the period from 0 to 50 ms.</td>
+            <td>
+                <img alt="Setting Match" height="288" src="Images/01.png" width="184" />
+                <img alt="PSP" height="138" src="Images/02.png" width="545" /><br />
+                <br />
+                <img alt="Trace" height="397" src="Images/03.png" width="563" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To move stimulation artifacts, set the time window of the first artifact. In 
+                this example, the &quot;Start&quot; is 49.50 ms and the &quot;Width&quot; is 2.00 ms. Check &quot;Remove 
+                Artifact&quot; and you will see the stimulation artifacts are removed. In addition, 
+                the minimum in the period from 50 to 100 ms is &quot;-1.019&quot; mV, which is the correct 
+                measurement.</td>
+            <td>
+                &nbsp;<img alt="Artifact Removal" height="183" src="Images/04.png" width="541" /><br />
+                <br />
+                <img alt="Artifact Removal" height="399" src="Images/05.png" width="590" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To measure the amplitude and the initial slope of the first response, set the 
+                &quot;Start&quot; and &quot;Width&quot; in measurement #18 to &quot;53&quot; and &quot;6&quot;, and set the &quot;Start&quot; and 
+                &quot;Width&quot; in measurement #19 to &quot;53.5&quot; and &quot;1&quot;. The average voltage, maximaum 
+                voltage, minimum voltage, and the slope in the periods from 53 to 59 ms and from 
+                53.5 to 54.5 ms are displayed. The the amplitude of the first response is 
+                vAve(#16) - vMin(#18). The initial slope of the first response is -0.287 mV/ms.</td>
+            <td>
+                <img alt="PSP" height="139" src="Images/06.png" width="381" /><br />
+                <br />
+                <img alt="Trace" height="398" src="Images/07.png" width="569" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

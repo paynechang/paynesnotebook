@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+    img
+    {
+        vertical-align:top;
+    }
+    </style>
+    </head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #10</h2>
+    <ul>
+        <li>Averaging and saving traces
+            <ul>
+                <li>Ephic allows you to save traces in plain text files so you can use other 
+                    programs to process, analyze, and plot the data.</li>
+                <li>Ephic can average several records, which match a setting file, in a defined 
+                    subset of records.</li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2>
+        Averaging and Saving Traces</h2>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                To save the voltage data to a local file &quot;V_Traces.txt&quot;, click &quot;Save -&gt; Add V 
+                Trace to V_Traces.txt&quot;. If the file does not exist, Ephic will creat a new one. 
+                If the &quot;V_Traces.txt&quot; already exists, the voltage data will be append to the 
+                end. You can open this file with Excel, Origin, or your favorite program to plot 
+                the trace.</td>
+            <td>
+                <img alt="Save Traces" height="146" src="Images/01.png" width="328" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To save voltage data in all records, which match a setting file, in a defined 
+                subset of records, to &quot;V_Traces.txt&quot;, follow this example:<br />
+                <br />
+&nbsp;(1) Load the setting file (&quot;I-40.set&quot; in this example).<br />
+&nbsp;(2) Check &quot;Setting Match Check&quot;.<br />
+&nbsp;(3) Set the first record number (&quot;1&quot; in this example).<br />
+&nbsp;(4) Set the last record number (&quot;100&quot; in this example).<br />
+&nbsp;(5) Click &quot;Save -&gt; Save V Traces of Each Records (V_Traces.txt)&quot;.<br />
+                <br />
+                In this example, all setting matched voltage data from record number 1 to 100 
+                will be saved to &quot;V_Traces.txt&quot;.</td>
+            <td>
+                <img alt="Period" height="287" src="Images/02.png" width="184" />
+                <img alt="Save All Traces" height="123" src="Images/03.png" width="321" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To delete local &quot;V_Traces.txt&quot;, click &quot;Save -&gt; Delete V_Traces.txt&quot;.</td>
+            <td>
+                <img alt="Delete Trace File" height="126" src="Images/04.png" width="322" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To average setting matched voltage data to local &quot;V_Trace_Ave.txt&quot;, 
+                do the following steps:<br />
+&nbsp;(1) Load the setting file, set the first and the last record numbers, and check &quot;Setting Match 
+                Check&quot;.<br />
+&nbsp;(2) Click &quot;Save -&gt; Save averaged V trace in the period (V_Trace_Ave.txt)&quot;.<br />
+                <br />
+                If &quot;V_Trace_Ave.txt&quot; already exists, Ephic will replace it.</td>
+            <td>
+                <img alt="Save Average Voltage Data" height="142" src="Images/05.png" 
+                    width="324" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To save the voltage, current, and command of 
+                the current record, click &quot;Save -&gt; Save 
+                V, I, and Cmd Traces&quot; and follow the instructions.</td>
+            <td>
+                <img alt="Save V, I, and Cmd" height="126" src="Images/06.png" width="321" /></td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                When saving voltage traces, you can decide whether to remove the baseline or 
+                not. To remove baseline from the data, check &quot;Remove Baseline (v12)&quot;. The 
+                baseline voltage is calculated according to measurement #12.</td>
+            <td>
+                <img alt="Remove Baseline" height="80" src="Images/07.png" width="155" /> <img 
+                    alt="Measurement 12" height="45" src="Images/08.png" width="406" /></td>
+        </tr>
+        </table>
+    <hr />
+    </body>
+</html>

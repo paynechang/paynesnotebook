@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Ephic Tutorial</title>
+    <link href="../../Ephic_NevigationBar.css" rel="stylesheet" type="text/css" />
+    <style>
+        img
+        {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        Ephic (<span class="underline">E</span>lectro<span class="underline">ph</span>ysiology
+        and <span class="underline">I</span>maging with <span class="underline">C</span>++)</h1>
+    <!-- Nevigation Bar  -->
+    <ul class="ul">
+        <li class="li"><a class="a" href="../../index.html">Introduction</a></li>
+        <li class="li"><a class="a" href="../../Features/index.html">Features</a></li>
+        <li class="li"><a class="a" href="../../Galleries/index.html">Galleries</a></li>
+        <li class="li"><a class="a" href="../../Tutorials/index.html">Tutorials</a></li>
+        <li class="li"><a class="a" href="../../Notes/index.html">Notes</a></li>
+    </ul>
+    <hr style="clear: both" />
+    <!-- Main  -->
+    <h2>
+        Tutorial #13</h2>
+    <h3>
+        Display Control, Analysis 
+        Period Control, Digital Filter (DSP)</h3>
+    <table>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Display Control</h4>
+                <p>
+                    You can decide whether to display the voltage (V), the current (I), the command
+                    (Cmd), the stimulus (Stimulus), or dV/dT (dV/dT) in the electrophysiology window
+                    by checking or unchecking respective buttons.</p>
+                <p>
+                    You can save the electrophysiology window to a TGA file by clicking &quot;Save Display
+                    To TGA File&quot; and following the instructions.</p>
+            </td>
+            <td>
+                <img alt="Display Control" height="264" src="Images/01.png" width="169" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Analysis Period Control</h4>
+                <p>
+          By default, Ephic 
+                    analyzes the whole trace. You can specify
+                    the analysis period by checking the square box and typing the start and end time in the &quot;Start
+                    (ms)&quot; and &quot;End (ms)&quot; boxes and press &quot;Enter&quot;. The maximum
+                    current and its latency, the minimum current and its latency, the minimum voltage
+                    and its latency, the maximum dV/dT and its latency, and the minimum dV/dT and its
+                    latency are displayed.</p>
+            </td>
+            <td>
+                <img alt="Analysis Window" height="241" src="Images/02.png" width="208" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                <h4>
+                    Digital Filter</h4>
+                <p>
+                    Ephic provides two types of digital fileters, Gaussian and Moving Average, which you
+                    can use to reduce noise. You can also control the half width of these filters by
+                    typing the number of points in the &quot;Half Width (pts)&quot; box and press &quot;Enter&quot;.
+                    In this example, none of these filters is used and the original data is displayed.</p>
+            </td>
+            <td>
+                <img alt="Digital Filter" height="85" src="Images/03.png" width="180" />
+            </td>
+            <td>
+                <img alt="Raw Trace" height="395" src="Images/04.png" width="558" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 500px">
+                To use the Gaussian filter, click &quot;Type&quot; and select &quot;Gaussian&quot;.
+                You will see the noise is much smaller now.
+             much smaller now.
+            </td>
+            <td>
+                <img alt="Gaussian" height="83" src="Images/05.png" width="179" />
+            </td>
+            <td>
+                <img alt="Gaussian Filter" height="396" src="Images/06.png" width="556" />
+            </td>
+        </tr>
+    </table>
+    <hr />
+</body>
+</html>
