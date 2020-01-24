@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NSColor</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 147px;
+            height: 57px;
+        }
+        .style2
+        {
+            width: 567px;
+            height: 430px;
+        }
+        .style5
+        {
+            width: 570px;
+            height: 433px;
+        }
+        .style6
+        {
+            width: 561px;
+            height: 756px;
+        }
+        .style8
+        {
+            width: 472px;
+            height: 450px;
+        }
+        .style9
+        {
+            width: 545px;
+            height: 582px;
+        }
+        .style10
+        {
+            width: 557px;
+            height: 603px;
+        }
+    </style>
+    </head>
+<body>
+
+    <h1>
+        2. Basic NSColor</h1>
+    <p>
+        <a href="../index.html">Back to Cocoa Graphics table of contents</a></p>
+    <p>
+        Official link -
+        <a href="https://developer.apple.com/library/mac/documentation/cocoa/reference/applicationkit/classes/NSColor_Class/Reference/Reference.html">
+        NSColor Class Reference - Apple Developer</a></p>
+    <hr />
+    <p>
+        Setting color is one of the basic steps of drawing. In this tutorial, I am going 
+        to show you two ways to create colors. The first is to use (Hue, Saturation, 
+        Brightness) values and the second is using (Red, Green, Blue) values. After 
+        creating the color, we use <span class="code">-(void)set</span> function to set 
+        the color for drawing rectangles.</p>
+    <p>
+        The following is the prototypes of these functions.</p>
+    <ul class="code">
+        <li>NSColor<ul>
+            <li>+ (NSColor *)colorWithCalibratedHue:(CGFloat) hue 
+                <br />
+                saturation:(CGFloat) saturation<br />
+                brightness:(CGFloat) brightness<br />
+                alpha:(CGFloat) alpha<br />
+            </li>
+            <li>+ (NSColor *)colorWithCalibratedRed:(CGFloat) red<br />
+                green:(CGFloat) green<br />
+                blue:(CGFloat) blue<br />
+                alpha:(CGFloat) alpha<br />
+            </li>
+            <li>- (void)set</li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    
+    <h2>
+        Using colorWithCalibratedHue:saturation:brightness:alpha to create colors</h2>
+    <p>
+        In the color space of (H, S, B), the hue (H) determins the color. For example, 0 
+        corresponds to red and 0.65 corresponds to blue. In the following figure, the 
+        spectrum is created by setting S (saturation), B (brightness), and alpha to one 
+        and changing H from 0 (left) to 1 (right).</p>
+    <p>
+        <img class="style1" src="Figures/01.png" /></p>
+    <p>
+The saturation (S) determines how strong the color is. Taking the red color for 
+        example, 1 corresponds to pure red while 0.5 corresponds to light red. The 
+        brightness (B) is, as the name indicated, the brightness of the color. In 
+        addition to H, S, and B, alpha (A) determines the transparency. A = 1 suggests 
+        opaque, while A = 1 suggests transparent. The following two figures are colors 
+        corresponding to differennt (H, S, B, A) values with black or white background.&nbsp;</p>
+    <p>
+        <img class="style2" src="Figures/02.png" /></p>
+    <p>
+        <img class="style5" src="Figures/05.png" /></p>
+    <p>
+        The following is the code to generate the figure.</p>
+    <p>
+        <img class="style6" src="Figures/03.png" /><br />
+        <img class="style10" src="Figures/04.png" /><br />
+        </p>
+    <p>
+        Here is the zipped project - <a href="ExploreNSColor.zip">ExploreNSColor.zip</a></p>
+    <hr />
+    <h2>
+        Using colorWithCalibratedRed:green:blue:alpha to create colors</h2>
+    <p>
+        In this example, I used red, green, and blue values (from 0 to 1) to generate 
+        colors and create a pattern in the following figure to show you how these values 
+        affect the color.</p>
+    <p>
+        <img class="style8" src="Figures/06.png" /></p>
+    <p>
+        The following is the revised drawRect function.</p>
+    <p>
+        <img class="style9" src="Figures/07.png" /></p>
+    <p>
+        The zipped project file is here - <a href="ExploreNSColorRGB.zip">
+        ExploreNSColorRGB.zip</a></p>
+    <hr />
+    
+</body>
+</html>

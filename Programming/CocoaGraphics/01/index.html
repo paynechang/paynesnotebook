@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NSPoint, NSRect</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style2
+        {
+            width: 527px;
+            height: 414px;
+        }
+        .style3
+        {
+            width: 269px;
+            height: 181px;
+        }
+        .style4
+        {
+            width: 565px;
+            height: 470px;
+        }
+        .style5
+        {
+            width: 358px;
+            height: 102px;
+        }
+        .style8
+        {
+            width: 540px;
+            height: 443px;
+        }
+        .style10
+        {
+            width: 273px;
+            height: 193px;
+        }
+        .style12
+        {
+            width: 442px;
+            height: 445px;
+        }
+        .style13
+        {
+            width: 498px;
+            height: 396px;
+        }
+        .style14
+        {
+            width: 739px;
+            height: 504px;
+        }
+        .style15
+        {
+            width: 678px;
+            height: 447px;
+        }
+        .style16
+        {
+            width: 272px;
+            height: 260px;
+        }
+        .style17
+        {
+            width: 537px;
+            height: 439px;
+        }
+        .style18
+        {
+            width: 491px;
+            height: 395px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>
+        1.
+        Draw a Rectangle and Two Points
+        - From Creating A Project to Drawing</h1>
+    <p>
+        <a href="../index.html">Back to Cocoa Graphics table of contents</a></p>
+    <hr />
+    <p>
+        This tutorial will show you 
+        the steps from creating a project to drawing a rectangle 
+        and two points. Xcode 4.5.2 was used here. I assume you know the basics 
+        of Objective-C.</p>
+    <p>
+        The focus of this tutorial is to show you the steps to draw primitive 
+        shapes in a view. Therefore, I will avoid using other techniques not related to 
+        Cocoa graphics. In addition, I will not try to draw beautiful things for now. 
+        These extra efforts might distract you from graphics. However, I encourage you 
+        to play with the code and see the effects, which is a great way to REALLY learn 
+        graphics and any other programming techniques. After you gaining the knowledge and skills about Cocoa graphics, you 
+        will be able to enjoy generating beautiful drawings and maybe share them with the world.</p>
+    <p>
+        As the title mentioned, I will show you how to create a project, create a view 
+        class, and draw a rectangle and a few points.</p>
+    <hr />
+    <h2>
+        Create the basic structure of the program</h2>
+    <ul>
+        <li>Launch Xcode.</li>
+        <li>Select menu: &quot;File &gt; New &gt; Project...&quot;.</li>
+        <li>Select &quot;OS X &gt; Application &gt; Cocoa Application&quot; template. Click &quot;Next&quot;.</li>
+        <li>Fill the dialog similar to the following figure. Click &quot;Next&quot;.<br />
+            <img class="style14" src="Figures/01.png" /></li>
+        <li>Select a location for the project. Click &quot;Create&quot; with default settings.</li>
+        <li>Click &quot;Run&quot; and you will see a window like the following figure.<br />
+            <img class="style2" src="Figures/02.png" /></li>
+        <li>Select menu: &quot;RectangleAndPoint &gt; Quit RectangleAndPoint&quot; to quick this program 
+            for now. The basic structure of the program is done.</li>
+    </ul>
+    <hr />
+    <h2>
+        Create a customed view class - MyView, 
+        and draw a blue rectangle</h2>
+    <ul>
+        <li>Select &quot;RectangleAndPoint&quot; folder in the Project Navigator<br />
+            <img class="style3" src="Figures/03.png" /><br />
+        </li>
+        <li>Select menu: &quot;File &gt; New &gt; File...&quot;.</li>
+        <li>Select &quot;OS X &gt; Cocoa &gt; Objective-C class&quot; and click &quot;Next&quot;.</li>
+        <li>Complete the dialog like the following figure and click &quot;Next&quot;.<br />
+            <img class="style4" src="Figures/05.png" /><br />
+        </li>
+        <li>Click &quot;Create&quot; with default settings.</li>
+        <li>Revise &quot;MyView.m &gt; drawRect:&quot; so it looks like the 
+            following.<br />
+            <img class="style5" src="Figures/06.png" /><ul>
+                <li>In this code, we first created a rectangle, myRect. (20, 10) is the position of 
+                    the origin. 200 is the width and 100 is the height.</li>
+                <li>We need to set the color before we draw anything. Otherwise, the default color 
+                    or the previous used color is used. Here, we set the color to blue.</li>
+                <li>The last line of code filled the rectangle with the set color.</li>
+                <li>By the way, the default origin of the view is the bottom left corner. Similarly, 
+                    the origin of a rectangle is the lower left corner.</li>
+                <li>Notice that the length unit of the coordination is 1/72 inch. Therefore, 72 
+                    units correspond to one inch and 0.1 unit corresponds to 1/720 inch on the 
+                    screen.<br /></li>
+            </ul>
+        </li>
+        <li>Select &quot;MainMenu.xib&quot; in the Project Navigator.</li>
+        <li>Select &quot;Window - RectangleAndPoint&quot;.<br />
+            <img class="style15" src="Figures/04.png" /><br />
+        </li>
+        <li>In &quot;Object library&quot; pan, type in &quot;Custom View&quot; in the search bar. You shoud see 
+            something similar to the following.<br />
+            <img class="style16" src="Figures/07.png" /><br />
+        </li>
+        <li>Drag &quot;Custom View&quot; from the &quot;Object library&quot; to the RectangleAndPoint window. 
+            The result will be 
+            similar to the following.<br />
+            <img class="style8" src="Figures/09.png" /><br />
+        </li>
+        <li>Adjust the position and the size of the &quot;Custom View&quot; so it looks like:<br />
+            <img class="style17" src="Figures/08.png" /><br />
+        </li>
+        <li>When &quot;Custom View&quot; is selected, select &quot;Identity inspector&quot; and select/type in 
+            &quot;MyView&quot;, like the following:<br />
+            <img class="style10" src="Figures/11.png" /><br />
+        </li>
+        <li>Click &quot;Run&quot; and you will see a blue rectangle in your window.<br />
+            <img class="style18" src="Figures/10.png" /></li>
+    </ul>
+    <hr />
+    <h2>
+        Draw two points</h2>
+    <p>To my knowledge, there is no native support for drawing a point. Instead, we can 
+        use rect to draw a point. In the following code, the <span class="code">
+        drawRect:</span> function is revised to change the background to black and draw 
+        a white point. An additional function, <span class="code">drawPointAtX: andY:</span>, was created to draw a 
+        red point at (x, y). The following is the revised code:</p>
+    <p>
+        <img class="style12" src="Figures/14.png" /></p>
+    <p>
+        The following is the result.</p>
+    <p>
+        <img class="style13" src="Figures/13.png" /></p>
+    <p>
+        And, the following is the zipped final project.</p>
+    <p>
+        <a href="RectangleAndPoint.zip">RectangleAndPoint.zip</a></p>
+    <hr />
+
+</body>
+</html>
