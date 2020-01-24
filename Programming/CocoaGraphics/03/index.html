@@ -1,0 +1,500 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NSPoint, NSSize, NSRect</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style1
+        {
+            width: 247px;
+            height: 93px;
+        }
+        .style2
+        {
+            width: 492px;
+            height: 393px;
+        }
+        .style3
+        {
+            width: 325px;
+            height: 173px;
+        }
+        .style4
+        {
+            width: 381px;
+            height: 442px;
+        }
+        .style5
+        {
+            width: 245px;
+            height: 175px;
+        }
+        .style6
+        {
+            width: 490px;
+            height: 393px;
+        }
+        .style7
+        {
+            width: 463px;
+            height: 594px;
+        }
+        .style8
+        {
+            width: 495px;
+            height: 395px;
+        }
+        .style9
+        {
+            width: 248px;
+            height: 202px;
+        }
+        .style10
+        {
+            width: 543px;
+            height: 446px;
+        }
+        .style11
+        {
+            width: 543px;
+            height: 447px;
+        }
+        .style12
+        {
+            width: 264px;
+            height: 274px;
+        }
+        .style13
+        {
+            width: 392px;
+            height: 83px;
+        }
+        .style14
+        {
+            width: 459px;
+            height: 258px;
+        }
+        .style15
+        {
+            width: 106px;
+            height: 49px;
+        }
+        .style16
+        {
+            width: 1040px;
+            height: 158px;
+        }
+        .style17
+        {
+            width: 346px;
+            height: 62px;
+        }
+        .style18
+        {
+            width: 111px;
+            height: 51px;
+        }
+        .style19
+        {
+            width: 417px;
+            height: 173px;
+        }
+        .style20
+        {
+            width: 411px;
+            height: 332px;
+        }
+        .style21
+        {
+            width: 495px;
+            height: 396px;
+        }
+        .style22
+        {
+            width: 492px;
+            height: 394px;
+        }
+        .style23
+        {
+            width: 491px;
+            height: 397px;
+        }
+        .style24
+        {
+            width: 544px;
+            height: 440px;
+        }
+        .style25
+        {
+            width: 437px;
+            height: 496px;
+        }
+        .style26
+        {
+            width: 562px;
+            height: 495px;
+        }
+        .style27
+        {
+            width: 490px;
+            height: 33px;
+        }
+        .style28
+        {
+            width: 463px;
+            height: 311px;
+        }
+        .style29
+        {
+            width: 503px;
+            height: 392px;
+        }
+        .style30
+        {
+            width: 561px;
+            height: 479px;
+        }
+        .style31
+        {
+            width: 560px;
+            height: 371px;
+        }
+        .style32
+        {
+            width: 500px;
+            height: 396px;
+        }
+        .style33
+        {
+            width: 560px;
+            height: 483px;
+        }
+        .style34
+        {
+            width: 478px;
+            height: 428px;
+        }
+        .style35
+        {
+            width: 500px;
+            height: 395px;
+        }
+        .style36
+        {
+            width: 342px;
+            height: 55px;
+        }
+        .style37
+        {
+            width: 557px;
+            height: 454px;
+        }
+        .style38
+        {
+            width: 427px;
+            height: 118px;
+        }
+        .style39
+        {
+            width: 575px;
+            height: 396px;
+        }
+    </style>
+    </head>
+<body>
+
+    <h1>
+        3. Basic NSPoint, NSSize, and NSRect</h1>
+    <p>
+        <a href="../index.html">Back to Cocoa Graphics table of contents</a></p>
+    <hr />
+    <h2>
+        Drawing Points</h2>
+    <p>
+        First, I am going to draw 1000 points in the view with random location and 
+        color.</p>
+        
+    <p>
+        Create a project with similar steps mentioned in tutorial #2. I named this 
+        project BasicNSRect. I also created an empty MyView class and insert one to the 
+        window as described in tutorial #2. Revise &quot;<span class="code">MyView.m &gt; 
+        drawRect:</span>&quot; so it looks like the following. Notice that we used &quot;<span 
+            class="code">bounds</span>&quot; method to get the bounds rectangle of the view 
+        and &quot;<span class="code">NSRectFill</span>&quot; method to fill it with the clear 
+        color.</p>
+    <p>
+        <img class="style1" src="Figures/01.png" /></p>
+    <p>
+        Click &quot;Run&quot; and you should see 
+        an empty window similar to the following.</p>
+    <p>
+        <img class="style2" src="Figures/02.png" /></p>
+    <p>
+        Next, I add two functions to &quot;<span class="code">MyView.m</span>&quot; for drawing a 
+        point. Notice that we used &quot;<span class="code">NSMakeRect(X, Y, Width, Height)</span>&quot; 
+        function to generate a rectangle.</p>
+    <p>
+        <img class="style3" src="Figures/03.png" /></p>
+    <p>
+        To draw 1000 random points with random colors, I added &quot;<span class="code">drawPoints</span>&quot; 
+        function to &quot;MyView.m&quot; so we can call it from &quot;<span class="code">drawRect:</span>&quot;. I didn&#39;t 
+        put the drawing code in &quot;<span class="code">drawRect:</span>&quot; because we are 
+        going to draw different things according to the user choice later. In this function, 
+        I used &quot;<span class="code">arc4random()</span>&quot; to generate random numbers. 
+        Be aware that we need to put &quot;<span class="code">drawPoints</span>&quot; in front of 
+        &quot;<span class="code">drawRect:</span>&quot;. Otherwise, &quot;<span class="code">drawRect:</span>&quot; 
+        can not recognize &quot;<span class="code">drawPoints</span>&quot; function.</p>
+    <p>
+        <img class="style4" src="Figures/04.png" /></p>
+    <p>
+        You can initialize NSPoint by using an initialization list, assigning the X and 
+        Y coordinates individually, or using &quot;<span class="code">NSMakePoint(X, Y)</span>&quot; 
+        function. By the way, you can use &quot;<span class="code">BOOL NSEqualPoints ( 
+        NSPoint aPoint, NSPoint bPoint )</span>&quot; to test whether two NSPoint objects are equal. In 
+        addition, you can use &quot;<span class="code">NSString* NSStringFromPoint ( NSPoint 
+        aPoint )</span>&quot; to generate a NSString object containing the coordinates of a 
+        NSPoint object and &quot;<span class="code">NSPoint NSPointFromString ( NSString 
+        *aString )</span>&quot; to create a NSPoint object from a NSString object.</p>
+    <p>
+        Next, let&#39;s call &quot;<span class="code">drawPoints</span>&quot; from &quot;<span 
+            class="code">drawRect:</span>&quot;.</p>
+    <p>
+        <img class="style5" src="Figures/05.png" /></p>
+    <p>
+        Click &quot;Run&quot; and you should see the result similar to the following.</p>
+    <p>
+        <img class="style6" src="Figures/06.png" /></p>
+    <hr />
+    <h2>
+        Drawing Rectangles</h2>
+    <p>
+        To draw rectangles, we add &quot;<span class="code">drawRectangles</span>&quot; function 
+        to &quot;MyView.m&quot; 
+        like the following. In addition, we use &quot;<span class="code">NSFrameRectWithWidth</span>&quot; to 
+        draw white frames so it is easier to recognize the rectangles.</p>
+    <p>
+        <img class="style7" src="Figures/07.png" /></p>
+    <p>
+        Revise &quot;<span class="code">drawRect:</span>&quot; function to comment out &quot;<span 
+            class="code">drawPoints</span>&quot; and add &quot;<span class="code">drawRectangles</span>&quot;.</p>
+    <p>
+        <img class="style9" src="Figures/09.png" /></p>
+    <p>
+        Click &quot;Run&quot; and you should see the result like the following.</p>
+    <p>
+        <img class="style8" src="Figures/08.png" /></p>
+    <p>
+        Notice that we drew rectangles with colder colors first. Some of the later added 
+        &quot;warmer&quot; rectangles cover some part of the &quot;colder&quot; rectangles.</p>
+    <hr />
+        
+    <h2>
+        Adding Buttons</h2>
+    <p>
+        Next, we are going to modify the UI to include two buttons so the user can 
+        choose what to draw.</p>
+    <p>
+        Click &quot;<span class="code">MainMenu.xib</span>&quot; and select &quot;<span class="code">Window 
+        - BasicNRect</span>&quot;. Select &quot;<span class="code">MyView</span>&quot; and make it 
+        shorter like the following.</p>
+    <p>
+        <img class="style10" src="Figures/10.png" /></p>
+    <p>
+        Show the object library. Search for &quot;Push Button&quot;. Add one to the top of the 
+        window. Double click the button and change the title to &quot;Points&quot;, like 
+        following.</p>
+    <p>
+        <img class="style11" src="Figures/11.png" /></p>
+    <p>
+        Make sure 
+        that &quot;Attributes inspector &gt; Control &gt; Tag&quot; is 0 if it is not.</p>
+    <p>
+        <img class="style12" src="Figures/12.png" /></p>
+    <p>
+        Add another button and change the title to &quot;Rectangles&quot;. Change &quot;Attributes 
+        inspector &gt; Control &gt; Tag&quot; to 1.</p>
+    <p>
+        Add &quot;drawingChoice&quot; property to &quot;MyView.h&quot; like the following.</p>
+    <p>
+        <img class="style13" src="Figures/13.png" /></p>
+    <p>
+        Revise &quot;MyView.m &gt; drawRect:&quot; so it looks like the following.</p>
+    <p>
+        <img class="style14" src="Figures/14.png" /></p>
+        
+    <p>
+        Now, we need to create the function that responds to button clicking.</p>
+    <p>
+        Select &quot;Project navigator &gt; BasicNSRect &gt; MainMenu.xib&quot;.</p>
+    <p>
+        Click &quot;Show the Assistant editor&quot;.</p>
+    <p>
+        <img class="style15" src="Figures/15.png" /></p>
+    <p>
+        Control + Click and drag &quot;Points&quot; button to &quot;AppDelegate.h &gt; AppDelegate&quot;. 
+        Change &quot;Connection&quot; to &quot;Action&quot;. Change &quot;Name&quot; to &quot;setDrawingChoice&quot;. Change 
+        &quot;Type&quot; to &quot;NSButton&quot;. Click &quot;Connect&quot;.</p>
+    <p>
+        <img class="style16" src="Figures/16.png" /></p>
+    <p>
+        The code will look like:</p>
+    <p>
+        <img class="style17" src="Figures/17.png" /></p>
+    <p>
+        Control + Click and drage &quot;Rectangles&quot; button to &quot;<span class="code">- 
+        (IBAction)setDrawingChoice:(NSButton *)sender;</span>&quot; so both buttons can 
+        invoke the same function.</p>
+    <p>
+        In addition, we need to create an outlet to myView. To do this, Control + Click 
+        and drag &quot;MyView&quot; to &quot;AppDelegate&quot; interface, similar to the steps just 
+        mentioned. Change the &quot;Name&quot; to &quot;myView&quot;, &quot;Type&quot; to &quot;MyView&quot;, and &quot;Storage&quot; to 
+        &quot;weak&quot;. Click &quot;Connect&quot;. If you followed the steps, you will see an error in the 
+        editor. That&#39;s because we haven&#39;t import &quot;MyView.h&quot;. Do this and the code should 
+        look similar to the following.</p>
+    <p>
+        <img class="style19" src="Figures/19.png" /></p>
+    <p>
+        Click &quot;Show the Standard editor&quot;.</p>
+    <p>
+        <img class="style18" src="Figures/18.png" /></p>
+    <p>
+        Select &quot;Project navigator &gt; AppDelegate.m&quot; and you will see the prototype of &quot;<span 
+            class="code">setDrawingChoice:</span>&quot;. Modiy it so it can handle user 
+        choice. Recall that we set the tags for both buttons. We can use the tag to 
+        identify which button invokes the function. The other alternative is to identify 
+        the button by 
+        the title, such as &quot;Points&quot; and &quot;Rectangles&quot; in this example. 
+        However, it is not good to tightly couple UI texts to the code. Imaging that one 
+        day you need to localize the program or change the button title, your code will 
+        not recognize these changes and you will be forced to modify the code. You can 
+        imaging that it is not an interesting task. The code should look similar to the 
+        following now.</p>
+    <p>
+        <img class="style20" src="Figures/20.png" /></p>
+    <p>
+        Click &quot;Run&quot; and try to click &quot;Points&quot; and &quot;Rectangles&quot; buttons. The following is 
+        the result.</p>
+    <p>
+        When the program starts...<br />
+        <img class="style21" src="Figures/21.png" /></p>
+    <p>
+        When the &quot;Points&quot; button is clicked...<br />
+        <img class="style22" src="Figures/22.png" /></p>
+    <p>
+        When the &quot;Rectangles&quot; button is clicked...<br />
+        <img class="style23" src="Figures/23.png" /></p>
+    <hr />
+    <h2>
+        Offset</h2>
+    <p>
+        Next, I am going to demonstrate the use of &quot;<span class="code">NSOffsetRect</span>&quot;. 
+        First, let&#39;s add three buttons. They are 
+        &quot;Offset&quot;, &quot;Intersection&quot;, and &quot;Union&quot;. 
+        &quot;Intersection&quot; and &quot;Union&quot; will be used in later sections. Set tags 
+        incrementally, and link them to &quot;<span class="code">- 
+        (IBAction)setDrawingChoice:(NSButton *)sender</span>&quot;. The UI should look like 
+        the following figure.</p>
+    <p>
+        <img class="style24" src="Figures/24.png" /></p>
+    <p>
+        Next, let&#39;s modify &quot;AppDelegate.m &gt; setDrawingChoic:&quot; so it can handle events 
+        triggered by new buttons. The following is the updated code.</p>
+    <p>
+        <img class="style25" src="Figures/25.png" /></p>
+    <p>
+        Let&#39;s add &quot;<span class="code">demonstrateOffset</span>&quot; in MyView.m. We use &quot;<span 
+            class="code">NSOffsetRect</span>&quot; to create a rectangle by offseting the 
+        input rectangle. We also use &quot;<span class="code">NSStringFromRect</span>&quot; 
+        to get information about rectangles so we can display the rectangle information 
+        in the console.</p>
+    <p>
+        <img class="style26" src="Figures/26.png" /></p>
+        
+    <p>
+        Finally, we need to revise &quot;<span class="code">drawRect:</span>&quot; so it can draw the two rectangles when a 
+        user clicks &quot;Offset&quot; button.</p>
+    <p>
+        <img class="style28" src="Figures/28.png" /></p>
+    <p>
+        Click &quot;Run&quot; and then click &quot;Offset&quot; button.</p>
+    <p>
+        <img class="style29" src="Figures/29.png" /></p>
+    <p>
+        The following figure displays the information about the two rectangles in the 
+        console.</p>
+    <p>
+        <img class="style27" src="Figures/27.png" /></p>
+    <hr />
+    <h2>
+        Intersection</h2>
+    <p>
+        To generate a rectangle defined by the intersection of two rectangles, we use &quot;<span 
+            class="code">NSIntersectionRect</span>&quot;. Add &quot;<span class="code">demonstrateIntersection</span>&quot; 
+        function in &quot;MyView.m&quot;, similar to the following.</p>
+    <p>
+        <img class="style30" src="Figures/30.png" /></p>
+    <p>
+        Revise &quot;<span class="code">drawRect:</span>&quot; to include &quot;<span class="code">demonstrateIntersection</span>&quot;.</p>
+    <p>
+        <img class="style31" src="Figures/31.png" /></p>
+    <p>
+        Click &quot;Run&quot; and then click &quot;Intersection&quot; button.</p>
+    <p>
+        <img class="style32" src="Figures/32.png" /></p>
+    <hr />
+    <h2>
+        Union</h2>
+    <p>
+        To generate a rectangle defined by the union of two rectangles, we use &quot;<span 
+            class="code">NSUnionRect</span>&quot; function. Add &quot;<span class="code">demonstrateUnion</span>&quot; 
+        function in &quot;MyView.m&quot;, similar to the following.</p>
+    <p>
+        <img class="style33" src="Figures/33.png" /></p>
+    <p>
+        Revise &quot;<span class="code">drawRect:</span>&quot; to include &quot;<span class="code">demonstrateUnion</span>&quot;.</p>
+    <p>
+        <img class="style34" src="Figures/34.png" /></p>
+    <p>
+        Click &quot;Run&quot; and then click &quot;Union&quot; button. The following is the result.</p>
+    <p>
+        <img class="style35" src="Figures/35.png" /></p>
+    <hr />
+    <h2>
+        Inset</h2>
+    <p>
+        The last rectangle function I want to demonstrate is &quot;<span class="code">NSInsetRect</span>&quot;. 
+        This function is convenient when you want to create a boarder for a rectangle. 
+        Please create one more button titled &quot;Inset&quot; and set the tag to &quot;5&quot;. Link it to 
+        &quot;<span class="code">setDrawingChoice:</span>&quot;. Revise it&nbsp;to include the 
+        following case.</p>
+    <p>
+        <img class="style36" src="Figures/36.png" /></p>
+    <p>
+        Add &quot;<span class="code">demonstrateInset</span>&quot; to &quot;MyView.m&quot;.</p>
+    <p>
+        <img class="style37" src="Figures/37.png" /></p>
+    <p>
+        Revise &quot;<span class="code">drawRect:</span>&quot; to include &quot;<span class="code">demonstrateInset</span>&quot; 
+        function.</p>
+    <p>
+        <img class="style38" src="Figures/38.png" /></p>
+    <p>
+        Click &quot;Run&quot; and then click &quot;Inset&quot; button.</p>
+    <p>
+        <img class="style39" src="Figures/39.png" /></p>
+        
+    <hr />
+    <h2>
+        Zipped Final Project</h2>
+    <p>
+        Here is the final zipped project -
+        <a href="BasicNSRect.zip">BasicNSRect.zip</a></p>
+    <p>
+        If you see any errors, something not clear, have any comments or suggestions, 
+        please contact me at &quot;<a href="mailto:paynechang@gmail.com">paynechang@gmail.com</a>&quot;. 
+        Thanks.</p>
+    <hr />
+        
+</body>
+</html>

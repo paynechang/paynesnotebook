@@ -1,0 +1,383 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Cocoa Graphics - 3</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .style2
+        {
+            width: 415px;
+            height: 193px;
+        }
+        .style3
+        {
+            width: 445px;
+            height: 56px;
+        }
+        .style4
+        {
+            width: 439px;
+            height: 76px;
+        }
+        .style5
+        {
+            width: 443px;
+            height: 69px;
+        }
+        .style6
+        {
+            width: 438px;
+            height: 95px;
+        }
+        .style8
+        {
+            width: 440px;
+            height: 83px;
+        }
+        .style9
+        {
+            width: 441px;
+            height: 77px;
+        }
+        .style10
+        {
+            width: 443px;
+            height: 75px;
+        }
+        .style11
+        {
+            width: 441px;
+            height: 84px;
+        }
+        .style12
+        {
+            width: 745px;
+            height: 673px;
+        }
+        .style13
+        {
+            width: 440px;
+            height: 66px;
+        }
+        .style14
+        {
+            width: 440px;
+            height: 69px;
+        }
+        .style15
+        {
+            width: 442px;
+            height: 68px;
+        }
+        .style16
+        {
+            width: 456px;
+            height: 200px;
+        }
+        .style17
+        {
+            width: 375px;
+            height: 134px;
+        }
+        .style18
+        {
+            width: 282px;
+            height: 330px;
+        }
+        .style19
+        {
+            width: 336px;
+            height: 189px;
+        }
+        .style20
+        {
+            width: 585px;
+            height: 466px;
+        }
+        .style21
+        {
+            width: 644px;
+            height: 834px;
+        }
+        .style22
+        {
+            width: 928px;
+            height: 726px;
+        }
+        .style23
+        {
+            width: 474px;
+            height: 382px;
+        }
+        .style24
+        {
+            width: 472px;
+            height: 493px;
+        }
+        .style25
+        {
+            width: 846px;
+            height: 844px;
+        }
+        .style26
+        {
+            width: 791px;
+            height: 900px;
+        }
+        .style27
+        {
+            width: 747px;
+            height: 664px;
+        }
+    </style>
+    </head>
+<body>
+
+    <h1>
+        4. NSBezierPath - Line</h1>
+    <p>
+        We can use &quot;<span class="code">NSBezierPath</span>&quot; function to draw many 
+        different types of paths. Line is the simplest one. With Cocoa, we can control 
+        the attributes of a line in many ways. Here, I am going to show you how to 
+        control color, width, dash style, cap style, start point and end point. The 
+        final product will look similar to the following figure.</p>
+    <p>
+        <img class="style12" src="Figures/01.png" /></p>
+    <p>
+        Let me first describe these attributes.</p>
+    <h3>
+        Color</h3>
+    <p>
+        We set the line color with &quot;<span class="code">[colorObj set]</span>&quot; method before we make a stroke, 
+        where colorObj is a NSColor object. In this tutorial, I will also draw a thin black 
+        line to indicate the center of the line, which is used to illustrate different 
+        cap styles.</p>
+    <h3>
+        Width</h3>
+    <p>
+        We use &quot;<span class="code">[pathObj setLineWidth:(CGFloat)lineWidth]</span>&quot; method to 
+        set the width of a line, where pathObj is a NSBezierPath object. One unit of length is 1/72 inch and the default width 
+        is 1 unit. In the following figure, I set the width to 20 unites by calling &quot;<span 
+            class="code">[pathObj setLineWidth:20.0]</span>&quot;.</p>
+    <p>
+        <img class="style2" src="Figures/02.png" /></p>
+    <h3>
+        Dash Style</h3>
+    <p>
+        The default dash style is solid. That is, no gap is in the line. We use a 
+        CGFloat array to define a dash pattern. The first element in the array is the 
+        length of the first line segment, the second is the length of the first gap, the 
+        third is the length of the second line segment, the fourth is the length of the 
+        second gap, and so on. If we have odd number of elements in the array, the last 
+        is ignored.</p>
+    <p>
+        To use a dash pattern, we first define the CGFloat array. Next, we call </p>
+    <p class="code">
+        - (void)setLineDash:(const CGFloat *)pattern<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        count:(NSInteger)count<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+        phase:(CGFloat)phase</p>
+    <p>
+        , where &quot;<span 
+            class="code">pattern</span>&quot; is a C-style array containing segment 
+        lengths, &quot;<span class="code">count</span>&quot; is the number of elements in the 
+        array, and &quot;<span class="code">phase</span>&quot; is the offset (length unit) at 
+        which to start drawing the pattern. The &quot;phase&quot; might need some examples to 
+        understand. Let&#39;s say that if the pattern array is {20, 20} and the phase is 10, 
+        the line will start at the middle of the line segment. If we set the phase 23, 
+        the line will start 3 units after the start of the gap. Thus, the first 17 
+        unites of the line would be the gap. Let&#39;s see some examples.</p>
+    <h4>
+        Solid (- setLineDash not used)</h4>
+    <p>
+        <img class="style3" src="Figures/03.png" /></p>
+    <h4>
+        Pattern = {40, 40}, Phase = 0</h4>
+    <p>
+        <img class="style4" src="Figures/04.png" /></p>
+    <h4>
+        Pattern = {80, 40}, Phase = 0</h4>
+    <p>
+        <img class="style5" src="Figures/05.png" /></p>
+    <h4>
+        Pattern = {80, 40}, Phase = 40</h4>
+    <p>
+        <img class="style8" src="Figures/07.png" /></p>
+    <h4>
+        Pattern = {40, 20, 10, 20}, Phase = 0</h4>
+    <p>
+        <img class="style6" src="Figures/06.png" /></p>
+    <h3>
+        Cap Style</h3>
+    <p>
+        We use &quot;<span class="code">[pathObj setLineCapStyle:(NSLineCapStyle)lineCapStyle]</span>&quot; 
+        to set cap style. &quot;lineCapStyle&quot; could be &quot;<span class="code">NSButtLineCapStyle</span>&quot;, 
+        &quot;<span class="code">NSSquareLineCapStyle</span>&quot;, or &quot;<span class="code">NSRoundLineCapStyle</span>&quot;. 
+        The followings are examples.</p>
+    <p>
+        <img class="style9" src="Figures/08.png" /></p>
+    <p>
+        <img class="style10" src="Figures/09.png" /></p>
+    <p>
+        <img class="style11" src="Figures/10.png" /></p>
+    <p>
+        <img class="style14" src="Figures/12.png" /></p>
+    <p>
+        <img class="style15" src="Figures/13.png" /></p>
+    <p>
+        <img class="style13" src="Figures/11.png" /></p>
+    <h3>
+        Start and End Points</h3>
+    <p>
+        We use &quot;<span class="code">[pathObj moveToPoint:(NSPoint)aPoint]</span>&quot; to move 
+        the current point to the specified location without drawing a line. Next, we use 
+        &quot;<span class="code">[pathObj lineToPoint:(NSPoint)aPoint]</span>&quot; to make a line 
+        from the previous point to the current point. Notice that these methods only 
+        move the current point and make line paths. The line is not drawn yet. We draw 
+        the line path by making strokes.</p>
+    <h3>
+        Make The Stroke</h3>
+    <p>
+        After setting all attributes and end points, we need to call &quot;<span 
+            class="code">[pathObj stroke]</span>&quot; to draw the line path. Notice that you 
+        can change attributes many times. Only the most recent changes will be used to 
+        make the strokes.</p>
+    <hr />
+    
+    <h2>
+        Create MyView Subclass</h2>
+    <p>
+        Good! Now you understand how to control line attributes and end points. Let&#39;s 
+        create our NSView subclass, MyView, to draw the line. Following previouse 
+        tutorials to create default &quot;MyView.h&quot; and &quot;MyView.m&quot;. In &quot;MyView.h&quot;, let&#39;s add 
+        properties to control the appearance of the line. I also added a property to set 
+        a flag for drawing something more interesting. The following is the 
+        revised code.</p>
+    <p>
+        <img class="style16" src="Figures/14.png" /></p>
+    <p>
+        In &quot;MyView.m&quot;, we declared two private arrays, &quot;<span class="code">dashSegmentCount</span>&quot; 
+        and &quot;<span class="code">dashSegmentLength</span>&quot;, for four dash patterns, 
+        which we are 
+        going to use in our drawing.</p>
+    <p>
+        <img class="style17" src="Figures/15.png" /></p>
+    <p>
+        To initialize these two arrays, we defined &quot;<span class="code">- 
+        (void)defineDashStyle</span>&quot; method.</p>
+    <p>
+        <img class="style18" src="Figures/16.png" /></p>
+    <p>
+        In &quot;<span class="code">- (void)initWithFrame:(NSRect)frame</span>&quot; method, we 
+        defined our dash styles and set &quot;<span class="code">isDrawSomethingInteresting</span>&quot; 
+        to &quot;NO&quot;.</p>
+    <p>
+        <img class="style19" src="Figures/17.png" /></p>
+    <p>
+        Next, we implement &quot;<span class="code">- (void)drawRect:(NSRect)viewRect</span>&quot;, 
+        the drawing method of our MyView object. The following is the code. It should be 
+        clear to you.</p>
+    <p>
+        <img class="style20" src="Figures/18.png" /></p>
+    <p>
+        OK. You might have wondered what the drawSomethingInteresting stuff is. Well, 
+        here it is. When the user clicks &quot;Give me something interesting!&quot; button, MyView 
+        draws three line paths. Each has ten segments with random attributes and end 
+        points. The following is the code.</p>
+    <p>
+        <img class="style21" src="Figures/19.png" /></p>
+    <p>
+        Well, you might be excited after typing all the code and click the 
+        &quot;Run&quot; button. Oops, nothing is in the window. That&#39;s because we haven&#39;t set 
+        outlets and action/target pairs. We will do that in the next section.</p>
+    <hr />
+    <h2>
+        Create User Interface (UI) and Set Outlets and Action/Target 
+        Pairs</h2>
+    <p>
+        Let&#39;s create the UI. Select &quot;MainMenu.xib&quot; in the project navigator. Create the 
+        UI by dragging-and-dropping objects from the object library. MyView is created 
+        from &quot;Custom View&quot; (NSView). Change Class to MyView. In addition, we used 
+        Box (NSBox), Color Well (NSColorWell), Label (NSTextField), Horizontal Slider 
+        (NSSlider), Radio Group (NSMetrix), and Push Button (NSButton).</p>
+    <p>
+        To change the default color of the color well, select the object, show the 
+        attributes inspector, then select the color in the Color pull down list. </p>
+    <p>
+        To adjust the bounds and the default value of a slider, select the object, show 
+        the attributes inpsector, change minimum value, maximum value, and the current 
+        value. In addition, check &quot;Control &gt; State &gt; Continuous&quot; so we can adjust the 
+        value and see the result immediately. Otherwise, the slider will not trigger 
+        events until you release the mouse.</p>
+    <p>
+        To adjust the number of items in a radio group, select the object, show the 
+        attributes inspector, change &quot;Metrix &gt; Cells &gt; Row and Column&quot;.</p>
+    <p>
+        There are two ways to change titles. You can double-click the title and change 
+        it there. You can also show the attributes inspector and change the title field. 
+        The final UI should look similar to the following.</p>
+    <p>
+        <img class="style22" src="Figures/20.png" /></p>
+    <h3>
+        Setting Outlets</h3>
+    <p>
+        Our application needs outlets pointing to UI controls when we need to set their 
+        properties or get their information programmatically. To set an oulet to an UI 
+        control, select &quot;MainMenu.xib&quot; in the project navigator and show the assistant 
+        editor. Make sure &quot;AppDelegate.h&quot; is displayed in the assistant editor. 
+        Drag-and-drop controls from XIB editor to the space between <span class="code">&quot;@interface 
+        AppDelegate : NSObject &lt;NSApplicationDelegate&gt;</span>&quot; and &quot;<span 
+            class="code">@end</span>&quot;, similar to steps 
+        mentioned in previous tutorials. </p>
+    <p>
+        We create an outlet to myView so we can ask it to change line attributes and 
+        draw it. The oulet to lineColorWell is to set the default line color when the 
+        application starts. You can see six NSTextField object and NSSlider pairs. Those 
+        NSTextField objects are for displaying current values of the corresponding 
+        NSSlider objects. The outlets to NSSlider objects are to get the default values 
+        for the NSTextField objects. The code in &quot;AppDelegate.h&quot; related to 
+        AppDelegate should look similar to the following.</p>
+    <p>
+        <img class="style23" src="Figures/21.png" /></p>
+    <h3>
+        Setting Action/Target Pairs</h3>
+    <p>
+        We will create seven IBAction functions. A function will be invoked when we 
+        change the line color, line width, dash style, dash phase, cap style, end 
+        points, or when we click the &quot;Give me something interesting!&quot; button. Notice 
+        that all sliders for controling end points invoke &quot;setPointXY&quot; function. The 
+        function identifies the sender by checking its tag. The following is the final 
+        interface for AppDelegate in &quot;AppDelegate.h&quot;.</p>
+    <p>
+        <img class="style24" src="Figures/22.png" /></p>
+    <p>
+        The implementation for these IBAction functions are straight forward. In 
+        addition to them, we also implement &quot;applicationDidFinishLaunching&quot; to 
+        initialize line attributes. The following is the colde in AppDelegate.m.</p>
+    <p>
+        <img class="style25" src="Figures/23.png" /></p>
+    <p>
+        <img class="style26" src="Figures/24.png" /></p>
+    <h3>
+        Running The Program</h3>
+    <p>
+        Let&#39;s run the program. Not bad. If you click the &quot;Give me something 
+        interesting!&quot; button, you might see something interesting. :)</p>
+    <p>
+        <img class="style27" src="Figures/25.png" /></p>
+    <hr />
+    <h2>
+        Zipped Final Project</h2>
+    <p>
+        Here is the zipped final project - <a href="BasicNSBezierPathLine.zip">
+        BasicNSBezierPathLine.zip</a></p>
+    <hr />
+    <p>
+        &nbsp;</p>
+    <p>
+        &nbsp;</p>
+    
+</body>
+</html>
