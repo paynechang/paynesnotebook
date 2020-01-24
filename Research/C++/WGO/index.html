@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>WGO</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+</head>
+
+<body>
+<table width="100%" border="0">
+  <tr>
+    <td><h1>WGO (Waveform Generator and Oscilloscope)</h1></td>
+  </tr>
+</table>
+<hr />
+<h2>Introduction</h2>
+<p>WGO is developed to test <a href="http://www.heka.com/physio/equipment/interfaces/itc18.html">ITC-18</a>,
+  a computer interface to control other instruments, such as amplifiers, picospritzers,
+  shutters, CCD cameras, etc. Programming supports for ITC-18 are provided
+  for <a href="http://www.wavemetrics.com/">IGOR</a> and C/C++. One of the best
+  way to test the characteristics of a computer interface like ITC-18 is to simulate
+  one waveform generator and one oscilloscope. WGO is developed with C++ and
+  <a href="http://www.fltk.org/">FLTK</a> and can run on either a Mac or a PC.</p>
+<h2>Manuals</h2>
+<p>The first figure is a snapshot of WGO. It has three major parts, the monitor,
+  the waveform generator, and the oscilloscope. The sampling rate is 200 kHz.
+  If the number of samples is greater than the available memory in FIFO, the
+  sampling rate will be automatically reduced. The signals from the waveform
+  generator is red and signals from the oscilloscope is blue.
+  It is safer
+  to turn off both waveform generator and the oscilloscope before closing WGO.</p>
+<p><img src="Fig01.jpg" border="1"></p>
+<p>&nbsp;</p>
+<h3>Waveform Generator</h3>
+<p>To turn on the waveform generator, click the &quot;Power&quot; button.</p>
+<p>To select one of the four DAC channels, select the channel number from the
+  &quot;DAC Channel #&quot; pop-up menu.</p>
+<p>To select one of the four waveforms, select the waveform from the &quot;Waveform&quot;
+  pop-up menu. The four available waveforms are sine, square, triangle and sawtooth.</p>
+<p><strong>Sine</strong></p>
+<p><img src="sine.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Square</strong></p>
+<p><img src="square.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Triangle</strong></p>
+<p><img src="triangle.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Sawtooth</strong></p>
+<p><img src="sawtooth.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p>To change the frequency, select the frequency range (100 Hz ~ 100 kHz) and
+  the ratio (0.01 ~ 1).</p>
+<p>To change the amplitude, select the voltage range (10 mV ~ 10 V) and the ratio
+  (0.01 ~ 1).</p>
+<p>To change the DC offset, slide the &quot;DC Offset (V)&quot; bar (-4 V ~ +4 V).</p>
+<p>&nbsp;</p>
+<h3>Oscilloscope</h3>
+<p>The signals from the oscilloscope is  blue in the monitor.</p>
+<p>To turn on the oscilloscope, click the &quot;Power&quot; button.</p>
+<p>To select one of the eight ADC channels (0 ~ 7), select the ADC channel number
+  from the &quot;ADC Channel #&quot; menu.</p>
+<p>To change the time per division, click one button in the &quot;TIME/DIV&quot; box
+  (10 us ~ 0.2 sec).</p>
+<p>To change the voltages per division, click one button in the &quot;VOLTS/DIV&quot; box
+  (0.5 mV ~ 5 V).</p>
+<p>To change the DC offset, slide the &quot;DC Offset (DIV)&quot; bar (-10 ~ +10 DIV).</p>
+<p>When the output
+    of one DAC channel is connected to the input of one ADC channel, there is
+  a lag
+    of
+    the
+    input signal
+    about 10 us possibly due to leak capacitance. Examples
+    of the lag for different waveforms are displayed bellow.</p>
+<p><strong>Sine</strong></p>
+<p><img src="sine2.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Square</strong></p>
+<p><img src="square2.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Triangle</strong></p>
+<p><img src="triangle2.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Sawtooth</strong></p>
+<p><img src="sawtooth2.jpg" border="1"></p>
+<p>&nbsp;</p>
+<h2>Sampling distortion</h2>
+<p>The sampling rate is 200 kHz. Theoretically, the system can generate and record
+  signals at frequencies close to 100 kHz. However, realistically, the system
+  can only handle signals with frequencies less than 20 kHz without severe distortion.
+  The following four figures demonstrate this point with sine waves at 10, 20,
+  50, and 95 kHz. At 10 kHz, one period of a sine wave is represented by 20 points.
+  The sampling distortion is not obvious. When the frequency of the sine wave
+  increases, the distortion becomes severe and noticeable.</p>
+<p><strong>Frequency = 10 kHz, TIME/DIV = 20 us, VOLTS/DIV = 1 V</strong></p>
+<p><img src="10kHz.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Frequency = 20 kHz, TIME/DIV = 20 us, VOLTS/DIV = 1 V</strong></p>
+<p><img src="20kHz.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Frequency = 50 kHz, TIME/DIV = 20 us, VOLTS/DIV = 1 V</strong></p>
+<p><img src="50kHz.jpg" border="1"></p>
+<p>&nbsp;</p>
+<p><strong>Frequency = 95 kHz, TIME/DIV = 20 us, VOLTS/DIV = 1 V</strong></p>
+<p><img src="95kHz.jpg" border="1"></p>
+<p>&nbsp;</p>
+<h2>Notes</h2>
+<p>ITC-18 is a nice instrument. When you develop a program for ITC-18, there
+  is one thing you need to keep in mind. It takes ITC-18 two cycles to transfer
+  data from the computer to the DAC output and it takes four cycles to receive
+  data from the ADC input to the computer. That means it takes six cycles to
+  send a command to the DAC output and receive the response to that command. If 
+  the sampling rate is fast enough, the latency could be ignored. For example,
+  when the sampling rate is 200 kHz, the six sampling cycle only takes 30 us.</p>
+<p>&nbsp;</p>
+</body>
+</html>
