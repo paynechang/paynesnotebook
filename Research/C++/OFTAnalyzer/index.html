@@ -1,0 +1,343 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>OFTAnalyzer</title>
+</head>
+<body>
+    <h1>
+        OFTAnalyzer (v.1.10)</h1>
+        <hr />
+        <h2>Contents</h2>
+    <ul>
+        <li><a href="#Introduction">Introduction</a></li>
+        <li><a href="#DevelopmentEnvironment">Development Environment</a></li>
+        <li><a href="#Instructions">Instructions</a><ul>
+            <li><a href="#OpenVideoFile">Open Video File</a></li>
+            <li><a href="#DisplayOFTAnalyzerInformation">Display OFTAnalyzer Information </a></li>
+            <li><a href="#PlayVideo">Play Video </a></li>
+            <li><a href="#SetInspectionArea">Set Inspection Area </a></li>
+            <li><a href="#SetExcludedBox">Set Excluded Box </a></li>
+            <li><a href="#AnalysisProcedure">Analysis Procedure</a></li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2 id="Introduction">Introduction</h2>
+    <p>
+        This program is developed for the analysis of Open Field Test (OFT) video.</p>
+    <p>
+        Author: Payne Y. Chang (c) 2011
+        <br />
+        Email: <a href="mailto:paynechang@gmail.com">paynechang@gmail.com</a>
+    </p>
+    <p>
+        Dr. Daniel Johnston&#39;s Lab
+        <br />
+        Center for Learning and Memory
+        <br />
+        The University of Texas at Austin
+    </p>
+    <hr />
+    <p style="font-weight: 700">Video of analysis in action (reduced size, faster playback)</p>
+<!----------------------------------------------------->
+<video width="482" height="278" controls="controls">
+    <source src="Videos/Sample.ogg" type="video/ogg" />
+    <source src="Videos/Sample.mp4" type="video/mp4" />
+    <source src="Videos/Sample.webm" type="video/webm" />
+    <object width="482" height="278" data="Videos/Sample.mp4">
+        <embed width="482" height="278" src="Videos/Sample.swf" />
+    </object>
+</video>
+<!----------------------------------------------------->
+    <hr />
+    <p>
+        Thank you for 
+        your interest in OFTAnalyzer.
+        If you like this program, please consider supporting our research in CLM by making
+        a donation or a purchase through either:
+    </p>
+    <ol>
+        <li><a href="http://www.clm.utexas.edu/CLMsite/friends.html">http://www.clm.utexas.edu/CLMsite/friends.html</a><br />
+            &nbsp;or</li>
+        <li>email <a href="mailto:jjain@otc.utexas.edu?subject=OFT_Analyzer">
+            jjain@otc.utexas.edu</a> (<a href="http://www.otc.utexas.edu">http://www.otc.utexas.edu</a>)</li>
+    </ol>
+    <p>
+        Thank you for your support.</p>
+    <p>
+        More information in:</p>
+    <p>
+        <a href="http://clm.utexas.edu/djlab">http://clm.utexas.edu/djlab</a></p>
+    <hr />
+    <h2 id="DevelopmentEnvironment">
+        Development Environment</h2>
+    <p>
+        The development environment is described as following:</p>
+    <ul>
+        <li>Windows XP</li>
+        <li>Windows SDK 6.0</li>
+        <li>FLTK 1.1.10 (<a href="http://www.fltk.org">http://www.fltk.org</a>)</li>
+    </ul>
+    <hr />
+    <p>
+        The tested video format is described as following:</p>
+    <ul>
+        <li>WMV file</li>
+        <li>Width: 640</li>
+        <li>Height: 480</li>
+        <li>RGB</li>
+        <li>Video codec: WMV8</li>
+        <li>Frame rate: 30 fps</li>
+    </ul>
+    <hr />
+    <p>
+        Available files</p>
+    <ul>
+        <li><a href="OFT_Analyzer.exe">OFT_Analyzer.exe</a><br />
+            - The executable program</li>
+        <li><a href="Sample.wmv">Sample.wmv</a><br />
+            - Sample video file</li>
+        <li><a href="Sample.wmv_Data.txt">Sample.wmv_Data.txt</a><br />
+            - Sample data output</li>
+        <li><a href="Sample.wmv_Trace.txt">Sample.wmv_Trace.txt</a><br />
+            - Sample trace output</li>
+        <li><a href="Sample.xls">Sample.xls</a><br />
+            - Sample trace in Excel file</li>
+    </ul>
+    <hr />
+    <h2 id="Instructions">
+        Instructions</h2>
+    <p>
+        This is the user interface when you start OFTAnalyzer.</p>
+    <p>
+        <img src="Images/01.png" style="width: 965px; height: 548px" /><br />
+    </p>
+    <p>
+        To quit OFTAnalyzer, press &quot;Esc&quot; button in your keyboard.<br />
+    </p>
+    <hr />
+    <h3 id="OpenVideoFile">
+        Open Video File</h3>
+    <p>
+        To open a file:</p>
+    <ol>
+        <li>Click &quot;Open File&quot; button. An &quot;Open File&quot; window will appear.</li>
+        <li>Select the file and click &quot;OK&quot;.</li>
+    </ol>
+    <p>
+        <img src="Images/02.png" style="width: 498px; height: 407px" /><br />
+    </p>
+    <p>
+        After opening the video file, OFTAnalyzer will show the first frame in the video
+        window.<br />
+        The file name will be displayed in the &quot;File Name&quot; box.</p>
+    <p>
+        <img src="Images/04.png" style="width: 965px; height: 548px" /><br />
+    </p>
+    <hr />
+    <h3 id="DisplayOFTAnalyzerInformation">Display OFTAnalyzer Information</h3>
+    <p>
+        To show &quot;OFTAnalyzer Information&quot; window, click &quot;Information&quot;
+        button.<br />
+        You need to close this window before you do analysis.</p>
+    <p>
+        <img src="Images/03.png" style="width: 401px; height: 612px" /><br />
+    </p>
+    <hr />
+    <h3 id="PlayVideo">
+        Play Video<br />
+    </h3>
+    <p>
+        To play the video, click
+        <img src="Images/05.png" style="width: 56px; height: 25px" />
+        .</p>
+    <p>
+        To stop playing the video, click
+        <img src="Images/05.png" style="width: 56px; height: 25px" />
+        again.</p>
+    <p>
+        OFTAnalyzer will display and examine the frame every 0.1 second (the video time).<br />
+        OFTAnalyzer will try to play the video as fast as possible.</p>
+    <p>
+        To step back one frame, click
+        <img src="Images/06.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        To step forward one frame, click
+        <img src="Images/07.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        To go to the first frame, click
+        <img src="Images/08.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        To go to the last frame, click
+        <img src="Images/09.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        The elapsed time will be displayed in &quot;Video Time&quot; boxes.<br />
+        <img src="Images/10.png" style="width: 200px; height: 28px" /><br />
+        The left yellow box displays the time in seconds.<br />
+        The right gray box displays the time in &quot;min : sec&quot;.<br />
+        You can go to a specific frame by left-click inside the yellow box and drag to the
+        left to go backward and to the right to go forward.</p>
+        <hr />
+    <h3 id="SetInspectionArea">
+        Set Inspection Area</h3>
+    <p>
+        When
+        <img src="Images/11.png" style="width: 115px; height: 24px" />
+        is checked, you will see a big blue square devided into nine squares.<br />
+        The area inside the big blue square is the inspection area.<br />
+        OFTAnalyzer will examine pixels in the inspection area and ignore the rest.</p>
+    <p>
+        &quot;X0&quot; box displays the x coordinate (in pixels) of the left boundary.<br />
+        To move the inspection area horizontally, left-click &quot;X0&quot; box and drag
+        to the left to move to the left, or to the right to move to the right.<br />
+        &quot;W&quot; box displays the width (in pixels) of the inspection area.<br />
+        To change the width, left-click &quot;W&quot; box and drag to the left to reduce
+        the width, or to the right to increase the width.</p>
+    <p>
+        &quot;Y0&quot; box displays the y coordinate (in pixels) of the top boundary.<br />
+        To move the inspection area vertically, left-click &quot;Y0&quot; box and drag to
+        the left to move to the top, or to the right to move to the bottom.<br />
+        &quot;H&quot; box displays the height (in pixels) of the inspection area.<br />
+        To change the height, left-click &quot;H&quot; box and drag to the left to reduce
+        the height, or to the right to increase the height.</p>
+    <p>
+        <img src="Images/12.png" style="width: 965px; height: 548px" /></p>
+    <p>
+        If the field is too dim to see the boundaries clearly, you can check &quot;Brightness
+        Control&quot; to increase the brightness.<br />
+        The fold of increase is displayed in the &quot;Fold&quot; box.<br />
+        To change the fold, left-click &quot;Fold&quot; box and drag to the left to reduce
+        it, or to the right to increase it.<br />
+        After setting the inspection area, clear &quot;Brightness Control&quot;.</p>
+    <p>
+        <img src="Images/13.png" style="width: 965px; height: 548px" /></p>
+        <hr />
+    <h3 id="SetExcludedBox">
+        Set Excluded Box</h3>
+    <p>
+        It is recommended that the inspection area should cover the whole field.<br />
+        If there is an interference, OFTAnalyzer provides a simple way to remove it.<br />
+        In the above example, the time box covers a part of the inspection area.<br />
+        The changing digits will interfere with the calculation of the body center.</p>
+    <p>
+        To display the excluded box, click &quot;Draw Excluded Box&quot; and you will see
+        a cyan box.<br />
+        To exclude the area, check &quot;Exclude Box&quot; and you will see the cyan box
+        is filled with black.</p>
+    <p>
+        &quot;X0&quot; box displays the x coordinate (in pixels) of the left boundary.<br />
+        To move the excluded area horizontally, left-click &quot;X0&quot; box and drag to
+        the left to move to the left, or to the right to move to the right.<br />
+        &quot;W&quot; box displays the width (in pixels) of the excluded area.<br />
+        To change the width, left-click &quot;W&quot; box and drag to the left to reduce
+        the width, or to the right to increase the width.</p>
+    <p>
+        &quot;Y0&quot; box displays the y coordinate (in pixels) of the top boundary.<br />
+        To move the excluded area vertically, left-click &quot;Y0&quot; box and drag to
+        the left to move to the top, or to the right to move to the bottom.<br />
+        &quot;H&quot; box displays the height (in pixels) of the excluded area.<br />
+        To change the height, left-click &quot;H&quot; box and drag to the left to reduce
+        the height, or to the right to increase the height.</p>
+    <p>
+        <img src="Images/14.png" style="width: 965px; height: 548px" /></p>
+    <hr />
+    <h3 id="AnalysisProcedure">
+        Analysis Procedure</h3>
+    <ul>
+        <li>Open video file.</li>
+        <li>Adjust the inspection area so it covers the whole field.</li>
+        <li>In some cases, you need to adjust and use the excluded area so interference is removed.</li>
+        <li>Click &quot;Save Background&quot; to save background when the animal is not in the
+            field.</li>
+        <li>Play the video and stop it when the animal is in the field and the handler is just
+            out of view.</li>
+        <li>To display the center of the animal, check &quot;Draw Center&quot;. You will see
+            a green cross indicating the center of the animal.<br />
+            However, it is not accurate and we need to perform some imaging processing to get
+            the accurate position.<br />
+            <br />
+            <img src="Images/15.png" style="width: 965px; height: 548px" /><br />
+            <br />
+        </li>
+        <li>&nbsp;Check &quot;Remove Background&quot; box and you will see the background become
+            dark and the cross become closer to the body center.<br />
+            However, the position is still not accurate due to some low intensity background.<br />
+            <br />
+            <img src="Images/16.png" style="width: 965px; height: 548px" /><br />
+            <br />
+        </li>
+        <li>To remove the low intensity background, check &quot;Threshold On&quot; and you will
+            see the cross is at the body center.<br />
+            When the &quot;Threshold On&quot; is checked, intensity of pixels lower than the
+            threshold is set to zero.<br />
+            To adjust the threshold, left-click &quot;Threshold&quot; box and drag to the left
+            to reduce the threshold, or to the right to increase the threshold.<br />
+            <br />
+            <img src="Images/17.png" style="width: 965px; height: 548px" /><br />
+            <br />
+        </li>
+        <li>Click &quot;Record&quot; button. The &quot;Record&quot; button will become red.
+            OFTAnalyzer will advance for 1 minute and start analyzing the data as fast as possible
+            for 5 minutes.<ul>
+                <li>The Record Time will display in two gray boxes.</li>
+                <li>The left box displays record time in seconds.</li>
+                <li>The right box displays record time in &quot;min : sec&quot;.</li>
+                <li>You can interrupt the recording by click &quot;Record&quot; button again.</li>
+                <li>The &quot;Number of Line Crossing&quot;, the &quot;Number of Center Square Entry&quot;,
+                    the &quot;Time in Center Square (Sec)&quot;, the &quot;Total Time (Sec)&quot;,<br />
+                    the &quot;Distance in Center Square (Inch)&quot;, and the &quot;Total Distance (Inch)&quot;
+                    are diplayed.<br />
+                    <img src="Images/18.png" style="width: 297px; height: 184px" /><br />
+                    <br />
+                </li>
+            </ul>
+        </li>
+        <li>The cross is green when the animal stays in a square other than the center 
+            square.<br />
+            <img src="Images/19.png" style="width: 205px; height: 187px" /><br />
+        </li>
+        <li>The cross becomes a combination of a magenta cross and a magenta circle for 0.1 
+            sec when the animal crosses a line.<br />
+            <img src="Images/20.png" style="width: 192px; height: 325px" /><br />
+        </li>
+        <li>When the animal is in the center square, the cross becomes a combination of a 
+            red cross and a red circle and the center square becomes magenta.<br />
+            <img src="Images/21.png" style="width: 322px; height: 309px" /><br />
+        </li>
+        <li>After finishing the recording, you will get two files in the folder.<ul>
+            <li>XXXX_Data.txt contains summary information (XXXX is the file name
+                of the video).<br />
+                <br />
+                The information contains the number of line crossing (LC), the number of center 
+                square entry (CSE), the center time percentage (CTP, the time in the center 
+                square/the total time), the center distance percentage (CDP, the moving distance 
+                in the center square/the total moving distance), the center time (CT, the time 
+                in the center square (sec)), the total time (TT, sec), the center distance (CD, 
+                the moving distance in the center square (inch)), the total distance (TD, the 
+                total moving distance (inch)).<br />
+                <br />
+                <img src="Images/22.png" style="width: 548px; height: 34px" /><br />
+                <br />
+            </li>
+            <li>XXXX_Trace.txt contains the coordinates of the body center at 0.1 second interval.<br />
+                <br />
+                In each row, the information contains the Time (sec), the X coordinate (inch), 
+                and the Y coordinate (inch).<br />
+                <br />
+                <img src="Images/23.png" style="width: 214px; height: 212px" /><br />
+                <br />
+                You can plot the trace by importing the data to other programs (like Excel or 
+                Origin). Each black dot represents the location of the body center for 0.1 
+                second.<br />
+                <img src="Images/24.png" style="width: 462px; height: 466px" /><br />
+            </li>
+        </ul>
+        </li>
+    </ul>
+    <hr />
+</body>
+</html>
