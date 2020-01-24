@@ -1,0 +1,138 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>EyelidTracker</title>
+</head>
+<body>
+    <h1>
+        EyelidTracker</h1>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        EyelidTracker was developed in Dr. Daniel Johnston&#39;s lab to quantify eyelid
+        position during eyelid conditioning experiments.</p>
+    <p>
+        During the development, Dr. Javier Medina in the University of Pennsylvania gave
+        us invaluable suggestions and helps, including sample videos and Matlab files. We
+        deeply appreciate his generosity and assistance. Here is a link to his article related
+        to this project (<a href="http://www.ncbi.nlm.nih.gov/pubmed/22144951">link</a>).</p>
+    <h2>
+        Authors:</h2>
+    <p>
+        Dr. Payne Chang, Dr. Rick Gray, Dr. Randy Chitwood, and Dr. Johnston&#39;s lab @2012.<br />
+        If you have any comments or suggestions, please contact Dr. Payne Chang at <a href="mailto:paynechang@gmail.com">
+            paynechang@gmail.com</a> .</p>
+    <h2>
+        Development Environment:</h2>
+    <ul>
+        <li>Programming Language: Igor Pro 6.0 (Wavemetrics)</li>
+        <li>QuickTime 7.7.1 (Required to extract images from video files)</li>
+        <li>Sample video files (From Dr. Javier Medina&#39;s lab)</li>
+    </ul>
+    <h2>
+        Download:</h2>
+    <ul>
+        <li><a href="EyelidTracker_v02.05.ipf">EyelidTracker_v02.05.ipf</a></li>
+    </ul>
+    <h2>
+        Tests:</h2>
+    <ol>
+        <li>No Conditioned Response (NoCR.avi) - <a href="Tests/NoCR/index.html">Link</a></li>
+        <li>Conditioned Stimulus Alone (CS-Alone.avi) - <a href="Tests/CS-Alone/index.html">
+            Link</a></li>
+        <li>Trained Conditioned Response (TrainedCR.avi) - <a href="Tests/TrainedCR/index.html">
+            Link</a></li>
+        <li>Explore the possible improvement in analysis with line scan method -
+            <a href="Tests/04/index.html">Link</a></li>
+        <li>Compare three videos - <a href="Tests/05/index.html">Link</a></li>
+        <li>Quantify positions of the upper eyelid and the lower eyelid separately -
+            <a href="Tests/06/index.html">Link</a></li>
+    </ol>
+    <h2>
+        Brief Instruction:</h2>
+    <ul>
+        <li>Compile EyelidTracker_vXX.XX.ipf .</li>
+        <li>Click menu item: Macros/EyelidTracker.</li>
+        <li>The Control Panel<br />
+            <img alt="Control Panel" height="384" src="Images/01.png" width="308" /><br />
+            &nbsp;</li>
+        <li>Click &quot;Open Video File&quot; to select one video file. One QuickTime window
+            and one GrayscaleWindow will appear.<br />
+            <br />
+            GrayscaleWindow<br />
+            <img alt="GrayscaleWindow" height="309" src="Images/02.png" width="300" /><br />
+            &nbsp;</li>
+        <li>Type in the &quot;Number of Frames&quot;.</li>
+        <li>Type in the &quot;Frames per Second&quot;.</li>
+        <li>In GrayscaleWindow, use marquee to select ROI (Region Of Interest) and click &quot;Select
+            ROI&quot;. ROIWindow will apprear.<br />
+            <br />
+            GrayscaleWindow with a marquee<br />
+            <img alt="GrayscaleWindow with Marquee" height="254" src="Images/03.png" width="255" /><br />
+            <br />
+            ROIWindow<br />
+            <img alt="ROIWindow" height="222" src="Images/04.png" width="237" /><br />
+            &nbsp;</li>
+        <li>If &quot;Thresholding&quot; is not checked, the image in ROIWindow is in gray scale.
+            If it is checked, the image is in black and white. Black pixels are counted in the
+            analysis.</li>
+        <li>Use the slider or the &quot;Threshold&quot; box to set the threshold. You will see
+            the image in the ROIWindow changing.</li>
+        <li>To analyze video, click &quot;Analyze Video&quot;. A TraceWindow will appear to
+            display the data.<br />
+            <br />
+            TraceWindow<br />
+            <img alt="TraceWindow" height="300" src="Images/05.png" width="408" /><br />
+            &nbsp;</li>
+        <li>To go to the first frame, click &quot;Go to Beginning&quot;.</li>
+        <li>To exit, click &quot;Exit&quot;. It will close all windows.</li>
+    </ul>
+    <h2>
+        Software Notes:</h2>
+    <ul>
+        <li>Macros<ul>
+            <li>EyelidTracker<ul>
+                <li>The program starts here. It invokes macro ControlPanel to create the control panel
+                    and set default values for global variables.</li>
+            </ul>
+            </li>
+            <li>ControlPanel<ul>
+                <li>Create the control panle.</li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+        <li>Functions<ul>
+            <li>OpenVideoFileFunc - <a href="OpenVideoFileFunc/index.html">Link</a>
+                <ul>
+                    <li>Open video file.</li>
+                </ul>
+            </li>
+            <li>SelectROIFunc<ul>
+                <li>Select ROI.</li>
+            </ul>
+            </li>
+            <li>AnalyzeVideoFunc - <a href="AnalyzeVideoFunc/index.html">Link</a>
+                <ul>
+                    <li>Analyze video.</li>
+                </ul>
+            </li>
+            <li>ImageProcessingFunc<ul>
+                <li>Process and analyze image extracted from video files.</li>
+            </ul>
+            </li>
+            <li>SaveDataFunc<ul>
+                <li>Save data in two formats.</li>
+            </ul>
+            </li>
+            <li>ExitFunc<ul>
+                <li>Release resource and close windows.</li>
+            </ul>
+            </li>
+        </ul>
+        </li>
+    </ul>
+    <hr />
+</body>
+</html>
