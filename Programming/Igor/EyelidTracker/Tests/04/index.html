@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EyelidTracker</title>
+    <style type="text/css">
+        td
+        {
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        EyelidTracker</h1>
+    <hr />
+    <h2>
+        Test #4</h2>
+    <p>
+        Explore the possible improvement in analysis with line scan method.</p>
+    <p>
+        With a video quality like this, line scan method does not gain significant improvement.</p>
+    <h3>
+        Video Source</h3>
+    <p>
+        CS-Alone.avi (generously provided by Dr. Javier Medina in the 
+        University of Pennsylvania.)</p>
+    <h3>
+        Download</h3>
+    <p>
+        <a href="EyelidTracker_v03.02.ipf">EyelidTracker_v03.02.ipf</a></p>
+    <h3>
+        Results</h3>
+    <p>
+        Condition: Threshold = 60</p>
+    <p>
+        <img alt="Result" height="303" src="Images/02.PNG" width="997" /></p>
+    <table>
+        <tr>
+            <td style="text-align: center;">
+                Line Scan vs. Frame Index (without thresholding)
+            </td>
+            <td style="text-align: center;">
+                Line Scan vs. Frame Index (threshold = 60)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img alt="Line Scan vs. Frame Index" height="307" src="Images/04.png" width="394" />
+            </td>
+            <td>
+                <img alt="Line Scan vs. Frame Index" height="307" src="Images/05.png" width="394" />
+            </td>
+        </tr>
+    </table>
+    <p>
+        Comparison between <span style="color: Red;">method #1 (thresholding and pixel counting:
+            red)</span> and <span style="color: Blue;">method #2 (thresholding, line integration, and
+                line counting: blue)</span><br />
+        These two methods generated similar results.<br />
+        <img alt="Comparison" height="300" src="Images/03.png" width="408" /></p>
+    <h3>
+        Video during Analysis</h3>
+    <video controls="controls">
+        <source src="Videos/Video.x264.aac.mp4" type="video/mp4" />
+        <source src="Videos/Video.vp8.vorbis.webm" type="video/webm" />
+        <source src="Videos/Video.theora.vorbis.ogg" type="video/ogg" />
+        Your browser does not support the video tag.
+    </video>
+    <h3>
+        Summary</h3>
+    <p>
+        With a very good video quality, line scan method does not gain significant improvement.</p>
+    <p>
+        One thing should be pointed out about the selection of ROI in the thresholding and
+        pixel counting method (#1). Selecting the whole eye might not be the best way to
+        determine ROI since the reflection of light source could introduce some error. Selecting
+        a rectangle avoiding the reflecting spot as the ROI is better.</p>
+    <hr />
+</body>
+</html>

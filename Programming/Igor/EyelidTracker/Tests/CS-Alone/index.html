@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EyelidTracker</title>
+</head>
+<body>
+    <h1>
+        EyelidTracker</h1>
+    <hr />
+    <h2>
+        Test #2</h2>
+    <p>
+        This video was recorded after the mouse was trained.</p>
+    <h3>
+        Source</h3>
+    <p>
+        CS-Alone.avi (Conditioned Stimulus Alone, generously provided by Dr. Javier Medina 
+        in the University of Pennsylvania.)</p>
+    <h3>
+        Methods</h3>
+    <ol>
+        <li>The first method selects the pupil as the region of interest (ROI).</li>
+        <li>The second method selects the whole eye as the ROI. This method produced simular 
+            resulte as that from Dr. Javier Medina&#39;s lab.</li>
+    </ol>
+    <hr />
+    <h3>
+        Method #1</h3>
+    <p>
+        The pupil was selected as the ROI.</p>
+    <h4>
+        Original Image</h4>
+    <p>
+        <img alt="Original Video" height="256" src="Images/01.png" width="532" /></p>
+    <h4>
+        Grayscale Image and ROI</h4>
+    <p>
+        <img alt="Grayscale Image" height="282" src="Images/02.png" width="560" /></p>
+    <h4>
+        Thresholding (threshold = 47)</h4>
+    <p>
+        <img alt="ROI" height="162" src="Images/03.png" width="174" /></p>
+    <h4>
+        Compare Results</h4>
+    <ul>
+        <li>White dashed line: CS</li>
+        <li>Dark red dashed line: Expected US</li>
+        <li>Blue trace: Eyelid position quantified by Dr. Javier Medina&#39;s lab</li>
+        <li>Red trace: Eyelid position quantified by EyelidTracker</li>
+    </ul>
+    <p>
+        <img alt="Comparison" height="301" src="Images/04.png" width="449" /></p>
+    <hr />
+    <h3>
+        Method #2</h3>
+    <p>
+        The whole eye was selected as the ROI.</p>
+    <h4>
+        Grayscale Image</h4>
+    <p>
+        <img alt="Grayscale Image" height="286" src="Images/05.png" width="552" /></p>
+    <h4>
+        Thresholding (threshold = 78)</h4>
+    <p>
+        <img alt="Thresholding" height="170" src="Images/06.png" width="214" /></p>
+    <h4>
+        Comparison</h4>
+    <ul>
+        <li>White dashed line: CS</li>
+        <li>Dark red dashed line: Expected US</li>
+        <li>Blue trace: Eyelid position quantified by Dr. Javier Medina&#39;s lab</li>
+        <li>Red trace: Eyelid position quantified by EyelidTracker</li>
+        <li>This method generated the result similare to that from Dr. Javier Medina&#39;s lab.</li>
+    </ul>
+    <p>
+        <img alt="Comparison" height="298" src="Images/07.png" width="446" /></p>
+    <hr />
+</body>
+</html>

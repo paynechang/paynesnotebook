@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EyelidTracker</title>
+</head>
+<body>
+    <h1>
+        EyelidTracker</h1>
+    <hr />
+    <h2>
+        Test #3</h2>
+    <p>
+        This video was recorded after the mouse was trained.</p>
+    <h3>
+        Source</h3>
+    <p>
+        TrainedCR.avi (Trained Conditioned Response, generously provided by Dr. Javier Medina 
+        in the University of Pennsylvania.)</p>
+    <h3>
+        Video during Analysis</h3>
+    <video controls="controls">
+        <source src="Videos/Video.x264.aac.mp4" type="video/mp4" />
+        <source src="Videos/Video.vp8.vorbis.webm" type="video/webm" />
+        <source src="Videos/Video.theora.vorbis.ogg" type="video/ogg" />
+        Your browser does not support the video tag.
+    </video>
+    <h3>
+        Grayscale Image and ROI</h3>
+    <p>
+        <img alt="Grayscale Image" height="280" src="Images/01.png" width="279" /></p>
+    <h3>
+        Thresholding (threshold = 87)</h3>
+    <p>
+        <img alt="Thresholding" height="174" src="Images/02.png" width="222" /></p>
+    <h3>
+        Compare Results</h3>
+    <ul>
+        <li>White dashed line: CS</li>
+        <li>Dark red dashed line: US</li>
+        <li>Gray trace: Eyelid position quantified by Dr. Javier Medina&#39;s lab</li>
+        <li>Red trace: Eyelid position quantified by EyelidTracker</li>
+    </ul>
+    <p>
+        <img alt="Comparison" height="343" src="Images/03.png" width="377" /></p>
+    <hr />
+    </body>
+</html>
