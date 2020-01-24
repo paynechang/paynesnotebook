@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>EPMAnalyzer</title>
+    <style>
+        img
+        {
+            vertical-align: top;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        EPMAnalyzer (1.02)</h1>
+    <hr />
+    <h2>
+        Contents</h2>
+    <ul>
+        <li><a href="#Introduction">Introduction</a></li>
+        <li><a href="#DevelopmentEnvironment">Development Environment and Downloads</a></li>
+        <li><a href="#Instructions">Instructions</a><ul>
+            <li><a href="#Displaying EPMAnalyzer Information">Displaying EPMAnalyzer Information </a></li>
+            <li><a href="#Opening File">Opening File </a></li>
+            <li><a href="#Setting Boundary">Setting Boundary </a></li>
+            <li><a href="#Setting Excluded Box">Setting Excluded Box </a></li>
+            <li><a href="#Display Mode">Display Mode </a></li>
+            <li><a href="#Image Processing">Image Processing </a></li>
+            <li><a href="#Setting Background">Setting Background </a></li>
+            <li><a href="#Calculation of The Body Center">Calculation of The Body Center </a></li>
+            <li><a href="#Determination of The Occupied Arm">Determination of The Occupied Arm </a></li>
+            <li><a href="#Playing Video">Playing Video </a></li>
+            <li><a href="#Analyzing Data">Analyzing Data </a></li>
+            <li><a href="#Displaying Data">Displaying Data</a></li>
+            </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2 id="Introduction">
+        Introduction</h2>
+    <p>
+        EPMAnalyzer is developed to evaluate video clips of elevated plus maze test (EPM), which is a test to evaluate the anxiety level of rodents <sup>[<a href="http://en.wikipedia.org/wiki/Elevated_plus_maze">Wikepedia</a>]</sup>.
+        EPMAnalyzer counts the number of closed arm entry, the number of open arm entry, and the time in the open arms. It also records the coordinates of the
+        body center and the resident arm at each time point. If you like to support the development of scientific programs in the Center for Learning and Memory,
+        the University of Texas at Austin, please click <a href="http://www.clm.utexas.edu/CLMsite/friends.html">here</a>. Thanks.</p>
+    <p>
+        Author: Payne Y. Chang (c)2012<br />
+        E-mail: <a href="mailto:paynechang@gmail.com">paynechang@gmail.com</a></p>
+    <p>
+        Dr. Daniel Johnston&#39;s Lab<br />
+        Center for Learning and Memory<br />
+        The University of Texas at Austin</p>
+    <p>
+        <strong>Analysis in Action</strong></p>
+<!----------------------------------------------------->
+<video width="514" height="272" controls="controls">
+    <source src="Videos/Sample.ogg" type="video/ogg" />
+    <source src="Videos/Sample.mp4" type="video/mp4" />
+    <source src="Videos/Sample.webm" type="video/webm" />
+
+    <object width="514" height="272" data="Videos/Sample.mp4">
+        <embed width="514" height="272" src="Videos/Sample.swf" />
+    </object>
+
+</video>
+<!----------------------------------------------------->
+    <hr />
+    <h2 id="DevelopmentEnvironment">
+        Development Environment and Downloads</h2>
+    <h3>
+        Development Environment</h3>
+    <ul>
+        <li>Windows XP</li>
+        <li>Windows SDK 6.0</li>
+        <li>FLTK 1.1.10 (<a href="http://www.fltk.org/">http://www.fltk.org/</a>)</li>
+    </ul>
+    <h3>
+        Tested video file format</h3>
+    <ul>
+        <li>WMV file, 640 x 480 pixels, 30 fps, RGB mode, Video codec: WMV2</li>
+    </ul>
+    <h3>
+        Downloads</h3>
+    <ul>
+        <li>Sample Output File: <a href="Downloads/46.wmv.txt">46.wmv.txt</a></li>
+        <li>Sample Origin File: <a href="Downloads/Trace.OPJ">Trace.OPJ</a></li>
+    </ul>
+    <p>
+        <strong>Elevated Plus Maze</strong></p>
+    <ul>
+        <li>The length of one arm is 50 cm. The width of one arm is 10 cm.</li>
+    </ul>
+    <hr />
+    <h2 id="Instructions">
+        Instructions</h2>
+    <p>
+        To start EPMAnalyzer, double-click &quot;EPMAnalyzer.ext&quot;. You will see the following user interface.
+        To quit the program, press &quot;Esc&quot; on your keyboard.</p>
+    <img alt="User Interface" height="575" src="Figures/01.png" width="1035" />
+    <hr />
+    <h3 id="Displaying EPMAnalyzer Information">
+        Displaying EPMAnalyzer Information</h3>
+    <p>
+        To display EPMAnalyzer information, click &quot;Information&quot; button. You will see a pop-up window displays the information.
+        To close this window, click &quot;Close&quot; button.</p>
+    <p>
+        <img alt="Information" height="618" src="Figures/02.png" width="401" /></p>
+    <hr />
+    <h3 id="Opening File">
+        Opening File</h3>
+    <p>
+        To open a video file, click &quot;Open File&quot; button. Select the video file and click &quot;OK&quot; button. EMPAnalyzer will display the first frame
+        of the video file.</p>
+    <p>
+        <img alt="Open File" height="575" src="Figures/03.png" width="1035" /></p>
+    <hr />
+    <h3 id="Setting Boundary">
+        Setting Boundary</h3>
+    <p>
+        By default, EPMAnalyzer displays the boundary. The boundary is in blue. To hide the boundary, uncheck &quot;Draw Boundary&quot; button.</p>
+    <p>
+        By default, the vertical arms are closed arms. The horizontal arms are open arms.</p>
+    <p>
+        To move the boundary to the left or the right, move the cursor to &quot;X0&quot; box, click and hold the left button and drag to the left or the right.</p>
+    <p>
+        To move the boundary to the top or the bottom, move the cursor to &quot;Y0&quot; box, click and hold the left button and drag to the left or the right.</p>
+    <p>
+        To decrease or increase the width of the arm, move the cursor to &quot;R&quot; box, click and hold the left button and drag to the left or the right.</p>
+    <p>
+        After properly setting the boundary, the interface should look like the following.</p>
+    <p>
+        <img alt="Set Boundary" height="543" src="Figures/04.png" width="1029" /></p>
+    <hr />
+    <h3 id="Setting Excluded Box">
+        Setting Excluded Box</h3>
+    <p>
+        In some rare cases, you might want to exclude an area from analysis.</p>
+    <p>
+        To turn on this fuction, check &quot;Exclude Box&quot; box.</p>
+    <p>
+        To display the excluded area, check &quot;Draw Excluded Box&quot; button. The excluded box is shown in cyan.</p>
+    <p>
+        <img alt="Excluded Box" height="55" src="Figures/06.png" width="161" /></p>
+    <p>
+        To move the excluded area to the left or the right, move the cursor to &quot;X0&quot; box, click and hold the left button, drag to the left or the right.</p>
+    <p>
+        To move the excluced area to the top or the bottom, move the cursor to &quot;Y0&quot; box, click and hold the left button, drag to the left or the right.</p>
+    <p>
+        To reduce or increase the width of the excluded area, move the cursor to &quot;W&quot; box, click and hold the left button, drag to the left or the right.</p>
+    <p>
+        To reduce or increase the height of the excluded area, move the cursor to &quot;H&quot; box, click and hold the left button, drag to the left or the right.</p>
+    <p>
+        <img alt="Set Excluded Box" height="109" src="Figures/05.png" width="169" />
+    </p>
+    <hr />
+    <h3 id="Display Mode">
+        Display Mode</h3>
+    <p>
+        <img alt="Display Mode" height="64" src="Figures/08.png" width="124" /></p>
+    <p>
+        There are two display modes. When &quot;Original&quot; is selected, EPMAnalyzer displays the original video. When &quot;Processed&quot; is selected, the
+        processed data is displayed.</p>
+    <p>
+        Internally, EPMAnalyzer converts RGB data to 8-bit gray scale data. For each pixel, the value range is 0~255. The following image displays a processed
+        frame. You might notice that the excluded box covers the time and the area is black.</p>
+    <p>
+        <img alt="Processed Data" height="480" src="Figures/09.png" width="640" /></p>
+    <hr />
+    <h3 id="Image Processing">
+        Image Processing</h3>
+    <p>
+        The following is the steps in image processing:</p>
+    <ul>
+        <li>Convert 24-bit RGB data to 8-bit gray scale data.</li>
+        <li>Exclude &quot;Excluded Box&quot; area if &quot;Exclude Box&quot; box is checked.</li>
+        <li>Subtract the background if &quot;Remove Background&quot; box is checked.</li>
+        <li>Compare the final value to &quot;Pixel Threshold&quot;. If the value is larger than the threshold, this pixel is considered as an active pixel (or an
+            occupied pixel).</li>
+    </ul>
+    <hr />
+    <h3 id="Setting Background">
+        Setting Background</h3>
+    <p>
+        <img alt="Set Background" height="164" src="Figures/07.png" width="204" /></p>
+    <p>
+        To save the current frame as the background, click &quot;Save Background&quot; button. If &quot;Remove Background&quot; box is checked and the display
+        mode is in &quot;Processed&quot;, the screen will become black since the processed value of each pixel should be zero.</p>
+    <p>
+        To reduce or increase &quot;Pixel Threshold&quot;, move the cursor to &quot;Pixel Threshold&quot; box, click and hold the left button, drag to the left
+        or the right.</p>
+    <hr />
+    <h3 id="Calculation of The Body Center">
+        Calculation of The Body Center</h3>
+    <p>
+        The body center is calculated as the center of all active pixels. The x and y coordinates are the averages of x and y coordinates of all active 
+        pixels, respectively.</p>
+    <p>
+        To display the body center, check &quot;Draw Body Center&quot; button. The body center is indicated by a green cross. During recording, the coordinates
+        of the body center and the arm state are displayed in &quot;Position&quot; box. The unit of X and Y coordinates is cm. (0, 0) corresponds to the center
+        of the maze. Arm state indicates what type of arm the body center is in (-1: closed arm; 0: center square; 1: open arm).</p>
+    <p>
+        <img alt="Body Center" height="480" src="Figures/10.png" width="640" />
+        <img alt="Coordinates" height="159" src="Figures/11.png" width="104" /></p>
+    <hr />
+    <h3 id="Determination of The Occupied Arm">
+        Determination of The Occupied Arm</h3>
+    <p>
+        To determine which area the animal is in, EPMAnalyzer counts active pixels in each area, calculates the total pixel count, and calculates the active pixel
+        ratio of each area (number of active pixels in one area / total active pixels). The ratios and the total pixel count are displayed in &quot;Active Pixel
+        Ratio (%)&quot; box. In the following example, there are 3996 active pixels in the frame. 53% of the activated pixels are in the top arm. To display the
+        occupied arm, check &quot;Draw Active Arm&quot; box and the occupied arm is in red.</p>
+    <p>
+        There are two parameters related to the determination of occupied arm. The first is the ratio threshold, which specifys that the animal is considered
+        being in a specific arm when the active pixel ratio is larger than this threshold. By default, the ratio threshold is 50%. To reduce or increase this
+        threshold, move the cursor to &quot;Ratio Threshold (%)&quot; box, click and hold the left button, drag to the left or the right. When none of the five
+        areas has active pixel ratio larger than this threshold, the animal is considered as being in the previous occupied arm.</p>
+    <p>
+        In some frames, especially when the animal is out of the camera field or near the end of the closed arms, the number of active pixels could be zero or
+        very small. This situation can lead to incorrect determination of the occupied arm. To avoid this, EPMAnalyzer considers the data are reliable and suitable
+        for analysis when the total active pixel count is larger than the pixel count threshold. If the total pixel count is less than this threshold, EPMAnalyzer
+        considers the animal is still in the previous occupied arm. To reduce or increase the pixel count threshold, move the cursor to &quot;Pixel Count Threshold&quot;
+        box, click and hold the left button, drag to the left or the right.</p>
+    <p>
+        <img alt="Occupied Arm" height="480" src="Figures/12.png" width="640" />
+        <img alt="Pixel Counts" height="159" src="Figures/13.png" width="149" />
+        <img alt="Settings" height="164" src="Figures/07.png" width="204" /></p>
+    <hr />
+    <h3 id="Playing Video">
+        Playing Video</h3>
+    <p>
+        To play the video, click &quot;&gt;&quot; button. To pause the video, click &quot;&gt;&quot; button again. EPMAnalyzer displays and analyzes one frame
+        in 0.1 second interval.</p>
+    <p>
+        To move one frame backward, click &quot;&lt;|&quot; button. To move one frame forward, click &quot;|&gt;&quot; button.</p>
+    <p>
+        To go to the first frame, click &quot;|&lt;&quot; button. To go to the last frame, click &quot;&gt;|&quot; button.</p>
+    <p>
+        The video time is displayed in the cyan box as seconds and the orange box as min:sec.</p>
+    <p>
+        You can move the cursor to the cyan box, click and hold the left button, drag to the left or the right to go backward or forward.</p>
+    <p>
+        <img alt="Playback Control" height="64" src="Figures/14.png" width="239" /></p>
+    <hr />
+    <h3 id="Analyzing Data">
+        Analyzing Data</h3>
+    <p>
+        To start recording, click &quot;Record&quot; button. To stop the recording, click &quot;Record&quot; button again or click &quot;Stop&quot; button. By
+        default, EPMAnalyzer will analyze the video for 6 minutes if the recording is not stopped by the user.</p>
+    <p>
+        The record time in seconds or min:sec format is displayed in one of &quot;Record Time&quot; boxes.</p>
+    <p>
+        &quot;Number of Closed Ary Entry&quot; and &quot;Number of Open Arm Entry&quot; are displayed.</p>
+    <p>
+        The value in &quot;Time in Open Arm (Sec)&quot; box is the total duration when the active pixel ratio in either one of the open arm is larger than the
+        pixel ratio threshold.</p>
+    <p>
+        The distance travelled in the open arms is also displayed in &quot;Open Arm Distance (cm)&quot; box.</p>
+    <p>
+        <img alt="Recording" height="159" src="Figures/15.png" width="259" /></p>
+    <hr />
+    <h3 id="Displaying Data">
+        Displaying Data</h3>
+    <p>
+        After analyzing the video, EPMAnalyzer generates a txt file containing the record time, the x coordinate, the y coordinate, and the arm state. The
+        following is a snapshot of the first few lines in an example.</p>
+    <pre>
+Time	X	Y	Arm
+0	0.478428	-12.4721	-1
+0.1	0.512983	-12.5398	-1
+0.2	0.52587	-12.3777	-1
+0.3	0.503302	-12.1689	-1
+0.4	0.356756	-11.1223	-1
+0.5	0.180037	-10.5322	-1</pre>
+    <p>
+        These data can be imported to other programs to display the body center trace or the arm state vs. time. The following figures are examples.</p>
+    <p>
+        &nbsp;<img alt="Trace" height="453" src="Figures/16.png" width="410" />
+        <img alt="Arm State" height="180" src="Figures/17.png" width="497" /></p>
+    <hr />
+</body>
+</html>
