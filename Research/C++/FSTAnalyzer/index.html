@@ -1,0 +1,293 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>FSTAnalyzer</title>
+</head>
+<body>
+    <h1>
+        FSTAnalyzer (v.1.09)</h1>
+    <hr />
+    <h2>
+        Contents</h2>
+    <ul>
+        <li><a href="#Introduction">Introduction</a></li>
+        <li><a href="#DevelopmentEnvironment">Development Environment</a></li>
+        <li><a href="#Instructions">Instructions</a>
+            <ul>
+                <li><a href="#OpenFile">Open File </a></li>
+                <li><a href="#DisplayFSTAnalyzerInformation">Display FSTAnalyzer Information </a></li>
+                <li><a href="#PlayVideo">Play Video </a></li>
+                <li><a href="#SetExamineArea">Set Examine Area </a></li>
+                <li><a href="#AnalysisParameters">Analysis Parameters </a></li>
+                <li><a href="#AnalysisProcedure">Analysis Procedure </a></li>
+                <li><a href="#Reevaluation">Re-evaluation </a></li>
+            </ul>
+        </li>
+        <li><a href="#Notes">Notes</a></li>
+    </ul>
+    <hr />
+    <h2 id="Introduction">
+        Introduction</h2>
+    <p>
+        This program is developed for the analysis of modified Forced Swim Test (FST) video.</p>
+    <p>
+        Author: Payne Y. Chang (c) 2011
+        <br />
+        Email: <a href="mailto:paynechang@gmail.com">paynechang@gmail.com</a>
+    </p>
+    <p>
+        Dr. Daniel Johnston&#39;s Lab
+        <br />
+        Center for Learning and Memory
+        <br />
+        The University of Texas at Austin
+    </p>
+    <hr />
+    <p>
+        Thank you for your interest in FSTAnalyzer. If you like this program, please consider supporting our research in CLM by making a donation or a purchase
+        through either:
+    </p>
+    <ol>
+        <li><a href="http://www.clm.utexas.edu/CLMsite/friends.html">http://www.clm.utexas.edu/CLMsite/friends.html</a><br />
+            &nbsp;or</li>
+        <li>email <a href="mailto:jjain@otc.utexas.edu?subject=FST_Analyzer">jjain@otc.utexas.edu</a> (<a href="http://www.otc.utexas.edu">http://www.otc.utexas.edu</a>)</li>
+    </ol>
+    <p>
+        Thank you for your support.</p>
+    <p>
+        More information in: <a href="http://clm.utexas.edu/djlab">http://clm.utexas.edu/djlab</a></p>
+    <hr />
+    <h2 id="DevelopmentEnvironment">
+        Development Environment</h2>
+    <p>
+        The development environment is described as following:</p>
+    <ul>
+        <li>Windows XP</li>
+        <li>Windows SDK 6.0</li>
+        <li>FLTK 1.1.10 (<a href="http://www.fltk.org">http://www.fltk.org</a>)</li>
+    </ul>
+    <hr />
+    <p>
+        The tested video format is described as following:</p>
+    <ul>
+        <li>WMV file</li>
+        <li>Width: 640</li>
+        <li>Height: 480</li>
+        <li>RGB</li>
+        <li>Video codec: WMV8</li>
+        <li>Frame rate: 30 fps</li>
+    </ul>
+    <hr />
+    <p>
+        Available files</p>
+    <ul>
+        <li><a href="Sample.wmv_II.txt">Sample.wmv_II.txt</a><br />
+            Sample immobility index output file</li>
+        <li><a href="Sample.wmv_MI.txt">Sample.wmv_MI.txt</a><br />
+            Sample movement index output file</li>
+    </ul>
+    <hr />
+    <h2 id="Instructions">
+        Instructions</h2>
+    <p>
+        This is the user interface when you start FSTAnalyzer.</p>
+    <img src="Images/01.png" style="width: 918px; height: 555px" /><br />
+    <p>
+        To quit FSTAnalyzer, press &quot;Esc&quot; button in your keyboard.<br />
+    </p>
+    <hr />
+    <h3 id="OpenFile">
+        Open File</h3>
+    <p>
+        To open a file:</p>
+    <ol>
+        <li>Click &quot;Open File&quot; button. An &quot;Open File&quot; window will appear.</li>
+        <li>Select the file and click &quot;OK&quot;.</li>
+    </ol>
+    <p>
+        <img src="Images/02.png" style="width: 499px; height: 408px" /><br />
+    </p>
+    <p>
+        After opening the video file, FSTAnalyzer will show the first frame in the video window.<br />
+        The file name will be displayed in the &quot;File Name&quot; box.</p><p>
+        <img src="Images/04.png" style="width: 918px; height: 555px" />
+    </p>
+    <hr />
+    <h3 id="DisplayFSTAnalyzerInformation">Display FSTAnalyzer Information</h3>
+    <p>
+        To show &quot;FSTAnalyzer Information&quot; window, click &quot;Information&quot; button.<br />
+        You need to close this window before you do analysis.</p><p>
+        <img src="Images/03.png" style="width: 401px; height: 612px" />
+    </p>
+    <hr />
+    <h3 id="PlayVideo">
+        Play Video<br />
+    </h3>
+    <p>
+        To play the video, click
+        <img src="Images/05.png" style="width: 56px; height: 25px" />
+        .</p>
+    <p>
+        To stop playing the video, click
+        <img src="Images/05.png" style="width: 56px; height: 25px" />
+        again.</p>
+    <p>
+        FSTAnalyzer will display and examine the frame every 0.1 second (the video time).</p>
+    <p>
+        With default settings, FSTAnalyzer will try to play the video as fast as possible.<br />
+        To play the video at x1 speed, check &quot;x1 Speed&quot;.</p>
+    <p>
+        To play the video for 5 seconds, check &quot;5 sec&quot; and click
+        <img src="Images/05.png" style="width: 56px; height: 25px" />
+        .</p>
+    <p>
+        To step back for 5 seconds, click
+        <img src="Images/17.png" style="width: 55px; height: 24px" />
+        .</p>
+    <p>
+        To step back one frame, click
+        <img src="Images/06.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        To step forward one frame, click
+        <img src="Images/07.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        To go to the first frame, click
+        <img src="Images/08.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        To go to the last frame, click
+        <img src="Images/09.png" style="width: 35px; height: 24px" />
+        .</p>
+    <p>
+        The elapsed time will be displayed in &quot;Video Time&quot; boxes.<br />
+        <img src="Images/10.png" style="width: 200px; height: 28px" /><br />
+        The left yellow box displays the time in seconds.<br />
+        The right gray box displays the time in &quot;min : sec&quot;.<br />
+        You can go to a specific frame by left-click inside the yellow box and drag to the left to go backward and to the right to go forward.</p>
+        <hr />
+    <h3 id="SetExamineArea">
+        Set Examine Area</h3>
+    <p>
+        When
+        <img src="Images/11.png" style="width: 115px; height: 24px" />
+        is checked, you will see a blue or red circle.<br />
+        The area inside the blue or red circle is the examine area.<br />
+        When the movement is above the threshold, the circle is red.<br />
+        When the movement is below the threshold, the circle is blue.<br />
+        The movement detection will be discussed shortly.</p>
+    <p>
+        X0 displays the x coordinate (in pixels) of the left boundary.<br />
+        Y0 displays the y coordinate (in pixels) of the top boundary.<br />
+        R displays the radius (in pixels) of the examine area.<br />
+        To move the examine area horizontally, left-click X0 box and drag to the left (the area moves to the left) or to the right (the area moves to the right).<br />
+        To move the examine area vertically, left-click Y0 box and drag to the left (the area moves to the top) or to the right (the area moves to the bottom).<br />
+        Left-click R box and drag to the left to reduce the radius.<br />
+        Left-click R box and drag to the right to increase the radius.</p>
+        <hr />
+    <h3 id="AnalysisParameters">
+        Analysis Parameters</h3>
+    <p>
+        FSTAnalyzer analyzes the difference from frame to frame.<br />
+        To see the difference, click &quot;Show Difference&quot; button.<br />
+        The area outside the examine area is always black and not analyzed.<br />
+        <img src="Images/12.png" style="width: 918px; height: 555px" /></p>
+    <p>
+        FSTAnalyzer calculates the average difference in the examine area (difference per pixel).<br />
+        If the average difference is above the &quot;Movement Threshold&quot;, the circle turns red and it indicates the animal is active for 0.1 second.<br />
+        If the average difference is below the &quot;Movement Threshold&quot;, the circle turns blue and it indicates the animal is immobile for 0.1 second.</p>
+    <p>
+        Within 5 seconds, if the summation of active time is longer than the &quot;Length Threshold&quot;, FSTAnalyzer considers the animal is active in this
+        five second period.<br />
+        If the summation of active time is shorter than the &quot;Length Threshold&quot;, FSTAnalyzer considers the animal is immobile in this five second period.</p>
+    <p>
+        To change &quot;Movement Threshold&quot;, left-click &quot;Movement Threshold&quot; box and drag to the left to reduce the threshold and drag to the right
+        to increase the threshold.<br />
+        To change &quot;Length Threshold&quot;, left-click &quot;Length Threshold&quot; box and drag to the left to reduce the threshold and drag to the right
+        to increase the threshold.</p>
+    <hr />
+    <h3 id="AnalysisProcedure">
+        Analysis Procedure</h3>
+    <ul>
+        <li>Open video file.</li>
+        <li>Adjust the examine area so it covers the whole water surface.</li>
+        <li>Play the video and stop it when the animal is in the chamber and the handler is just out of view.</li>
+        <li>Click &quot;Record&quot; button. The &quot;Record&quot; button will become red. FSTAnalyzer will advance for 2 minutes and start analyzing the data as
+            fast as possible for 4 minutes.<ul>
+                <li>The Record Time will display in two gray boxes.</li>
+                <li>The left box displays record time in seconds.</li>
+                <li>The right box displays record time in &quot;min : sec&quot;.</li>
+                <li>The immobility time is displayed in the &quot;Immobility Time&quot; box (in seconds).<br />
+                    <img src="Images/13.png" style="width: 229px; height: 83px" /></li>
+                <li>You can interrupt the recording by click &quot;Record&quot; button again.<br />
+                </li>
+            </ul>
+        </li>
+        <li>After finishing the analysis, you will get two files in the folder.<ul>
+            <li>XXXX_MI.txt contains movement index at 0.1 second interval (XXXX is the file name of the video).<br />
+                <br />
+                The first column shows the frame index.<br />
+                The second column shows the Record Time (in seconds).<br />
+                The third column shows the Video Time (in seconds).<br />
+                The forth column shows the movement index (MI).<br />
+                <br />
+                <img src="Images/14.png" style="width: 307px; height: 194px" /><br />
+                <br />
+            </li>
+            <li>XXXX_II.txt contains immobility index (Im.I) at 5 second interval.<br />
+                <br />
+                The following example indicates the animal is immobile (1) in the first 5 seconds, active (0) in the second 5 seconds, and immobile (1) in the third 5
+                seconds.<br />
+                The total immobility time is 10 seconds.<br />
+                <br />
+                <img src="Images/15.png" style="width: 123px; height: 103px" /></li>
+        </ul>
+        </li>
+    </ul>
+    <hr />
+    <h3 id="Reevaluation">
+        Re-evaluation</h3>
+    <p>
+        If you want to evaluate the immobility time with different threshold settings, you don&#39;t need to repeat the &quot;Record&quot; procedure given you
+        already have the movement index file.</p>
+    <p>
+        To re-evaluate one video:</p>
+    <ol>
+        <li>Adjust the threshold settings (Movement Threshold and/or Length Threshold).</li>
+        <li>Click &quot;Process Data&quot; button.</li>
+        <li>Select &quot;XXXX_MI.txt&quot; file and click &quot;OK&quot;.</li>
+        <li>FSTAnalyzer will generate &quot;ImmobilityIndex.txt&quot;, which has similar format as XXXX_II.txt. FSTAnalyzer will also update the value in &quot;Immobility
+            Time&quot; box.</li>
+    </ol>
+    <p>
+        To re-evaluate several videos:</p>
+    <ol>
+        <li>Adjust the threshold settings.</li>
+        <li>Create a TXT file (similar to the following example) in the folder containing the movement index (MI) files.<br />
+            <img src="Images/16.png" style="width: 119px; height: 263px" /></li>
+        <li>Click &quot;Batch Processing&quot;.</li>
+        <li>Select the TXT file containing the file list and click &quot;OK&quot;.</li>
+        <li>FSTAnalyzer will generate &quot;Immobility_Time.txt&quot;, which contains a list of movement index file names and immobility time, like the following
+            example.<br />
+            <img src="Images/18.png" style="width: 178px; height: 263px" /></li>
+    </ol>
+    <hr />
+    <h2 id="Notes">
+        Notes</h2>
+    <ol>
+        <li>The analysis is sensitive to background. The following points are recommended.<ul>
+            <li>The background and the lighting should be similar from trial to trial.</li>
+            <li>Place a black background without pattern under the chamber for white animals.<br />
+                Place a white background without pattern under the chamber for black animals.</li>
+            <li>Adjust the relative positions of the camera and the lamp so the reflection of light is minimized.</li>
+        </ul>
+        </li>
+        <li>To get appropriate threshold settings, it is recommended to first manually score several videos according to your criteria. Next, use FSTAnalyzer to analyze
+            the same set of videos and adjust the threshold settings so on average FSTAnalyzer produces similar result as your own scores. Then, you can use these
+            threshold settings for the analysis of other videos. The analysis of FSTAnalyzer is very robust given the background and the lighting is similar from
+            trial to trial.</li>
+    </ol>
+    <hr />
+</body>
+</html>
