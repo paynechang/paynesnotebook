@@ -1,0 +1,63 @@
+.ul
+{
+    list-style-type:none;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+}
+
+.li
+{
+    float:left;
+    margin:2px;
+}
+
+a
+{
+    color:#2200BB;
+    text-decoration:none;
+}
+
+.a:link, .a:visited
+{
+    display: block;
+    width: 120px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #FF9900;
+    text-align: center;
+    padding: 4px;
+    text-decoration: none;
+}
+
+.a:hover, .a:active
+{
+    background-color: #CC6600;
+}
+
+.indent
+{
+    margin-left:30px;
+    margin-right:30px;
+}
+
+.underline
+{
+    text-decoration: underline;
+}
+
+table
+{
+    border-collapse: collapse;
+    border-width: 1px;
+    border-color: #999999;
+    border-style:solid;
+}
+
+td
+{
+    border-color: #999999;
+    border-style:solid;
+    border-width:1px;
+    padding:5px;
+}
