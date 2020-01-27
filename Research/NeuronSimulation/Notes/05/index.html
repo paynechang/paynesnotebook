@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #5</title>
+</head>
+<body>
+
+    <h1>
+        NEURON Tutorial #5</h1>
+        <hr />
+    <h2>
+        Goals: Put tutorials #3 and #4 together 
+        and organize the structure of files.</h2>
+    <h2>
+        Specific aims:</h2>
+    <ul>
+        <li>Create an experiment control panel to control experiment</li>
+        <li>Organize the structure of files</li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Main.hoc">Main.hoc</a></li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a></li>
+        <li><a href="1_TimeConstant.hoc">1_TimeConstant.hoc</a></li>
+        <li><a href="1_SingleExponentialFitting.hoc">1_SingleExponentialFitting.hoc</a></li>
+        <li><a href="2_InputResistance.hoc">2_InputResistance.hoc</a></li>
+        <li><a href="VGraph.hoc">VGraph.hoc</a></li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a></li>
+        <li><a href="05.zip">05.zip</a></li>
+    </ul>
+    <hr />
+<pre>
+//======================================
+// Title: Tutorial #5
+// Author: Payne Y. Chang
+// File Name: Main.hoc
+
+//======================================
+// Parameters
+experimentDuration = 400	// [ms]
+
+//======================================
+// Object references
+//======================================
+
+// Create soma section
+create soma
+
+// I-clamp electrode
+objref electrode
+soma electrode = new IClamp(0.5)
+
+// Voltage graph
+objref vGraph			
+vGraph = new Graph(0)
+
+// Vectors for recording time and voltage
+objref tVector, vVector	
+tVector = new Vector()	// Time vector
+vVector = new Vector()	// Voltage vector
+
+// Output File
+objref outputFile
+outputFile = new File()
+
+// Experiment Control Box
+objref experimentControl
+experimentControl = new HBox()
+
+// Time Constant Box
+objref timeConstantBox
+timeConstantBox = new HBox()
+
+// Single Exponential Fitting Box
+objref singleExponentialFittingBox
+singleExponentialFittingBox = new HBox()
+
+// Input Resistance Box
+objref inputResistanceBox
+inputResistanceBox = new HBox()
+
+//======================================
+// Create panels
+load_file("nrngui.hoc")				// Display main menu
+load_file("ExperimentControl.hoc")		// Display experiment control panel
+load_file("1_TimeConstant.hoc")			// Assemble time constant box
+load_file("1_SingleExponentialFitting.hoc")	// Assemble exponential fitting box
+load_file("2_InputResistance.hoc")		// Assemble input resistance box
+load_file("VGraph.hoc")				// Display v plot
+
+//======================================
+// Set soma properties
+soma {
+	nseg = 1		// Number of segments = 1
+	diam = 100		// Diameter [um]
+	L = 100			// Length [um]
+	Ra = 100		// Axial risistance [ohm-cm]
+	cm = 1			// Capacitance of membrane [uF/cm2]
+	
+	insert pas		// Insert passive properties
+	g_pas = 1/30000	// [S/cm2]. Tau = 30 ms
+	e_pas = -65		// Reversal potential. [mV]
+}
+
+//======================================
+// Set recording vectors
+tVector.record(&t)		// Record t
+vVector.record(&soma.v(0.5))	// Record v at soma</pre>
+<hr />
+</body>
+</html>

@@ -1,0 +1,52 @@
+//======================================
+// File Name: 2_InputResistance.hoc
+// Assemble Input Resistance Box
+
+//======================================
+// Start of the box
+inputResistanceBox.intercept(1)
+{
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		xbutton("Calculate Rin","CalculateRin()")	// Calculate Rin button
+		xlabel("After simulation")					// Display "After simulation"
+		xbutton("Measure Rin","MeasureRin()")		// Measure Rin button
+	}
+	xpanel() // Close the panel
+
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+}
+inputResistanceBox.intercept(0)// End of the box
+
+//======================================
+// Calculate Rin
+proc CalculateRin() {
+	R = 1/soma.g_pas					// Resistance [ohm.cm^2]
+	SurfaceArea = soma.diam*PI*soma.L	// Surface Area [um^2]
+
+	// Display Rin information
+	print "\nCalculated Rin"
+	print "Surface Area = ", SurfaceArea, " (um^2)"
+	print "R = ", R, " (ohm cm^2)"
+	print "Rin = ", R/(SurfaceArea*1e-8)*1e-6, " (Mega ohm)"
+}
+
+//======================================
+// Measure Rin
+proc MeasureRin() {
+	index1 = tVector.indwhere(">=", 50)		// Get the index of the baseline
+	index2 = tVector.indwhere(">=", 100)	// 50~100 ms
+	v1 = vVector.mean(index1, index2-1)		// Voltage at baseline
+	
+	index1 = tVector.indwhere(">=", 550)	// Get the index of the response
+	index2 = tVector.indwhere(">=", 600)	// 550~600 ms
+	v2 = vVector.mean(index1, index2-1)		// Voltage at steady state
+	
+	// Display Rin information
+	print "\nMeasured Rin"
+	print "Rin = ", (v2-v1)/(-0.1), " (Mega Ohm)"	
+}

@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #1</title>
+</head>
+<body>
+
+    <h1>
+        NEURON Note #1</h1>
+        <hr />
+    <h2>
+        Goal: Build one single compartment model</h2>
+    <h2>
+        Specific aims:</h2>
+    <ul>
+        <li>Display NEURON main menu.</li>
+        <li>Create and set a section called soma.</li>
+        <li>Create and set a current clamp electrode.</li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Main.hoc">Main.hoc</a></li>
+    </ul>
+    <hr />
+<pre>
+//==============================================================================
+// Note #1
+// Main.hoc
+
+//======================================
+// Display NEURON Main Menu
+load_file("nrngui.hoc")
+print "Main menu is displayed"	// Display notice
+
+//======================================
+// Create a section called soma
+create soma
+print "Soma is created."	// Display notice
+
+// Set properties
+soma {
+	nseg = 1		// Number of segments = 1
+	diam = 10		// Diameter = 10 [um]
+	L = 10			// Length = 10 [um]
+	Ra = 100		// Axial risistance = 100 [ohm-cm]
+	cm = 1			// Capacitance of membrane = 1
+	insert hh		// Insert Hodgkin-Huxley channels
+}
+
+print "Properties of soma are set."	// Display notice
+soma psection()	// Display properties of section soma
+
+//======================================
+// Set one current clamp electrode
+objectvar electrode
+soma electrode = new IClamp(0.5)
+
+electrode.del = 100	// Delay = 100 ms
+electrode.dur = 500	// Duration = 100 ms
+electrode.amp = 0.02	// Amplitude = 0.02 nA
+
+print "Electrode is set."	// Display notice
+
+//======================================
+// Set simulation duration
+tstop = 700
+
+//==============================================================================
+</pre>
+<hr />
+</body>
+</html>

@@ -1,0 +1,78 @@
+//======================================
+// File Name: ExperimentControl.hoc
+// Assemble Experiment Control Box
+
+//======================================
+// Start of the box
+experimentControl.intercept(1)
+{
+	//======================================
+	// Experiment control panel 
+	xpanel("", 0)	// Start the panel, ("Title", 0: vertical lay out)
+	{
+		xbutton("Measure Membrane Time Constant","MeasureMembraneTimeConstant()")
+		xbutton("Measure Input Resistance","MeasureInputResistance()")
+	}
+	xpanel() // Close the panel
+}
+experimentControl.intercept(0)// End of the box
+experimentControl.map("Experiment Control", 900, 0, 200, 200)// Display the box
+
+//======================================
+// Hide all panels
+proc HideAllPanels() {
+	timeConstantBox.unmap()
+	inputResistanceBox.unmap()
+	singleExponentialFittingBox.unmap()
+}
+
+//======================================
+// Measure membrane time constant
+proc MeasureMembraneTimeConstant() {
+	// Display notice
+	print "\nSet parameters for membrane time constant measurement"
+	
+	// Set experiment duration
+	experimentDuration = 400 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	vGraph.erase()	// Erase old traces
+	vGraph.size(0, experimentDuration, -70, -60)
+	
+	// Set the parameters for I-clamp electrode
+	electrode.del = 100		// Delay [ms]
+	electrode.dur = 1		// Duration [ms]
+	electrode.amp = -0.4	// Amplitude [nA]
+	
+	// Update panels
+	HideAllPanels()
+	timeConstantBox.map("Time Constant", 1200, 0, 400, 250)	// Display the box
+	singleExponentialFittingBox.map("FunctionFitter", 1300, 400, 472, 472)	// Display FunctionFitter
+	doNotify()
+}
+
+//======================================
+// Measure input resistance (Rin)
+proc MeasureInputResistance() {
+	// Display notice
+	print "\nSet parameters for input resistance measurement"
+	
+	// Set experiment duration
+	experimentDuration = 800 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	vGraph.erase()	// Erase old traces
+	vGraph.size(0, experimentDuration, -80, -60)
+	
+	// Set the parameters for I-clamp electrode
+	electrode.del = 100		// Delay [ms]
+	electrode.dur = 500		// Duration [ms]
+	electrode.amp = -0.1	// Amplitude [nA]
+	
+	// Update panels
+	HideAllPanels()
+	inputResistanceBox.map("Input Resistance", 1200, 0, 400, 250)	// Display the box
+	doNotify()
+}

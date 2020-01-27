@@ -1,0 +1,43 @@
+//==============================================================================
+// Note #1
+// Main.hoc
+
+//======================================
+// Display NEURON Main Menu
+load_file("nrngui.hoc")
+print "Main menu is displayed"	// Display notice
+
+//======================================
+// Create a section called soma
+create soma
+print "Soma is created."	// Display notice
+
+// Set properties
+soma {
+	nseg = 1		// Number of segments = 1
+	diam = 10		// Diameter = 10 [um]
+	L = 10			// Length = 10 [um]
+	Ra = 100		// Axial risistance = 100 [ohm-cm]
+	cm = 1			// Capacitance of membrane = 1
+	insert hh		// Insert Hodgkin-Huxley channels
+}
+
+print "Properties of soma are set."	// Display notice
+soma psection()	// Display properties of section soma
+
+//======================================
+// Set one current clamp electrode
+objectvar electrode
+soma electrode = new IClamp(0.5)
+
+electrode.del = 100	// Delay = 100 ms
+electrode.dur = 500	// Duration = 100 ms
+electrode.amp = 0.02	// Amplitude = 0.02 nA
+
+print "Electrode is set."	// Display notice
+
+//======================================
+// Set simulation duration
+tstop = 700
+
+//==============================================================================

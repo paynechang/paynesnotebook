@@ -1,0 +1,12 @@
+//======================================
+// File Name: ParameterControl.hoc
+// Create "Parameter Control" panel
+
+// Start of an xpanel 
+xpanel("Parameter Control", 0)	// ("Title", 0: vertical lay out)
+
+// Save Response
+xbutton("Save Response to File","save_response()")
+
+// Close the xpanel (x, y)
+xpanel(1150,10)

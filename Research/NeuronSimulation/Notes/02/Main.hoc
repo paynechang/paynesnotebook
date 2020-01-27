@@ -1,0 +1,35 @@
+//==============================================================================
+// Note #2
+// Main.hoc
+
+//======================================
+// Display NEURON Main Menu
+load_file("nrngui.hoc")		// Display main menu
+load_file("RunControl.hoc")	// Display run control
+load_file("VGraph.hoc")		// Display v plot
+
+//======================================
+// Create a section called soma
+create soma
+
+// Set properties
+soma {
+	nseg = 1		// Number of segments = 1
+	diam = 10		// Diameter = 10 [um]
+	L = 20			// Length = 10 [um]
+	Ra = 100		// Axial risistance = 100 [ohm-cm]
+	cm = 1			// Capacitance of membrane = 1
+	insert hh		// Insert Hodgkin-Huxley channels
+	insert pas		// Insert passive properties
+}
+
+//======================================
+// Set one current clamp electrode
+objectvar electrode
+soma electrode = new IClamp(0.5)
+
+electrode.del = 100		// Delay = 100 ms
+electrode.dur = 500		// Duration = 100 ms
+electrode.amp = 0.2		// Amplitude = 0.02 nA
+
+//==============================================================================

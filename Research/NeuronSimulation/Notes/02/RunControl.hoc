@@ -1,0 +1,56 @@
+//==============================================================================
+// Create "Run Control" panel
+{
+	// Start of an xpanel 
+	xpanel("Run Control", 0)
+		// ("Title", 0: vertical lay out)
+	
+	// Initiate and Run
+	xbutton("Initiate & Run","run()")
+	
+	// Stop
+	xbutton("Stop","stoprun=1")
+	
+	// Initial voltage
+	v_init = -65
+	xvalue("Initiate V","v_init", 0,"stdinit()")
+		// ("Prompt", "variable", 1: check box, "action")
+	
+	// Simulation time
+	t = 0
+	xvalue("t","t", 2 )	// 2: Updated every 10th doNotify()
+	
+	// Simulation duration
+	tstop = 700
+	xvalue("tstop","tstop", 0,"tstop_changed()")
+	
+	// Time step
+	dt = 0.02
+	xvalue("dt","dt", 0,"setdt()")
+	
+	// Steps per ms
+	steps_per_ms = 50
+	xvalue("steps_per_ms","steps_per_ms", 0,"setdt()")
+	
+	// Screen update interval
+	screen_update_invl = 0.05
+	xvalue("screen_update_invl","screen_update_invl", 0,"")
+	
+	// Real time
+	realtime = 0
+	xvalue("realtime","realtime", 0,"")
+	
+	// Quit
+	xbutton("quit()","quit()")
+	
+	// Close the xpanel (x, y)
+	xpanel(900,10)
+}
+
+//======================================
+// Update all panels
+{
+	doNotify()
+}
+
+//==============================================================================

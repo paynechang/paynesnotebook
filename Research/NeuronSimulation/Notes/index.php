@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NEURON Tutorials</title>
+	<meta content="text/html;charset=UTF-8" />
+    <link href="../style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h1 style="margin-bottom: 0px">
+        NEURON Simulation</h1>
+    <hr />
+    <table style="border-style: none">
+        <tr>
+            <td style="border-style: none">
+                <?php include("../navigationBar.php"); ?>
+            </td>
+            <td style="border-style: none">
+                <h2>
+                    Notes</h2>
+                <p>
+                    These are 
+                    my notes. I hope they are useful to your research.
+                    If you have any questions or comments, please feel free to contact me at <a href="mailto:paynechang@gmail.com">
+                        paynechang@gmail.com</a>.</p>
+                <ol>
+                    <li>Build one single compartment model - <a href="01/index.html">index.html</a></li>
+                    <li>Add a run control panel and a voltage graph - <a href="02/index.html">index.html</a></li>
+                    <li>Set passive properties and measure time constant - <a href="03/index.html">index.html</a></li>
+                    <li>Set passive properties and measure input resistance - <a href="04/index.html">index.html</a></li>
+                    <li>Put #3 and #4 together - <a href="05/index.html">index.html</a></li>
+                    <li>Measure temporal summation - <a href="06/index.html">index.html</a></li>
+                    <li>Create Ih model - <a href="07/index.html">index.html</a></li>
+                    <li>Insert Ih - <a href="08/index.html">index.html</a></li>
+                    <li>Run step family: measure Rin and rebound slope by linear regression - <a href="09/index.html">
+                        index.html</a></li>
+                    <li>Chirp experiment - <a href="10/index.html">index.html</a></li>
+                    <li>Examine the influences of the parameters and the order on activation and deactivation
+                        - <a href="11/index.html">index.html</a></li>
+                    <li>A program to examine the influences of each parameters on GV curve, tau, and rates
+                        in the kinetic scheme ( C &lt;-&gt; O ) - <a href="12/index.html">index.html</a></li>
+                    <li>Develop an integrated environment to test one Ih model (Sonia&#39;s Ih model). -
+                        <a href="13_Sonia_Ih/index.html">index.html</a></li>
+                    <li>Compare Sonia&#39;s Ih and Payne&#39;s Ih - <a href="14_Payne_Ih/index.html">index.html</a></li>
+                    <li>Find the best fit for the kinetic scheme (C &lt;-&gt; O)<sup>2</sup> - <a href="15_s2_fit/index.html">
+                        index.html</a></li>
+                    <li>Simulate with the kinetic scheme (C &lt;-&gt; O)<sup>2</sup> - <a href="16_s2_sim/index.html">
+                        index.html</a></li>
+                    <li>Simulate with Altomare&#39;s HCN1 model (JGP, 2001) - <a href="17_Altomare_HCN1/index.html">
+                        index.html</a></li>
+                    <li>Modify the parameters in Altomare&#39;s model to fit Jeff Magee&#39;s data - <a
+                        href="18_Ih_Fit_Altomare/index.html">index.html</a></li>
+                    <li>Compare several Ih models - <a href="19_Comparison/index.html">index.html</a></li>
+                    <li>Influence of Q10, the size of injected current, and gbar_h on impedance magnitude,
+                        voltage lag, and time constants - <a href="20_Q10/index.html">index.html</a></li>
+                    <li>Fourier transform of chirp current and voltage - <a href="21_Chirp/index.html">index.html</a></li>
+                    <li>Compare models without and with Ih - <a href="22_Ih/index.html">index.html</a></li>
+                    <li>Compare Altomare&#39;s HCN1 and HCN2 model - <a href="23_Altomare/index.html">index.html</a></li>
+                    <li>Influence of gating variables&#39; power in Hodgkin-Huxley model - <a href="24_Order/index.html">
+                        index.html</a></li>
+                    <li>Delayed rectifier potassium current (K<sub>DR</sub>)- <a href="25_Kdr/index.html">
+                        index.html</a></li>
+                    <li>Fast and transient potassium current (K<sub>A</sub>) - <a href="26_Ka/index.html">
+                        index.html</a></li>
+                    <li>Transient voltage-gated sodium current (I<sub>NaT</sub>) -<a href="27_NaT/index.html">index.html</a></li>
+                    <li>Some notes about curve fitting - <a href="28_CurveFitting/index.html">index.html</a></li>
+                    <li>Transient voltage-gated sodium current (I<sub>NaT</sub>) based on new
+                        data - <a href="29_NaT_YYP/index.html">index.html</a></li>
+                    <li>DTX-k sensitive potassium current (K<sub>D</sub>) - <a href="30_KD/index.html">index.html</a></li>
+                </ol>
+            </td>
+        </tr>
+    </table>
+    <hr />
+</body>
+</html>

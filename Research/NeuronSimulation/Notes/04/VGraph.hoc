@@ -1,0 +1,11 @@
+//======================================
+// File Name: VGraph.hoc
+
+objref VGraph	// Create an object variable
+
+VGraph = new Graph(0)	// Create the object
+VGraph.view(0, -80, 800, 20, 900, 400, 400, 300)
+	// (x0, y0, width, height, window x, window y, window width, window height)
+graphList[0].append(VGraph)
+VGraph.save_name("graphList[0].")
+VGraph.addexpr("v(.5)", 1, 1, 0.8, 0.9, 2)
