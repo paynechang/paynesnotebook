@@ -1,0 +1,19 @@
+//======================================
+// File Name: Parameters.hoc
+// Assemble Parameters Box
+
+//======================================
+// Start of the box
+parametersControlBox.intercept(1)
+{
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		xvalue("gbar_h", "gBarH", 0, "SetSomaProperties()")	// gbar_h
+		xvalue("e_pas", "ePas", 0, "SetSomaProperties()")	// e_pas
+	}
+	xpanel() // Close the xpanel
+}
+parametersControlBox.intercept(0) // End of the box
+parametersControlBox.map("Parameters", 1200, 0, 200, 250)	// Display the box

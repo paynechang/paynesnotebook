@@ -1,0 +1,25 @@
+//======================================
+// File Name: Graph.hoc
+// Voltage graph and current graph
+
+// Graph Box
+graphBox.intercept(1)
+{
+	//======================================
+	// Voltage graph
+	vGraph.view(0, 0, 1, 1, 700, 400, 400, 300)
+		// (x0, y0, width, height, window x, window y, window width, window height)
+	graphList[0].append(vGraph)
+	vGraph.save_name("graphList[0].")
+	vGraph.addexpr("v(.5)", 1, 1, 0.8, 0.9, 2)
+	
+	//======================================
+	// Current graph
+	iGraph.view(0, 0, 1, 1, 700, 400, 400, 300)
+		// (x0, y0, width, height, window x, window y, window width, window height)
+	graphList[0].append(iGraph)
+	iGraph.save_name("graphList[0].")
+	iGraph.addexpr("electrode.i", 1, 1, 0.8, 0.9, 2)
+}
+graphBox.intercept(0)	// End of graph box
+graphBox.map("Voltage, Current", 700, 350, 400, 600)	// Display the window

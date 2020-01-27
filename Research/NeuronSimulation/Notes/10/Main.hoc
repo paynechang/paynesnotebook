@@ -1,0 +1,124 @@
+//======================================
+// Title: Tutorial #10
+// Author: Payne Y. Chang
+// File Name: Main.hoc
+
+//======================================
+// Parameters
+experimentDuration = 400	// Experiment duration [ms]
+gBarH = 5e-5	// Maximal conductance of Ih [S/cm2]
+ePas = -70		// Reversal potential of Ileak [mV]
+iAmp = -0.1		// Amplitude of injected current [nA]
+
+//======================================
+// Object references
+//======================================
+
+// Create soma section
+create soma
+
+// I-clamp electrode
+objref electrode
+soma electrode = new IClamp(0.5)
+
+//======================================
+// Graph Box, comprising voltage and current graphs
+objref graphBox
+graphBox = new VBox()
+
+// Voltage graph
+objref graphV			
+graphV = new Graph(0)
+
+// Current graph
+objref graphI			
+graphI = new Graph(0)
+
+//======================================
+// Vectors for recording time and voltage
+objref vecT, vecV	
+vecT = new Vector()	// Time vector
+vecV = new Vector()	// Voltage vector
+
+// Vector for injected current
+objref vecI
+vecI = new Vector()
+
+//======================================
+// Output File
+objref outputFile
+outputFile = new File()
+
+//======================================
+// Experiment Control Box
+objref hBoxExperimentControl
+hBoxExperimentControl = new HBox()
+
+//======================================
+// Parameters Control Box
+objref hBoxParameterControl
+hBoxParameterControl = new HBox()
+
+//======================================
+// Fitting window
+objref hBoxFitting
+hBoxFitting = new HBox()
+
+//======================================
+// (1) Pulse Box
+objref hBoxPulse
+hBoxPulse = new HBox()
+
+//======================================
+// (2) Step Box
+objref hBoxStep
+hBoxStep = new HBox()
+
+//======================================
+// (3) Alpha Box
+objref hBoxAlpha
+hBoxAlpha = new HBox()
+
+//======================================
+// (4) Chirp Box
+objref hBoxChirp
+hBoxChirp = new HBox()
+
+//======================================
+// Create panels
+load_file("nrngui.hoc")				// Display main menu
+load_file("ExperimentControl.hoc")	// Display experiment control panel
+load_file("ParameterControl.hoc")	// Display parameter control panel
+load_file("Graph.hoc")				// A graph containing voltage and current
+load_file("FittingWindow.hoc")		// Fitting window
+
+load_file("1_Pulse.hoc")	// Assemble pulse experiment box
+load_file("2_Step.hoc")		// Assemble step experiment box
+load_file("3_Alpha.hoc")	// Assemble alpha experiment box
+load_file("4_Chirp.hoc")	// Assemble Chirp experiment box
+
+//======================================
+// Set soma properties
+proc SetSomaProperties() {
+	soma {
+		nseg = 1		// Number of segments = 1
+		diam = 100		// Diameter [um]
+		L = 100			// Length [um]
+		Ra = 100		// Axial risistance [ohm-cm]
+		cm = 1			// Capacitance of membrane [uF/cm2]
+		
+		insert pas		// Insert passive properties
+		g_pas = 1/30000	// [S/cm2]. Tau = 30 ms
+		e_pas = ePas	// Reversal potential. [mV]
+		
+		insert h		// Insert Ih
+		gbar_h = gBarH	// Maximun conductions of Ih
+	}
+}
+
+SetSomaProperties()	// Set soma properties
+
+//======================================
+// Set recording vectors
+vecT.record(&t)				// Record t
+vecV.record(&soma.v(0.5))	// Record v at soma

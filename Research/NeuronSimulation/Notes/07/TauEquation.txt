@@ -1,0 +1,1 @@
+1/(Aa/(1+exp((x-vhalfa)/ka))+Ab/(1+exp((x-vhalfb)/kb)))

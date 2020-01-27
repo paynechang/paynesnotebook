@@ -1,0 +1,171 @@
+//======================================
+// File Name: 4_Chirp.hoc
+// Assemble Chirp Box
+
+//======================================
+// Start of the box
+hBoxChirp.intercept(1)
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Start of the panel
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		xlabel("After simulation")	// Display "After simulation"
+		// Characterize chirp response
+		xbutton("Characterize Chirp Response","CharacterizeChirpResponse()")	
+	}
+	xpanel() // End of the panel
+
+}
+hBoxAlpha.intercept(0)// End of the box
+
+//======================================
+// Set chirp current
+objref vecPeakFrequency, vecFallingFrequency, vecTroughFrequency, vecRisingFrequency
+vecPeakFrequency = new Vector()
+vecFallingFrequency = new Vector()
+vecTroughFrequency = new Vector()
+vecRisingFrequency = new Vector()
+
+proc SetChirpCurrent() {local factor, startPts
+	numPts = experimentDuration/dt + 1	// Calculate total number of points
+	vecI.resize(numPts)	// Change the size of vecI
+	vecI.fill(0)			// Initialize vecI
+	startPts=1000/dt		// The start point for the first injection
+	
+	// Sets chirp
+	factor=(0.001*dt)^2*PI
+	
+	for(i = 0; i <= 10000/dt; i += 1){	// 10 sec
+		vecI.x[i + startPts]=iAmp*sin(factor * i^2)
+	}
+	
+	// Set reference frequency
+	for(i=0; i<50; i+=1){
+		vecPeakFrequency.append(sqrt(2*i + 0.5))
+		vecFallingFrequency.append(sqrt(2*i + 1))
+		vecTroughFrequency.append(sqrt(2*i + 1.5))
+		vecRisingFrequency.append(sqrt(2*i + 2))
+	}
+}
+
+//======================================
+// Characterize chirp response
+objref vecPeakTime, vecPeak
+vecPeakTime = new Vector()
+vecPeak = new Vector()
+
+objref vecFallingTime
+vecFallingTime = new Vector()
+
+objref vecTroughTime, vecTrough
+vecTroughTime = new Vector()
+vecTrough = new Vector()
+
+objref vecRisingTime
+vecRisingTime = new Vector()
+
+proc CharacterizeChirpResponse() {local i
+	// Reset vectors
+	vecPeakTime.resize(0)
+	vecPeak.resize(0)
+	vecFallingTime.resize(0)
+	vecTroughTime.resize(0)
+	vecTrough.resize(0)
+	vecRisingTime.resize(0)
+	
+	// Remove baseline
+	vecV.sub(vecV.mean(500/dt, 1000/dt))
+	
+	// Start point
+	i = 1500/dt
+	
+	// Search peaks, troughs, and crossings
+	while(i < 11000/dt){
+		//======================================
+		// Peak
+		while(vecV.x[i] < vecV.x[i+1] && i < 11000/dt){
+			i += 1
+		}
+		
+		vecPeakTime.append(i*dt*0.001 - 1)
+		vecPeak.append(vecV.x[i])
+		
+		//======================================
+		// Falling
+		while(vecV.x[i] > 0 && i < 11000/dt){
+			i += 1
+		}
+		
+		vecFallingTime.append(i*dt*0.001 - 1)
+		
+		//======================================
+		// Trough
+		while(vecV.x[i] > vecV.x[i+1] && i < 11000/dt){
+			i += 1
+		}
+		
+		vecTroughTime.append(i*dt*0.001 - 1)
+		vecTrough.append(vecV.x[i])
+		
+		//======================================
+		// Rising
+		while(vecV.x[i] < 0 && i < 11000/dt){
+			i += 1
+		}
+		
+		vecRisingTime.append(i*dt*0.001 -1)
+	}
+	
+	//======================================
+	// Save peaks to peaks.dat
+	outputFile.wopen("peaks.dat")
+	outputFile.printf("Index Frequency Rin")
+	
+	for(i=0; i<50; i+=1){
+		outputFile.printf("\n%d %g %g", i+1, vecPeakFrequency.x[i], vecPeak.x[i]/iAmp)
+	}
+	
+	outputFile.close()
+	
+	//======================================
+	// Save troughs to troughs.dat
+	outputFile.wopen("troughs.dat")
+	outputFile.printf("Index Frequency Rin")
+	
+	for(i=0; i<50; i+=1){
+		outputFile.printf("\n%d %g %g", i+1, vecTroughFrequency.x[i], -vecTrough.x[i]/iAmp)
+	}
+	
+	//======================================
+	// Save fallings to fallings.dat
+	outputFile.wopen("fallings.dat")
+	outputFile.printf("Index Frequency Offset")
+	
+	for(i=0; i<50; i+=1){
+		outputFile.printf("\n%d %g %g", i+1, vecFallingFrequency.x[i], 1000*(vecFallingTime.x[i]-vecFallingFrequency.x[i]))
+	}
+	
+	outputFile.close()
+	
+	//======================================
+	// Save risings to rising.dat
+	outputFile.wopen("rising.dat")
+	outputFile.printf("Index Frequency Offset")
+	
+	for(i=0; i<49; i+=1){
+		outputFile.printf("\n%d %g %g", i+1, vecRisingFrequency.x[i], 1000*(vecRisingTime.x[i]-vecRisingFrequency.x[i]))
+	}
+	
+	outputFile.close()
+	
+	//======================================
+	// Notification
+	print "Depolarizing Resonance Frequency = ", vecPeakFrequency.x[vecPeak.max_ind()], " (Hz)"
+	print "Hyperpolarizing Resonance Frequency = ", vecTroughFrequency.x[vecTrough.min_ind()], " (Hz)"
+	print "Characterization of chirp response - Done!"
+}

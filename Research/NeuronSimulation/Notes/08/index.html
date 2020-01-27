@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #8</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse:collapse;
+            border-style:solid;
+            border-color:Black;
+            border-width:1px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #8</h1>
+    <hr />
+    <h2>
+        Goals: Insert Ih</h2>
+    <h2>
+        Specific aims:</h2>
+    <ul>
+        <li>Insert In, create parameter controls</li>
+        <li>Simulate whiout Ih (gbar_h = 0, e_pas = -70, v_init = -70)</li>
+        <li>Simulate with Ih (gbar_h = 5e-5, e_pas = -70, v_init = -65)</li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Main.hoc">Main.hoc</a> - Program starts here</li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a> - Experiment Controls</li>
+        <li><a href="Parameters.hoc">Parameters.hoc</a> - Parameter Controls<ul>
+            <li>gbar_h</li>
+            <li>e_pas</li>
+            </ul>
+        </li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a> - Run Controls</li>
+        <li><a href="Graph.hoc">Graph.hoc</a> - A window includes a voltage graph and a current graph</li>
+        <li><a href="1_TimeConstant.hoc">1_TimeConstant.hoc</a> - Controls for measuring membrane time constnat</li>
+        <li><a href="1_SingleExponentialFitting.hoc">1_SingleExponentialFitting.hoc</a> - A window for single exponential fitting</li>
+        <li><a href="2_InputResistance.hoc">2_InputResistance.hoc</a> - Protocol contains a hyperpolarizing step. Calculates Rin and sag.</li>
+        <li><a href="3_TemporalSummation.hoc">3_TemporalSummation.hoc</a> - Controls for measuring temporal summation</li>
+        <li><a href="08.zip">08.zip</a> - Comprises all files</li>
+    </ul>
+    <hr />
+    <table>
+        <tr>
+            <td>
+                Without Ih</td>
+            <td>
+                With Ih</td>
+        </tr>
+        <tr>
+            <td>
+                Membrane Time Constant</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                tau = 30 ms
+                <br />
+                <br />
+                <img alt="Tau without Ih" height="722" src="Images/01.png" width="452" /></td>
+            <td>
+                tau = 24 ms
+                <br />
+                <br />
+                <img alt="Tau with Ih" height="722" src="Images/04.png" width="452" /></td>
+        </tr>
+        <tr>
+            <td>
+                Input Resistance
+            </td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                Rin = 95 M&Omega;<br />
+                Sag = 0 %
+                <br />
+                <br />
+                <img alt="Rin without Ih" height="722" src="Images/02.png" width="452" /></td>
+            <td>
+                Rin = 45 M&Omega;<br />
+                Sag = 21 %
+                <br />
+                <br />
+                <img alt="Rin with Ih" height="722" src="Images/05.png" width="452" /></td>
+        </tr>
+        <tr>
+            <td>
+                Temporal Summation</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;Temporal Summation = 44%
+                <br />
+                <br />
+                <img alt="Alpha summation without Ih" height="722" src="Images/03.png" width="452" /></td>
+            <td>
+                &nbsp;Temporal Summation = 8%
+                <br />
+                <br />
+                <img alt="Temporal Summation without Ih" height="722" src="Images/06.png" width="452" /></td>
+        </tr>
+        </table>
+    <hr />
+</body>
+</html>

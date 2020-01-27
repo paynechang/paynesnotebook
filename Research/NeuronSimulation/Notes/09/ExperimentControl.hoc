@@ -1,0 +1,131 @@
+//======================================
+// File Name: ExperimentControl.hoc
+// Assemble Experiment Control Box
+
+// Local parameters
+window_x0 = 1480
+window_width = 350
+
+//======================================
+// Experiment control box
+hBoxExperimentControl.intercept(1)
+{
+	xpanel("", 0)	// Start the panel, ("Title", 0: vertical lay out)
+	{
+		xbutton("Pulse (1 ms)","SelectPulse()")	// Pulse experiment
+		xbutton("Current Step (500 ms)","SelectStep()")	// Step experiment
+		xbutton("Five alpha EPSCs (20 Hz)","SelectAlpha()")	// Alpha experiment
+		xlabel("")
+		xbutton("Quit", "quit()")	// Quit NEURON
+	}
+	xpanel() // End of the panel
+}
+hBoxExperimentControl.intercept(0)// End of the box
+hBoxExperimentControl.map("Experiment Control", 900, 0, 200, 200)// Display the box
+
+//======================================
+// Hide all panels
+proc HideAllPanels() {
+	hBoxPulse.unmap()
+	hBoxStep.unmap()
+	hBoxAlpha.unmap()
+	
+	hBoxFitting.unmap()
+}
+
+//======================================
+// Select pulse experiment
+proc SelectPulse() {
+	// Display notice
+	print "\nSet parameters for pulse experiment"
+	
+	// Set experiment duration
+	experimentDuration = 400 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -75, -60)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, -0.5, 0.5)
+	
+	// Set the parameters for I-clamp electrode
+	electrode.del = 100		// Delay [ms]
+	electrode.dur = 1		// Duration [ms]
+	iAmp = -0.4
+	electrode.amp = iAmp	// Amplitude [nA]
+	vecI.play_remove()	// Remove attachment
+	
+	// Update panels
+	HideAllPanels()
+	hBoxPulse.map("Pulse", window_x0, 0, window_width, 250)	// Display the box
+	hBoxFitting.map("Single Exponential", 1300, 400, 472, 472)	// Display FunctionFitter
+	doNotify()
+}
+
+//======================================
+// Select pulse experiment
+proc SelectStep() {
+	// Display notice
+	print "\nSet parameters for step experiment"
+	
+	// Set experiment duration
+	experimentDuration = 800 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -75, -55)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, -0.2, 0.2)
+	
+	// Set the parameters for I-clamp electrode
+	electrode.del = 100		// Delay [ms]
+	electrode.dur = 500		// Duration [ms]
+	iAmp = -0.1
+	electrode.amp = iAmp	// Amplitude [nA]
+	vecI.play_remove()	// Remove attachment
+	
+	// Update panels
+	HideAllPanels()
+	hBoxStep.map("Step", window_x0, 0, window_width, 250)	// Display the box
+	hBoxFitting.map("Linear Regression", 1300, 400, 472, 472)	// Display FunctionFitter
+	doNotify()
+}
+
+//======================================
+// Select alpha experiment
+proc SelectAlpha() {
+	// Display notice
+	print "\nSet parameters for alpha current injection"
+	
+	// Set experiment duration
+	experimentDuration = 500 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -75, -50)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, 0, 0.2)
+	
+	// Set the parameters for I-clamp electrode
+	iAmp = 0.03
+	SetAlphaCurrent()
+	
+	electrode.del = 0		// Delay [ms]
+	electrode.dur = 1e9		// Duration [ms]
+	electrode.amp = 0		// Amplitude [nA]
+	vecI.play(&electrode.amp, dt)	// Amplitude [nA]
+	
+	// Update panels
+	HideAllPanels()
+	hBoxAlpha.map("Alpha", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}

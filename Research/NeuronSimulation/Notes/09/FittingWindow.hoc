@@ -1,0 +1,63 @@
+hBoxFitting.intercept(1)
+
+objectvar save_window_, rvp_
+objectvar scene_vector_[3]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+{pwman_place(0,0,0)}
+
+//Begin FunctionFitter
+{
+	load_file("funfit.hoc")
+}
+{
+	ocbox_=new FunctionFitter()
+
+	ocbox_.info("t","A tau t0 v0", "A*exp(-(t-t0)/tau)+v0", 0, 10, -10, 10, 100, 0, 10)
+}
+{object_push(ocbox_)}
+{
+	args.x[0] = -1
+	arglow.x[0] = -1e+06
+	arghigh.x[0] = 1e+06
+	doargfit.x[0] = 1
+	args.x[1] = 10
+	arglow.x[1] = -1e+06
+	arghigh.x[1] = 1e+06
+	doargfit.x[1] = 1
+	args.x[2] = 101
+	arglow.x[2] = -1e+06
+	arghigh.x[2] = 1e+06
+	doargfit.x[2] = 1
+	args.x[3] = -65
+	arglow.x[3] = -1e+06
+	arghigh.x[3] = 1e+06
+	doargfit.x[3] = 1
+	init_weights(1)
+	w_boundary.x[0] = -1e+06
+	w_weight.x[0] = 1
+	w_boundary.x[1] = 9e+06
+	w_weight.x[1] = 1
+}
+{doplt() argpanel()}
+{object_pop()}
+{
+	{
+		save_window_=ocbox_.g
+		save_window_.size(100,400,-70,-60)
+		scene_vector_[2] = save_window_
+		ocbox_.g = save_window_
+		save_window_.save_name("ocbox_.g")
+	}
+	
+	ocbox_ = ocbox_.vbox
+	ocbox_.map("FunctionFitter", 1300, 400, 472, 472)
+}
+
+objref ocbox_
+//End FunctionFitter
+
+objectvar scene_vector_[1]
+{doNotify()}
+
+hBoxFitting.intercept(0)

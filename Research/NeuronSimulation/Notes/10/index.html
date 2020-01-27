@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #10</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+        .style1
+        {
+            border-collapse: collapse;
+            border: 1px solid #000000;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #10</h1>
+    <hr />
+    <h2>
+        Goals: Perform chirp experiment</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ul>
+        <li>Generate chirp current input.</li>
+        <li>Record time and voltage during simulation.</li>
+        <li>Analyze the impedance and the voltage delay.</li>
+        <li>Export the data and plot it with Origin.</li>
+    </ul>
+    <h2>
+        Steps:</h2>
+    <ul>
+        <li>Start the environment by double-clicking Main.hoc.</li>
+        <li>Click &quot;Chirp&quot;.</li>
+        <li>Click &quot;Initiate &amp; Run&quot;.</li>
+        <li>Click &quot;Characterize Chirp Response&quot;.</li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Main.hoc">Main.hoc</a> - Program start here</li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a> - Experiment contols</li>
+        <li><a href="ParameterControl.hoc">ParameterControl.hoc</a> - Parameter controls</li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a> - Run controls</li>
+        <li><a href="Graph.hoc">Graph.hoc</a> - A window contains a voltage graph and a current graph</li>
+        <li><a href="FittingWindow.hoc">FittingWindow.hoc</a> - For linear regression analysis</li>
+        <li><a href="1_Pulse.hoc">1_Pulse.hoc</a> - For pulse experiment (membrane time connstant)</li>
+        <li><a href="2_Step.hoc">2_Step.hoc</a> - For step experiment (Rin, sag, rebound slope)</li>
+        <li><a href="3_Alpha.hoc">3_Alpha.hoc</a> - For alpha experiment ( alpha summation)</li>
+        <li><a href="4_Chirp.hoc">4_Chirp.hoc</a> - For chirp experiment</li>
+        <li><a href="10.zip">10.zip</a> - Comprises all files.</li>
+    </ul>
+    <hr />
+    <table cellpadding="4" class="style1">
+        <tr>
+            <td>
+                Membrane potential in response to chirp current injection.<br />
+                Control<br />
+                Depolarizing resonance frequency = 4.06 Hz<br />
+                Hyperpolarizing resonance frequency = 4.85 Hz<br />
+                <br />
+                <img alt="Normal" height="722" src="Images/01.png" width="452" /></td>
+            <td>
+                Membrane potential in response to chirp current injection.<br />
+                Without Ih<br />
+                Depolarizing resonance frequency = 0.71 Hz<br />
+                Hyperpolarizing resonance frequency = 1.22 Hz<br />
+                <br />
+                <img alt="Without Ih" height="722" src="Images/02.png" width="452" /></td>
+        </tr>
+        <tr>
+            <td>
+                Impedance Amplitude<br />
+                <img alt="Impedance Amplitude" height="434" src="Images/03.PNG" width="550" /></td>
+            <td>
+                Voltage Delay<br />
+                <img alt="Voltage Delay" height="435" src="Images/04.PNG" width="561" /></td>
+        </tr>
+    </table>
+</body>
+</html>

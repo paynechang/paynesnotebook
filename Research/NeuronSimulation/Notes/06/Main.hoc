@@ -1,0 +1,93 @@
+//======================================
+// Title: Tutorial #6
+// Author: Payne Y. Chang
+// File Name: Main.hoc
+
+//======================================
+// Parameters
+experimentDuration = 400	// [ms]
+
+//======================================
+// Object references
+//======================================
+
+// Create soma section
+create soma
+
+// I-clamp electrode
+objref electrode
+soma electrode = new IClamp(0.5)
+
+// Voltage graph
+objref vGraph			
+vGraph = new Graph(0)
+
+// Current graph
+objref iGraph			
+iGraph = new Graph(0)
+
+// Graph Box, including voltage and current graphs
+objref graphBox
+graphBox = new VBox()
+
+// Vectors for recording time and voltage
+objref tVector, vVector	
+tVector = new Vector()	// Time vector
+vVector = new Vector()	// Voltage vector
+
+// Vector for injected current (Temporal summation)
+objref iVector
+iVector = new Vector()
+
+// Output File
+objref outputFile
+outputFile = new File()
+
+// Experiment Control Box
+objref experimentControl
+experimentControl = new HBox()
+
+// Time Constant Box
+objref timeConstantBox
+timeConstantBox = new HBox()
+
+// Single Exponential Fitting Box
+objref singleExponentialFittingBox
+singleExponentialFittingBox = new HBox()
+
+// Input Resistance Box
+objref inputResistanceBox
+inputResistanceBox = new HBox()
+
+// Temporal Summation Box
+objref temporalSummationBox
+temporalSummationBox = new HBox()
+
+//======================================
+// Create panels
+load_file("nrngui.hoc")				// Display main menu
+load_file("ExperimentControl.hoc")	// Display experiment control panel
+load_file("1_TimeConstant.hoc")		// Assemble time constant box
+load_file("1_SingleExponentialFitting.hoc")		// Assemble exponential fitting box
+load_file("2_InputResistance.hoc")	// Assemble input resistance box
+load_file("3_TemporalSummation.hoc")	// Assemble alpha summation box
+load_file("Graph.hoc")				// Display v plot
+
+//======================================
+// Set soma properties
+soma {
+	nseg = 1		// Number of segments = 1
+	diam = 100		// Diameter [um]
+	L = 100			// Length [um]
+	Ra = 100		// Axial risistance [ohm-cm]
+	cm = 1			// Capacitance of membrane [uF/cm2]
+	
+	insert pas		// Insert passive properties
+	g_pas = 1/30000	// [S/cm2]. Tau = 30 ms
+	e_pas = -65		// Reversal potential. [mV]
+}
+
+//======================================
+// Set recording vectors
+tVector.record(&t)				// Record t
+vVector.record(&soma.v(0.5))	// Record v at soma

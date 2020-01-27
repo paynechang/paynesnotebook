@@ -1,0 +1,128 @@
+//======================================
+// File Name: ExperimentControl.hoc
+// Assemble Experiment Control Box
+
+// Local parameters
+window_x0 = 1480
+window_width = 350
+
+//======================================
+// Start of the box
+experimentControl.intercept(1)
+{
+	//======================================
+	// Experiment control panel 
+	xpanel("", 0)	// Start the panel, ("Title", 0: vertical lay out)
+	{
+		xbutton("Measure Membrane Time Constant","SelectMembraneTimeConstant()")
+		xbutton("Measure Input Resistance","SelectInputResistance()")
+		xbutton("Measure Temporal Summation","SelectTemporalSummation()")
+		xlabel("")
+		xbutton("Quit", "quit()")
+	}
+	xpanel() // Close the panel
+}
+experimentControl.intercept(0)// End of the box
+experimentControl.map("Experiment Control", 900, 0, 200, 200)// Display the box
+
+//======================================
+// Hide all panels
+proc HideAllPanels() {
+	timeConstantBox.unmap()
+	inputResistanceBox.unmap()
+	singleExponentialFittingBox.unmap()
+	temporalSummationBox.unmap()
+}
+
+//======================================
+// Measure membrane time constant
+proc SelectMembraneTimeConstant() {
+	// Display notice
+	print "\nSet parameters for membrane time constant measurement"
+	
+	// Set experiment duration
+	experimentDuration = 400 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	vGraph.erase()	// Erase old traces
+	vGraph.size(0, experimentDuration, -75, -60)
+	
+	// Set the ranges for current graph
+	iGraph.erase()	// Erase old traces
+	iGraph.size(0, experimentDuration, -0.5, 0.5)
+	
+	// Set the parameters for I-clamp electrode
+	electrode.del = 100		// Delay [ms]
+	electrode.dur = 1		// Duration [ms]
+	electrode.amp = -0.4	// Amplitude [nA]
+	iVector.play_remove()	// Remove attachment
+	
+	// Update panels
+	HideAllPanels()
+	timeConstantBox.map("Time Constant", window_x0, 0, window_width, 250)	// Display the box
+	singleExponentialFittingBox.map("FunctionFitter", 1300, 400, 472, 472)	// Display FunctionFitter
+	doNotify()
+}
+
+//======================================
+// Measure input resistance (Rin)
+proc SelectInputResistance() {
+	// Display notice
+	print "\nSet parameters for input resistance measurement"
+	
+	// Set experiment duration
+	experimentDuration = 800 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	vGraph.erase()	// Erase old traces
+	vGraph.size(0, experimentDuration, -80, -60)
+	
+	// Set the ranges for current graph
+	iGraph.erase()	// Erase old traces
+	iGraph.size(0, experimentDuration, -0.2, 0.2)
+	
+	// Set the parameters for I-clamp electrode
+	electrode.del = 100		// Delay [ms]
+	electrode.dur = 500		// Duration [ms]
+	electrode.amp = -0.1	// Amplitude [nA]
+	iVector.play_remove()	// Remove attachment
+	
+	// Update panels
+	HideAllPanels()
+	inputResistanceBox.map("Input Resistance", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}
+
+//======================================
+// Select Temporal Summation
+proc SelectTemporalSummation() {
+	// Display notice
+	print "\nSet parameters for temporal summation measurement"
+	
+	// Set experiment duration
+	experimentDuration = 500 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	vGraph.erase()	// Erase old traces
+	vGraph.size(0, experimentDuration, -75, -50)
+	
+	// Set the ranges for current graph
+	iGraph.erase()	// Erase old traces
+	iGraph.size(0, experimentDuration, 0, 0.2)
+	
+	// Set the parameters for I-clamp electrode
+	SetAlphaCurrent()
+	
+	electrode.del = 0		// Delay [ms]
+	electrode.dur = 1e9		// Duration [ms]
+	electrode.amp = 0		// Amplitude [nA]
+	iVector.play(&electrode.amp, dt)	// Amplitude [nA]
+	
+	// Update panels
+	HideAllPanels()
+	temporalSummationBox.map("Temporal Summation", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}

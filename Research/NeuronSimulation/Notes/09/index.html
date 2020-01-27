@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #9</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #9</h1>
+    <hr />
+    <h2>
+        Goals: Measure Rin and rebound slope through linear regression</h2>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Main.hoc">Main.hoc</a> - Program start here</li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a> - Experiment contols</li>
+        <li><a href="ParameterControl.hoc">ParameterControl.hoc</a> - Parameter controls</li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a> - Run controls</li>
+        <li><a href="Graph.hoc">Graph.hoc</a> - A window contains a voltage graph and a current graph</li>
+        <li><a href="FittingWindow.hoc">FittingWindow.hoc</a> - For linear regression analysis</li>
+        <li><a href="1_Pulse.hoc">1_Pulse.hoc</a> - For pulse experiment (membrane time connstant)</li>
+        <li><a href="2_Step.hoc">2_Step.hoc</a> - For step experiment (Rin, sag, rebound slope)</li>
+        <li><a href="3_Alpha.hoc">3_Alpha.hoc</a> - For alpha experiment ( alpha summation)</li>
+        <li><a href="09.zip">09.zip</a> - Comprises all files.</li>
+    </ul>
+    <hr />
+    <h2>
+        Steps:</h2>
+    <ul>
+        <li>Double click &quot;Main.hoc&quot;</li>
+        <li>Click &quot;Current Step (500 ms)&quot; button.</li>
+        <li>Click &quot;Run Step Family&quot; button.<br />
+            <img alt="Current Step Family" height="722" src="Images/01.png" width="452" /><br />
+        </li>
+        <li>Select &quot;Fit to Data&quot; / &quot;Common Functional Forms&quot; / &quot;Linear&quot;</li>
+        <li>Select &quot;Fit to Data&quot; / &quot;Read Data File&quot;.</li>
+        <li>Select &quot;v_i.dat&quot;</li>
+        <li>Check &quot;Watch the fit&quot; box.</li>
+        <li>Click &quot;Praxis fit&quot; button.<br />
+            Slope = 52.1 (M&Omega;)<br />
+            <img alt="Rin" height="579" src="Images/02.png" width="532" /><br />
+        </li>
+        <li>Select &quot;Fit to data&quot; / &quot;Read Data File&quot;.</li>
+        <li>Select &quot;rebound_i.dat&quot;</li>
+        <li>Click &quot;Praxis fit&quot; button.<br />
+            Rebound slope = -0.23 (mV/mV)<br />
+            <img alt="Rebound Slope" height="579" src="Images/03.png" width="532" /><br />
+        </li>
+    </ul>
+</body>
+</html>
