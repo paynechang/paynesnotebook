@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #18</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #18</h1>
+    <hr />
+    <h2>
+        Goals: Modify Altomare&#39;s model</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ul>
+        <li>Find new sets of parameters to fit Magee&#39;s data.</li>
+    </ul>
+    <h2>
+        Notes:</h2>
+    <p>
+        Altomare&#39;s model produces Ih with a depolarized vhalf and shallower slope factor compared to Magee&#39;s data. I don&#39;t know which model is better. One 
+        thing I think worth to try is to find sets of parameters that produce Ih with similar vhalf and slope factor as in Magee&#39;s paper and see whether it 
+        can reproduce electrophysiology experiments.</p>
+    <ol>
+        <li>I tried to find alpha_0, beta_0, gamma_0, and delta_0 so the GV curve fits to Magee&#39;s data. The code is in <a href="P0_Fit.hoc">P0_Fit.hoc</a>. You 
+            will find values of alpha_0, beta_0, and gamma_0 are between the values of HCN1 and HCN2. Delta_0 is a little higher than both the values of HCN1 and 
+            HCN2.</li>
+        <li>Since delta_0 is larger than both the values of HCN1 and HCN2 but the values of HCN1 and HCN2 are close, I assumed delta_0 is the average of the 
+            values of HCN1 and HCN2 and tried to find the best fit. <a href="P0_Fit_2.hoc">P0_Fit_2.hoc</a> contains the code to find the parameters.</li>
+        <li>After simulating electrophysiology experiments, I found the time constant is about three folds slower than Magee&#39;s data. I decided to use alpha_0 and 
+            beta_0 from HCN1. Delta_0 is the average of the values of HCN1 and HCN2. A fitting process is used to find gamma_0, which is two orders different 
+            between HCN1 and HCN2. The code is in <a href="P0_Fit_3.hoc">P0_Fit_3.hoc</a>.</li>
+        <li>A comparison of several models are presented in tutorial #19.</li>
+    </ol>
+    <hr />
+    </body>
+</html>
