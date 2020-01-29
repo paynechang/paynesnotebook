@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #20</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #20</h1>
+    <hr />
+    <h2>
+        Goals: Examine The Influence of Q10, The Size of Injected Current, and gbar_h</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ol>
+        <li><a href="#1">Examine the influence of Q10 on impedance magnitude and voltage lag.</a></li>
+        <li><a href="#2">Examine the influence of Q10 on activation and inactivation time constant.</a></li>
+        <li><a href="#3">Examine the influence of the size of injected current on impedance magnitude and voltage lag.</a></li>
+        <li><a href="#4">Examine the influence of gbar_h on impedance magnitude and voltage lag.</a></li>
+    </ol>
+    <hr />
+    <h2>
+        Summary:</h2>
+    <h3 id="1">
+        1.
+        Q10 on Impedance Magnitude and Voltage Lag</h3>
+    <h4>
+        Conditions</h4>
+    <p>
+        e_pas = -74 (mV)<br />
+        gbar_h = 2e-5 (S/cm2)<br />
+        Altomare&#39;s model (2001)</p>
+    <h4>
+        Notes</h4>
+    <p>
+        Smaller Q10 produces results more similar to physiological data. Magee&#39;s data suggested Q10 of Ih is about 5. The parameters of this simulation are 
+        based on Altomare&#39;s HCN1 model. Since HCN2 is slower than HCN1, a better fit with Q10 = 2.5 might be due to that the native Ih contains both HCN1 and 
+        HCN2.</p>
+    <p>
+        <img alt="Impedance Magnitude" height="315" src="Images/01.PNG" width="415" />
+        <img alt="Voltage Lag" height="315" src="Images/02.png" width="415" /></p>
+    <hr />
+    <h3 id="2">
+        2.
+        Q10 on Activation and Inactivation Time Constant</h3>
+    <h4>
+        Conditions</h4>
+    <p>
+        e_pas = -74 (mV)<br />
+        gbar_h = 2e-5 (S/cm2)<br />
+        Altomare&#39;s model (2001)</p>
+    <h4>
+        Notes</h4>
+    <p>
+        Larger Q10 leads to faster time constant.</p>
+    <p>
+        <img alt="Time Constant" height="415" src="Images/03.png" width="515" /></p>
+    <hr />
+    <h3 id="3">
+        3. The Size of
+        Injected Current Amplitude on Impedance Magnitude and Voltage Lag</h3>
+    <h4>
+        Conditions</h4>
+    <p>
+        Ih model in Sonia&#39;s paper<br />
+        e_pas = -70 (mV)<br />
+        gbar_h = 4e-5 (S/cm2)</p>
+    <h4>
+        Notes</h4>
+    <p>
+        The larger the size of injected current, the larger the difference in the impedance magnitude between peaks and troughs.<br />
+        The larger the size of injected current, the larger the difference in the voltage lag between falling and rising edges.</p>
+    <p>
+        <img alt="Impedance Magnitude" height="415" src="Images/04.png" width="615" />
+        <img alt="Voltage Lag" height="415" src="Images/05.png" width="615" /></p>
+    <hr />
+    <h3 id="4">
+        4. The Influence of gbar_h on Impedance Magnitude and Voltage Lag</h3>
+    <h4>
+        Conditions</h4>
+    <p>
+        Ih model in Sonia&#39;s paper<br />
+        gbar_h = 2e-5 (S/cm2), e_pas = -67.5 (mV)<br />
+        gbar_h = 4e-5 (S/cm2),
+        e_pas = -70.0 (mV)<br />
+        gbar_h = 8e-5 (S/cm2),
+        e_pas = -75.0 (mV)</p>
+    <h4>
+        Notes</h4>
+    <p>
+        The differences in impedance magnitude and voltage lag between depolarization and hyperpolarization are larger when gbar_h is close to the median.</p>
+    <p>
+        <img alt="Impedance Magnitude" height="415" src="Images/06.png" width="615" />
+        <img alt="Voltage Lag" height="415" src="Images/07.png" width="615" /></p>
+    <hr />
+</body>
+</html>
