@@ -1,0 +1,409 @@
+//==============================================================================
+// CO.hoc
+// Closed state <-> Open state (rates: alpha, beta)
+
+//==============================================================================
+// Parameter Initiation
+
+// Forward rate (alpha)
+// Rate(x) = a / (1 + exp((x - x0) / k))
+alpha_a = 1
+alpha_x0 = -80
+alpha_k = 10
+
+// Backward rate (beta)
+// Rate(x) = a / (1 + exp((x - x0) / k))
+beta_a = 1
+beta_x0 = -40
+beta_k = -10
+
+// Experimental conductance v0(x0) and k
+expG_x0 = -80.5
+expG_k = 6.7
+
+//==============================================================================
+// Vectors
+objref vecX, vecG
+vecX = new Vector()	// x coordinate
+vecG = new Vector()		// Conductance
+
+objref vecCalActTau, vecCalDeactTau
+vecCalActTau = new Vector()	// Activation Tau
+vecCalDeactTau = new Vector()	// Deactivation Tau
+
+objref vecRateAlpha, vecRateBeta
+vecRateAlpha = new Vector()	// Forward rate
+vecRateBeta = new Vector()	// Backward rate
+
+// Experimental data
+objref vecCalGCurve, vecExpGCurve
+vecCalGCurve = new Vector()
+vecExpGCurve = new Vector()
+
+// For fitting
+objref vecExpGPoints1, vecExpGPoints2
+vecExpGPoints1 = new Vector()
+vecExpGPoints2 = new Vector()
+
+objref vecExpActTauX, vecExpActTau
+vecExpActTauX = new Vector()
+vecExpActTau = new Vector()
+
+objref vecExpDeactTauX, vecExpDeactTau
+vecExpDeactTauX = new Vector()
+vecExpDeactTau = new Vector()
+
+//==============================================================================
+// Window for the kinetic scheme
+// hBox comprises vBox1 and vBox2
+objref hBox, vBox1, vBox2
+hBox = new HBox()
+vBox1 = new VBox()
+vBox2 = new VBox()
+
+// Declare graphs
+objref graphGV, graphTau, graphRates
+
+// Start of the hBox
+hBox.intercept(1)
+{
+	//=============================================================
+	// The first column
+	vBox1.intercept(1)
+	{
+		// Display function
+		xpanel("function", 0)	// 0: Vertical
+		{
+			xlabel("Two States:")
+			xlabel("(C <-> O)^2 (Rates: alpha, beta)")
+		}
+		xpanel()
+		
+		//=====================
+		// alpha
+		
+		// Panel alpha
+		xpanel("alpha")
+		{
+			xlabel("alpha")
+		}
+		xpanel()
+		
+		// a
+		xpanel("alpha_a", 1)
+		{
+			xvalue("a", "alpha_a")
+			xslider(&alpha_a, 0, 1, "PlotSchemeCurves()")
+		}
+		xpanel()
+		
+		// Panel alpha_x0
+		xpanel("alpha_x0", 1)
+		{
+			xvalue("expG_x0", "alpha_x0")
+			xslider(&alpha_x0, -150, 50, "PlotSchemeCurves()")
+		}
+		xpanel()
+
+		// Panel alpha_k
+		xpanel("alpha_k", 1)
+		{
+			xvalue("expG_k", "alpha_k")
+			xslider(&alpha_k, -50, 50, "PlotSchemeCurves()")
+		}
+		xpanel()
+
+		//=====================
+		// beta
+		
+		// Panel beta
+		xpanel("beta")
+		{
+			xlabel("beta")
+		}
+		xpanel()
+		
+		// beta_a
+		xpanel("beta_a", 1)
+		{
+			xvalue("b", "beta_a")
+			xslider(&beta_a, 0, 1, "PlotSchemeCurves()")
+		}
+		xpanel()
+		
+		// Panel beta_x0
+		xpanel("beta_x0", 1)
+		{
+			xvalue("expG_x0", "beta_x0")
+			xslider(&beta_x0, -150, 50, "PlotSchemeCurves()")
+		}
+		xpanel()
+
+		// Panel beta_k
+		xpanel("beta_k", 1)
+		{
+			xvalue("expG_k", "beta_k")
+			xslider(&beta_k, -50, 50, "PlotSchemeCurves()")
+		}
+		xpanel()
+		
+		// Other parameters
+		xpanel("Parameters")
+		{
+			xlabel("Parameters for Boltzmann's equation")
+			xvalue("expG_x0", "expG_x0")
+			xvalue("expG_k", "expG_k")
+			xbutton("Load exp. Tau data", "LoadExpTauData()")
+			xbutton("Find The Best Fit", "FindBestFit()")
+		}
+		xpanel()
+	}
+	vBox1.intercept(0)
+	vBox1.map("Controls", 0, 0, 300, 300)
+
+	//=============================================================
+	// The second column
+	vBox2.intercept(1)
+	{
+		//=====================
+		// GV
+		graphGV = new Graph(0)
+		graphGV.view(-150, 0, 200, 1, 0, 0, 400, 200)
+		graphGV.yaxis( 0, 1, -150, 5, 1, 0, 1)
+		graphGV.label(0.05, 0.95, "GV Curve")
+		
+		//=====================
+		// Tau
+		graphTau = new Graph(0)
+		graphTau.view(-150, 0, 200, 50, 0, 0, 400, 200)
+		graphTau.label(0.05, 0.95, "Tau Curve")
+		graphTau.color(2)
+		graphTau.label("Activation")
+		graphTau.color(3)
+		graphTau.label("Deactivation")
+		
+		//=====================
+		// Rates
+		graphRates = new Graph(0)
+		graphRates.view(-150, 0, 200, 5, 0, 0, 400, 200)
+		graphRates.label(0.05, 0.7, "Rates Curve")
+		graphRates.color(2)
+		graphRates.label("Forward")
+		graphRates.color(3)
+		graphRates.label("Backward")
+	}
+	vBox2.intercept(0)
+	vBox2.map()
+}
+// End of hBox
+hBox.intercept(0)
+
+//==============================================================================
+// Plot all curves
+// Declare variables, which will be used later.
+alpha = 1
+beta = 1
+x = 0
+
+vecX.resize(201)	// x coordinate ( = v)
+
+vecExpGCurve.resize(201)	// Experimental G (conductance)
+vecCalGCurve.resize(201)			// Calculated G
+
+vecCalActTau.resize(201)			// Calculate Tau (time constant)
+vecCalDeactTau.resize(201)			// Calculate Tau (time constant)
+
+vecRateAlpha.resize(201)			// Forward rate
+vecRateBeta.resize(201)			// Backward rate
+
+// Procedure to plot curves
+proc PlotSchemeCurves(){
+	
+	// Set values
+	for(i = 0; i <= 200; i += 1){	// -150 ~ 50
+		// x
+		x = i - 150	// x ( = v )
+		vecX.x[i] = x
+		
+		// Alpha
+		alpha = alpha_a * Boltzmann(x, alpha_x0, alpha_k)
+		vecRateAlpha.x[i] = (alpha)
+		
+		// Beta
+		beta = beta_a * Boltzmann(x, beta_x0, beta_k)
+		vecRateBeta.x[i] = (beta)
+		
+		// Exp. GV curve
+		vecExpGCurve.x[i] = Boltzmann(x, expG_x0, expG_k)
+		
+		// Cal. GV curve
+		vecCalGCurve.x[i] = (alpha / (alpha + beta))^2
+		
+		// Cal. Ac. Tau
+		vecCalActTau.x[i] = 2 * (1 / (alpha + beta))
+		
+		// Cal. Deac. Tau
+		vecCalDeactTau.x[i] = 0.5 * (1 / (alpha + beta))
+	}
+	
+	// Plots
+	// GV curves
+	vecExpGCurve.plot(graphGV, vecX, 1, 2)
+	vecCalGCurve.plot(graphGV, vecX, 5, 1)
+	
+	vecExpGPoints1.mark(graphGV, vecExpActTauX, "s", 9, 2, 1)
+	vecExpGPoints2.mark(graphGV, vecExpDeactTauX, "s", 9, 3, 1)
+	
+	// Act. Tau-V curves
+	vecExpActTau.line(graphTau, vecExpActTauX, 1, 2)
+	vecExpActTau.mark(graphTau, vecExpActTauX, "s", 9, 2, 1)
+	
+	vecCalActTau.plot(graphTau, vecX, 2, 1)
+	
+	// Deact. Tau-V curves
+	vecExpDeactTau.line(graphTau, vecExpDeactTauX, 1, 2)
+	vecExpDeactTau.mark(graphTau, vecExpDeactTauX, "s", 9, 3, 1)
+	
+	vecCalDeactTau.plot(graphTau, vecX, 3, 1)
+	
+	// Rate-V curves
+	vecRateAlpha.plot(graphRates, vecX, 2, 1)
+	vecRateBeta.plot(graphRates, vecX, 3, 1)
+	
+	// Resize
+	graphTau.exec_menu("View = plot")
+	graphRates.exec_menu("View = plot")
+}
+
+//==============================================================================
+// Load experimental Tau-V data
+proc LoadExpTauData(){
+
+	// Select file
+	ioFile.chooser("", "Select exp. tau data", "*.dat", "OK")
+	
+	// The file has been successfully picked up
+	if(ioFile.chooser()){
+	
+		// Get file name
+		ioFile.getname(ioFileName)
+		
+		// Open file for input
+		ioFile.ropen(ioFileName)
+		
+		//==============================
+		// Activation
+		
+		// Number of data pairs
+		count = ioFile.scanvar()
+		
+		// Resize vectors
+		vecExpActTauX.resize(count)
+		vecExpActTau.resize(count)
+		vecExpGPoints1.resize(count)
+		
+		// Read each data
+		for(i=0; i<count; i+=1){
+			// x ( = v)
+			vecExpActTauX.x[i] = ioFile.scanvar()
+			
+			// tau
+			vecExpActTau.x[i] = ioFile.scanvar()
+			
+			// Calculate theoretical value at this x
+			vecExpGPoints1.x[i] = Boltzmann(vecExpActTauX.x[i], expG_x0, expG_k)
+		}
+		
+		//==============================
+		// Deactivation
+		
+		// Number of data pairs
+		count = ioFile.scanvar()
+		
+		// Resize vectors
+		vecExpDeactTauX.resize(count)
+		vecExpDeactTau.resize(count)
+		vecExpGPoints2.resize(count)
+		
+		// Read each data
+		for(i=0; i<count; i+=1){
+			// x ( = v)
+			vecExpDeactTauX.x[i] = ioFile.scanvar()
+			
+			// tau
+			vecExpDeactTau.x[i] = ioFile.scanvar()
+			
+			// Calculate theoretical value at this x
+			vecExpGPoints2.x[i] = Boltzmann(vecExpDeactTauX.x[i], expG_x0, \
+				expG_k)
+		}
+	}
+	
+	// Plot all curves
+	PlotSchemeCurves()
+}
+
+//==============================================================================
+// Find the best fit
+double fitVar[6]
+
+// Error function
+func FittingError() {local alpha_a, alpha_x0, alpha_k, beta_a, beta_x0, \
+						beta_k, error, alpha, beta
+	alpha_a = $&2[0]
+	alpha_x0 = $&2[1]
+	alpha_k = $&2[2]
+	beta_a = $&2[3]
+	beta_x0 = $&2[4]
+	beta_k = $&2[5]
+	
+	error = 0
+
+	for(i=0; i<vecExpActTauX.size(); i += 1){
+		alpha = alpha_a * Boltzmann(vecExpActTauX.x[i], alpha_x0, alpha_k)
+		beta = beta_a * Boltzmann(vecExpActTauX.x[i], beta_x0, beta_k)
+		error += (vecExpGPoints1.x[i] - (alpha / (alpha + beta))^2)^2 + \
+			((vecExpActTau.x[i] - 2 * (1 / (alpha + beta))) / vecExpActTau.max())^2
+	}
+	
+	for(i=0; i<vecExpDeactTauX.size(); i += 1){
+		alpha = alpha_a * Boltzmann(vecExpDeactTauX.x[i], alpha_x0, alpha_k)
+		beta = beta_a * Boltzmann(vecExpDeactTauX.x[i], beta_x0, beta_k)
+		error += (vecExpGPoints2.x[i] - (alpha / (alpha + beta))^2)^2 \
+			+ ((vecExpDeactTau.x[i] - 0.5 * (1 / (alpha + beta))) \
+			/ vecExpDeactTau.max())^2
+	}
+	
+	return error
+}
+
+// Fitting procedure
+proc FindBestFit(){
+
+	// Set fitting parameters
+	fitVar[0] = alpha_a
+	fitVar[1] = alpha_x0
+	fitVar[2] = alpha_k
+	fitVar[3] = beta_a
+	fitVar[4] = beta_x0
+	fitVar[5] = beta_k
+	
+	// Set fitting environment
+	attr_praxis(1e-5, 1, 1)
+	
+	// Find the best fit
+	error = fit_praxis(6, "FittingError", &fitVar[0])
+	
+	// Assign new values to parameters
+	alpha_a = fitVar[0]
+	alpha_x0 = fitVar[1]
+	alpha_k = fitVar[2]
+	beta_a = fitVar[3]
+	beta_x0 = fitVar[4]
+	beta_k = fitVar[5]
+	
+	// Plot new curves
+	PlotSchemeCurves()
+}
+
+//==============================================================================

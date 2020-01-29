@@ -1,0 +1,86 @@
+//==============================================================================
+// Boltzmann.hoc
+
+//=====================
+// Parameter Initiation
+x0Boltzmann = -60
+kBoltzmann = 10
+
+//=====================
+// Parameters: x, y
+objref vecXBoltzmann, vecYBoltzmann
+vecXBoltzmann = new Vector()
+vecYBoltzmann = new Vector()
+
+//=====================
+// Vertical box to comprise the controls and the graph
+objref vboxBoltzmann
+vboxBoltzmann = new VBox()
+
+// Declare Graph object: graphBoltzmann
+objref graphBoltzmann	
+
+// Start of the VBox
+vboxBoltzmann.intercept(1)
+{
+	// Display function
+	xpanel("function", 0)	// 0: Vertical
+	{
+		xlabel("Boltzmann Equation:")
+		xlabel("f(x) = 1 / ( 1 + exp( ( x - x0 ) / k ) )")
+	}
+	xpanel()
+	
+	// Panel x0Boltzmann
+	xpanel("x0", 1)
+	{
+		xvalue("x0", "x0Boltzmann")
+		xslider(&x0Boltzmann, -150, 50, "BoltzmannCurve()")
+	}
+	xpanel()
+	
+	// Panel k
+	xpanel("k", 1)
+	{
+		xvalue("k", "kBoltzmann")
+		xslider(&kBoltzmann, -50, 50, "BoltzmannCurve()")
+	}
+	xpanel()
+
+	// graphBoltzmann
+	graphBoltzmann = new Graph(0)
+	graphBoltzmann.view(-150, 0, 200, 1, 50, 20, 400, 200)
+	graphBoltzmann.yaxis( 0, 1, -150, 5, 1, 0, 1)
+}
+// End of the VBox
+vboxBoltzmann.intercept(0)
+
+//==============================================================================
+// Plot Boltzmann function
+proc BoltzmannCurve(){
+	// Reset coordinate vectors
+	vecXBoltzmann.resize(0)
+	vecYBoltzmann.resize(0)
+	
+	// Erase old curve
+	graphBoltzmann.erase()
+	
+	// Set values
+	for(i=-150; i<=50; i+=1){
+		vecXBoltzmann.append(i)
+		vecYBoltzmann.append(Boltzmann(i, x0Boltzmann, kBoltzmann))
+	}
+	
+	// Plot
+	vecYBoltzmann.plot(graphBoltzmann, vecXBoltzmann)
+}
+
+//==============================================================================
+// Return the value of Boltzmann equation. $1: x; $2: x0; $3: k
+func Boltzmann(){local y
+	if($3 != 0){
+		return 1/(1+exp(($1-$2)/$3))
+	}
+	
+	return 0
+}

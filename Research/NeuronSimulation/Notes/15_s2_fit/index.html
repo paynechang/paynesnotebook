@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #15</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #15</h1>
+    <hr />
+    <h2>
+        Goals: Kinetic scheme (C &lt;-&gt; O)<sup>2</sup> - Find parameters for Ih</h2>
+    <h2>
+        Specific Airms:</h2>
+    <ul>
+        <li>Find the best fit for the kinetic scheme (C &lt;-&gt; O)<sup>2</sup> </li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Main.hoc">Main.hoc</a> - Program start here.</li>
+        <li><a href="Boltzmann.hoc">Boltzmann.hoc</a> - For plotting Boltzmann equation.</li>
+        <li><a href="CO.hoc">CO.hoc</a> - Base on the kinetic scheme, plot the GV curve and the Tau-V curve, import experimental data, and find the best fit.</li>
+        <li><a href="MageeTau.dat">MageeTau.dat</a> - Experimental data deduced from Jeff Magee&#39;s paper (1998).</li>
+    </ul>
+    <hr />
+    <h2>
+        Steps:</h2>
+    <p>
+        Run &quot;Main.hoc&quot;.<br />
+        Click &quot;Two states (C &lt;-&gt; O)<sup>2</sup>&quot; button.<br />
+        Click &quot;Load exp. Tau data&quot; button.<br />
+        Select &quot;MageeTau.dat&quot; and click &quot;OK&quot;.<br />
+        Click &quot;Find The Best Fit&quot; button.</p>
+    <p>
+        <img alt="Kinetic Scheme" height="833" src="Images/01.png" width="897" /></p>
+    <p>
+        The Best Fit:</p>
+    <p>
+        Alpha:<br />
+        a = 0.1091<br />
+        vhalf = -91.69 (mV)<br />
+        k = 12.51 (mV)</p>
+    <p>
+        Beta:<br />
+        a = 0.09848<br />
+        vhalf = -35.73 (mV)<br />
+        k = -22.11 (mV)</p>
+    <hr />
+</body>
+</html>
