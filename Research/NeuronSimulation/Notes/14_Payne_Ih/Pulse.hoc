@@ -1,0 +1,96 @@
+//==============================================================================
+// File Name: Pulse.hoc
+// Short pulse experiment to measure membrane time constant
+
+//==============================================================================
+// Pulse box
+objref hBoxPulse
+hBoxPulse = new HBox()
+
+// Start of the box
+hBoxPulse.intercept(1)
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		xbutton("Calculate Tau","CalculateTau()")	// Calculate Tau button
+		xlabel("")
+		xlabel("After simulation")	// Display "After simulation"
+		xbutton("Fit Decay", "FitDecay()")	// Fit Decay button
+	}
+	xpanel() // Close the xpanel
+
+}
+hBoxPulse.intercept(0) // End of the box
+
+//==============================================================================
+// Calculate Tau
+proc CalculateTau() {
+	print "== Calculated Tau =="
+	print "C = ", soma.cm, " (uF/cm^2)"
+	print "R = ", 1/soma.g_pas, " (ohm cm^2)"
+	print "Tau = C * R = ", soma.cm / soma.g_pas * 1e-3, " (ms)\n"
+}
+
+//==============================================================================
+// Fit Decay
+proc FitDecay() {
+	print "== Fit Decay =="
+	
+	// Initial values for fitting
+	y0 = -65
+	amp = -5
+	x0 = 101
+	tau = 20
+	
+	// The index 1 ms after the start of the pulse (101 ms)
+	index1 = vecT.indwhere(">", 101)
+	
+	// The index when the voltage reaches the maximum
+	index2 = vecV.max_ind(index1, vecV.size()-1)	// Index of max
+
+	// Set data x vector for fitting
+	vecFittingDataX = vecT.c(index1, index2)
+	
+	// Set data y vector for fitting
+	vecFittingDataY = vecV.c(index1, index2)
+	
+	// Find the best fit
+	FitExponentialDecay(vecFittingDataX, vecFittingDataY, &y0, &amp, &x0, &tau)
+	
+	//=====================================
+	// Make the best fit curve
+	
+	// Change the size of the y vector, which will store the result.
+	vecFittingResultY.resize(vecFittingDataX.size())
+	
+	// Calculate the y value based on the fitting result
+	for(i = 0; i < vecFittingDataX.size(); i += 1) {
+		x = vecFittingDataX.x[i]
+		vecFittingResultY.x[i] = y0 + amp * exp(-(x - x0) / tau)
+	}
+	
+	// Erase old curves
+	graphFitting.erase()
+	
+	// Plot data
+	vecFittingDataY.plot(graphFitting, vecFittingDataX, 1, 1)
+	
+	// Plot fitting result
+	vecFittingResultY.plot(graphFitting, vecFittingDataX, 2, 1)
+	
+	// Resize the graph
+	graphFitting.exec_menu("View = plot")
+	graphFitting.exec_menu("10% Zoom out")
+	graphFitting.exec_menu("10% Zoom out")
+	
+	// Print the result in the console
+	printf("Tau = %g (ms)\n\n", tau)
+}
+
+//==============================================================================

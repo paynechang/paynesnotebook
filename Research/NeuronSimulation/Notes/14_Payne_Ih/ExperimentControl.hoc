@@ -1,0 +1,265 @@
+//==============================================================================
+// File Name: ExperimentControl.hoc
+// Experiment Control Box
+
+//==============================================================================
+// Local parameters
+window_x0 = 1480
+window_width = 350
+
+//==============================================================================
+// Experiment control box
+objref hBoxExperimentControl
+hBoxExperimentControl = new HBox()
+
+hBoxExperimentControl.intercept(1)
+{
+	xpanel("", 0)	// Start the panel, ("Title", 0: vertical lay out)
+	{
+		xbutton("Pulse (1 ms)","SelectPulse()")	// Pulse experiment
+		xbutton("Current Step (500 ms)","SelectStep()")	// Step experiment
+		xbutton("Five Alpha EPSCs (20 Hz)","SelectAlpha()")	// Alpha experiment
+		xbutton("Chirp","SelectChirp()")	// Chirp experiment
+		// Select voltage clamp experiment
+		xbutton("Voltage Clamp","SelectVoltageClamp()")	
+		xlabel("")
+		xbutton("Quit", "quit()")	// Quit NEURON
+	}
+	xpanel() // End of the panel
+}
+hBoxExperimentControl.intercept(0)	// End of the box
+// Display the box
+hBoxExperimentControl.map("Experiment Control", 900, 0, 200, 200)
+
+//==============================================================================
+// Hide all panels
+proc HideAllPanels() {
+	hBoxPulse.unmap()
+	hBoxStep.unmap()
+	hBoxAlpha.unmap()
+	hBoxChirp.unmap()
+	hBoxVoltageClamp.unmap()
+}
+
+//==============================================================================
+// Select pulse experiment
+proc SelectPulse() {
+	// Display notice
+	printf("Set parameters for pulse experiment.\n\n")
+	
+	// Set experiment duration
+	experimentDuration = 400 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -75, -60)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, -0.5, 0.5)
+	
+	// Set the parameters for I-clamp electrodeIC
+	electrodeIC.del = 100		// Delay [ms]
+	electrodeIC.dur = 1		// Duration [ms]
+	iAmp = -0.4
+	electrodeIC.amp = iAmp	// Amplitude [nA]
+	vecICElectrodeI.play_remove()	// Remove attachment
+	
+	// Initial condition
+	v_init = -65
+	g_pas = 1/30000
+	
+	// Set the parameters for V-clamp electrode
+	electrodeVC.dur1 = 0		// Duration [ms]
+	electrodeVC.amp1 = -45		// Voltage [mV]
+	electrodeVC.dur2 = 0		// Duration [ms]
+	electrodeVC.amp2 = -135		// Voltage [mV]
+	electrodeVC.dur3 = 0		// Duration [ms]
+	electrodeVC.amp3 = -45		// Voltage [mV]
+	
+	// Update panels
+	HideAllPanels()
+	hBoxPulse.map("Pulse", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}
+
+//==============================================================================
+// Select step experiment
+proc SelectStep() {
+	// Display notice
+	print "Set parameters for step experiment.\n"
+	
+	// Set experiment duration
+	experimentDuration = 800 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -75, -55)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, -0.2, 0.2)
+	
+	// Set the parameters for I-clamp electrodeIC
+	electrodeIC.del = 100		// Delay [ms]
+	electrodeIC.dur = 500		// Duration [ms]
+	iAmp = -0.1
+	electrodeIC.amp = iAmp	// Amplitude [nA]
+	vecICElectrodeI.play_remove()	// Remove attachment
+	
+	// Initial condition
+	v_init = -65
+	g_pas = 1/30000
+	
+	// Set the parameters for V-clamp electrode
+	electrodeVC.dur1 = 0		// Duration [ms]
+	electrodeVC.amp1 = -45		// Voltage [mV]
+	electrodeVC.dur2 = 0		// Duration [ms]
+	electrodeVC.amp2 = -135		// Voltage [mV]
+	electrodeVC.dur3 = 0		// Duration [ms]
+	electrodeVC.amp3 = -45		// Voltage [mV]
+	
+	// Update panels
+	HideAllPanels()
+	hBoxStep.map("Step", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}
+
+//==============================================================================
+// Select alpha experiment
+proc SelectAlpha() {
+	// Display notice
+	print "Set parameters for alpha current injection.\n"
+	
+	// Set experiment duration
+	experimentDuration = 500 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -75, -50)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, 0, 0.2)
+	
+	// Set the parameters for I-clamp electrodeIC
+	iAmp = 0.03
+	SetAlphaCurrent()
+	
+	electrodeIC.del = 0		// Delay [ms]
+	electrodeIC.dur = 1e9		// Duration [ms]
+	electrodeIC.amp = 0		// Amplitude [nA]
+	vecICElectrodeI.play(&electrodeIC.amp, dt)	// Amplitude [nA]
+	
+	// Initial condition
+	v_init = -65
+	g_pas = 1/30000
+	
+	// Set the parameters for V-clamp electrode
+	electrodeVC.dur1 = 0		// Duration [ms]
+	electrodeVC.amp1 = -45		// Voltage [mV]
+	electrodeVC.dur2 = 0		// Duration [ms]
+	electrodeVC.amp2 = -135		// Voltage [mV]
+	electrodeVC.dur3 = 0		// Duration [ms]
+	electrodeVC.amp3 = -45		// Voltage [mV]
+	
+	// Update panels
+	HideAllPanels()
+	hBoxAlpha.map("Alpha", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}
+
+//==============================================================================
+// Select chirp experiment
+proc SelectChirp() {
+	// Display notice
+	print "Set parameters for chirp experiment.\n"
+	
+	// Set experiment duration
+	experimentDuration = 12000 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -85, -55)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, -0.2, 0.2)
+	
+	// Set the parameters for I-clamp electrodeIC
+	iAmp = 0.1
+	SetChirpCurrent()
+	
+	electrodeIC.del = 0		// Delay [ms]
+	electrodeIC.dur = 1e9		// Duration [ms]
+	electrodeIC.amp = 0		// Amplitude [nA]
+	vecICElectrodeI.play(&electrodeIC.amp, dt)	// Amplitude [nA]
+	
+	// Initial condition
+	v_init = -65
+	g_pas = 1/30000
+	
+	// Set the parameters for V-clamp electrode
+	electrodeVC.dur1 = 0		// Duration [ms]
+	electrodeVC.amp1 = -45		// Voltage [mV]
+	electrodeVC.dur2 = 0		// Duration [ms]
+	electrodeVC.amp2 = -135		// Voltage [mV]
+	electrodeVC.dur3 = 0		// Duration [ms]
+	electrodeVC.amp3 = -45		// Voltage [mV]
+	
+	// Update panels
+	HideAllPanels()
+	hBoxChirp.map("Chirp", window_x0, 0, window_width, 250)	// Display the box
+	doNotify()
+}
+
+//==============================================================================
+// Select voltage clamp experiment
+proc SelectVoltageClamp() {
+	// Display notice
+	print "Set parameters for voltage clamp experiment.\n"
+	
+	// Set experiment duration
+	experimentDuration = 1200 // [ms]
+	tstop = experimentDuration
+	
+	// Set the ranges for voltage graph
+	graphV.erase()	// Erase old traces
+	graphV.size(0, experimentDuration, -140, -40)
+	
+	// Set the ranges for current graph
+	graphI.erase()	// Erase old traces
+	graphI.size(0, experimentDuration, -3, 3)
+	
+	// Set the parameters for I-clamp electrode
+	electrodeIC.del = 0		// Delay [ms]
+	electrodeIC.dur = 0		// Duration [ms]
+	electrodeIC.amp = 0		// Amplitude [nA]
+	vecICElectrodeI.play_remove()	// Amplitude [nA]
+	
+	// Initial condition
+	v_init = -45
+	g_pas = 0
+	
+	// Set the parameters for V-clamp electrode
+	electrodeVC.rs = 1e-9	// Series risistance
+	
+	electrodeVC.dur1 = 100		// Duration [ms]
+	electrodeVC.amp1 = -45		// Voltage [mV]
+	electrodeVC.dur2 = 1000		// Duration [ms]
+	electrodeVC.amp2 = -135		// Voltage [mV]
+	electrodeVC.dur3 = 100		// Duration [ms]
+	electrodeVC.amp3 = -45		// Voltage [mV]
+	
+	// Update panels
+	HideAllPanels()
+	// Display the box
+	hBoxVoltageClamp.map("Voltage Clamp", window_x0, 0, window_width, 300)	
+	doNotify()
+}
+
+//==============================================================================
