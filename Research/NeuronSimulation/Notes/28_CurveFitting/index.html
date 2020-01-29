@@ -1,0 +1,146 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Note #28</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Note #28</h1>
+    <hr />
+    <h2>
+        Goals: Some Notes about Curve Fitting</h2>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        Curve fitting is a very important tool to find time constants in biopysical 
+        processes. Here, I explored the consequences of fitting a curve with 
+        inconsistant functions. First, I tried to fit second or third power exponential 
+        decay curves with a first power exponential decay function. Next, I tried to fit 
+        first power exponential decay curves with second or third power exponential 
+        decay functions.</p>
+    <hr />
+    <h2>
+        Notes about methods:</h2>
+    <p>
+        curve_fit() in scipy will be used to fit curves. Exponential decay function is 
+        generated accoding to y = 1 - exp(-x / tau). Tau is from 1 ms to 20 ms. y(x)&nbsp; 
+        to the power of 2 to 3 are generated.</p>
+    <hr />
+    <h2>
+        Results:</h2>
+    <h3>
+        Fit second power exponential decay 
+        curves with first power exponential decay function</h3>
+    <p>
+        In this scenario, there is a second power exponential decay curve, which I tried 
+        to fit it with a single power exponential decay function. The result tau is 
+        about 1.4 longer than the tau in the second power exponential decay curve. If 
+        someone noticed that the actual function is a second power exponential decay 
+        function, he or she can correct the tau by divid it with the square root of 2.</p>
+        <table><tr><td>The period for fitting is 100 ms.</td><td>The period for fitting is 
+            200 ms.</td></tr><tr><td>
+        <img alt="Tau = 20" height="262" src="Images/01.png" width="336" /><br />
+                Tau = 20 ms<br />
+                Black: First power exponential decay<br />
+                Blue: Second power exponential decay<br />
+                Red: First power exponential decay fit to the blue trace </td><td>
+                    <img alt="200 ms" height="262" src="Images/03.png" width="336" /><br />
+                    Tau = 20 ms</td></tr><tr><td>
+        <img alt="Tau" height="324" src="Images/02.png" width="418" /><br />
+                Black: First power exponential decay<br />
+                Red: Second power exponential decay fitted by single exponential decay.<br />
+                Green: 
+                Corrected tau</td><td>
+                    <img alt="200 ms" height="324" src="Images/04.png" width="418" /></td></tr></table>
+    <p>
+        The period for fitting must be 10 times longer than tau to get a good fit.<br />
+        When the period for fitting is too short, the estimated tau is longer than the 
+        actual tau.</p>
+    <hr />
+    <h3>
+        Fit third power exponential decay 
+        curves with first power exponential decay function</h3>
+        <table><tr><td>The period for fitting is 100 ms.</td><td>The period for fitting is 
+            200 ms.</td></tr><tr><td>
+                <img alt="third power" height="262" src="Images/05.png" width="336" /><br />
+                Tau = 20 ms<br />
+                Black: First power exponential decay<br />
+                Blue: Third power exponential decay<br />
+                Red: First power exponential decay fit to the blue trace </td><td>
+                    <img alt="200 ms" height="262" src="Images/07.png" width="336" /><br />
+                    Tau = 20 ms</td></tr><tr><td>
+                <img alt="Tau" height="324" src="Images/06.png" width="418" /></td><td>
+                    <img alt="200 ms" height="324" src="Images/08.png" width="418" /></td></tr></table>
+    <p>
+        The period for fitting must be 10 times longer than tau to get a good fit.<br />
+        When the period for fitting is too short, the estimated tau is longer than the 
+        actual tau.</p>
+    <hr />
+    <h3>
+        Fit 
+        first power exponential decay curves with second power exponential decay 
+        function</h3>
+    <p>
+        In this scenario, we have a single power exponential decay curve, but we try to 
+        fit it with a second power exponential decay function. The result tau is shorter 
+        than the tau in the single power exponential decay. To convert the fitted tau to 
+        the tau of the first power exponential decay function, multiply each tau with 
+        1.23.</p>
+        <table><tr><td>The period for fitting is 100 ms.</td><td>The period for fitting is 
+            20 ms.</td></tr><tr><td>
+                <img alt="Curves" height="262" src="Images/09.png" width="336" /><br />
+                Tau = 20 ms</td><td>
+                    <img alt="Curves" height="262" src="Images/11.png" width="336" /><br />
+                    Tau = 20 ms</td></tr><tr><td>
+                <img alt="Plot" height="324" src="Images/10.png" width="418" /><br />
+                Second Power Fit * 1.23 = First Power</td><td>
+                    <img alt="Tau" height="324" src="Images/12.png" width="418" /></td></tr></table>
+    <p>
+        The fitting period must be at least four times longer than the actual tau to get 
+        a good fit.</p>
+    <hr />
+    <h3>
+        Fit 
+        first power exponential decay curves with third power exponential decay function</h3>
+    <p>
+        In this scenario, we have a 
+        first power exponential decay curve, but we try to 
+        fit it with a third power exponential decay function. The result tau is shorter 
+        than the tau in the first power exponential decay curve. To convert the fitted tau to 
+        the tau of the first power exponential decay function, multiply each tau with 
+        1.31.</p>
+        <table><tr><td>The period for fitting is 100 ms.</td><td>The period for fitting is 
+            20 ms.</td></tr><tr><td>
+                <img alt="Curves" height="262" src="Images/13.png" width="336" /><br />
+                Tau = 20 ms</td><td>
+                    <img alt="Curves" height="262" src="Images/15.png" width="336" /><br />
+                    Tau = 20 ms</td></tr><tr><td>
+                <img alt="Tau" height="324" src="Images/14.png" width="418" /><br />
+                Second Power Fit * 1.31 = First Power</td><td>
+                    <img alt="Tau" height="324" src="Images/16.png" width="418" /></td></tr></table>
+    <p>
+        The fitting period must be at least four times longer than the actual tau to get 
+        a good fit.</p>
+    <hr />
+    </body>
+</html>
