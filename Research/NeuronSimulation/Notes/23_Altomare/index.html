@@ -1,0 +1,229 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #23</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Note #23</h1>
+    <hr />
+    <h2>
+        Goals: Compare Altomare&#39;s HCN1 and HCN2 Models</h2>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        CA1 pyramidal neurons express both HCN1 and HCN2 proteins in their dendrites. Thus, the characteristics of native Ih are between those of HCN1 and HCN2.
+        This note examines the properties of Altomare&#39;s HCN1 and HCN2 models (2001). Compared to native Ih, HCN2 is much slower and has a hyperpolarized GV 
+        curve. Therefore, HCN1 might be dominant in determing the characteristics of native Ih and HCN2 plays a regulatory role.</p>
+    <hr />
+    <h2>
+        Methods:</h2>
+    <h3>
+        Software</h3>
+    <ul>
+        <li>NEURON (v7.1)</li>
+        <li>Python (For plotting figures)<ul>
+            <li>Python (v3.2.2), IPython (v0.12), Distribute (v0.6.26), PyReadline (v2.0), Matplotlib (v1.2.x), SciPy (v0.10.1), NumPy (v1.6.1), Freetype (v2.3.5-1)</li>
+        </ul>
+        </li>
+    </ul>
+    <p>
+        Q10 is 4.5. Temperature = 33.</p>
+    <hr />
+    <h2>
+        Results:</h2>
+    <table>
+        <tr>
+            <td>
+            </td>
+            <td>
+                No Ih
+            </td>
+            <td>
+                HCN1
+            </td>
+            <td>
+                HCN2
+            </td>
+        </tr>
+        <tr>
+            <td>
+                gbar_h (S/cm2)
+            </td>
+            <td>
+                0
+            </td>
+            <td>
+                2.2e-5
+            </td>
+            <td>
+                2.2e-5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                e_pas (mV)
+            </td>
+            <td>
+                -65
+            </td>
+            <td>
+                -75
+            </td>
+            <td>
+                -65.1</td>
+        </tr>
+        <tr>
+            <td>
+                Time Constant (ms)
+            </td>
+            <td>
+                30.0</td>
+            <td>
+                22.4
+            </td>
+            <td>
+                29.7</td>
+        </tr>
+        <tr>
+            <td>
+                Imput Resistance (M&Omega;)
+            </td>
+            <td>
+                95.5</td>
+            <td>
+                50.2&nbsp;</td>
+            <td>
+                93.4</td>
+        </tr>
+        <tr>
+            <td>
+                Rebound Slope (mV/mV)</td>
+            <td>
+                0.00</td>
+            <td>
+                -0.13</td>
+            <td>
+                -0.00</td>
+        </tr>
+        <tr>
+            <td>
+                Temporal Summation (%)</td>
+            <td>
+                43.7</td>
+            <td>
+                2.1</td>
+            <td>
+                42.8</td>
+        </tr>
+        <tr>
+            <td>
+                Depolarizing Resonance Frequency (Hz)</td>
+            <td>
+                0.6</td>
+            <td>
+                4.6</td>
+            <td>
+                0.6</td>
+        </tr>
+        <tr>
+            <td>
+                Hyperpolarizing Resonance Frequency (Hz)</td>
+            <td>
+                1.1</td>
+            <td>
+                4.8</td>
+            <td>
+                1.1</td>
+        </tr>
+        <tr>
+            <td>
+                <strong>Biophysical Properties</strong></td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td>
+                Vhalf (mV)</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                -68.9</td>
+            <td>
+                -98.0</td>
+        </tr>
+        <tr>
+            <td>
+                k (mV)</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                9.4</td>
+            <td>
+                6.0</td>
+        </tr>
+        <tr>
+            <td>
+                Activation Tau at -65 mV (ms)</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                41.4</td>
+            <td>
+                3185.0</td>
+        </tr>
+        <tr>
+            <td>
+                Deactivation Tau at -65 mV (ms)</td>
+            <td>
+                &nbsp;</td>
+            <td>
+                38.7</td>
+            <td>
+                122.5</td>
+        </tr>
+    </table>
+    <h3>
+        Impdedance Magnitude</h3>
+    <p>
+        <img alt="Impedance Magnitude" height="362" src="Images/01.png" width="512" /></p>
+    <h3>
+        Voltage Lag</h3>
+    <p>
+        <img alt="Voltage Lag" height="362" src="Images/02.png" width="512" /></p>
+    <h3>
+        GV Curve</h3>
+    <p>
+        <img alt="GV Curve" height="362" src="Images/03.png" width="512" /></p>
+    <h3>
+        Time Constant</h3>
+    <p>
+        <img alt="Time Constant" height="362" src="Images/04.png" width="512" />
+        <img alt="Time Constant" height="362" src="Images/05.png" width="512" /></p>
+    <hr />
+</body>
+</html>
