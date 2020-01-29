@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Note #25</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+        img
+        {
+            vertical-align:top;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Note #25</h1>
+    <hr />
+    <h2>
+        Goals: Create a NMODL model for the delayed rectifier potassium current (K<sub>DR</sub>)</h2>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        Delayed rectifier potassium current (I<sub>DR</sub>, K<sub>DR</sub>, or I<sub>K</sub>) is an important outward current regulating the firing 
+        properties of excitable cells. Thus, it is wise to carefully select an available model or create one based on experimental data. I tested the models 
+        in Bianchi et al&#39;s paper (2012), Gonzalez et al&#39;s paper (2011), and Migliore&#39;s paper (1996). These models generate currents which are distinct from I<sub>DR</sub> observed in CA1 pyramidal neurons. 
+        Thus, I created a new model based on Mohapatra et al&#39;s data (2009) and Hoffman&#39;s data (1997). This model is more suitable to simulate I<sub>DR</sub> 
+        in CA1 pyramidal neurons.</p>
+    <hr />
+    <h2>
+        Results:</h2>
+    <h3>
+        Bianchi (2012)</h3>
+        <table><tr><td>
+            <img alt="Voltage and Current" height="447" src="Images/01.png" width="336" /></td><td>
+                <img alt="GV Curve" height="223" src="Images/02.png" width="334" /></td><td>
+                <img alt="Time Constant" height="223" src="Images/09.png" width="334" /></td></tr><tr><td>
+                &nbsp;</td><td>Vhalf = 13.0 (mV); k = -8.8 (mV)</td><td>&nbsp;</td></tr></table>
+    <hr />
+    <h3>
+        Gonzalez (2011)</h3>
+    <p>
+        V<sub>1/2</sub> is too hyperpolarized. The absolute value of k is too small.</p>
+        <table><tr><td>
+            <img alt="Voltage and Current Traces" height="447" src="Images/03.png" width="336" /></td><td>
+                <img alt="GV Curve" height="223" src="Images/04.png" width="334" /></td><td>
+                <img alt="Tau" height="223" src="Images/05.png" width="334" /></td></tr><tr><td>
+                &nbsp;</td><td>Vhalf = -31.9 (mV); k = -4.1 (mV)</td><td>&nbsp;</td></tr></table>
+    <hr />
+    <h3>
+        Migliore (1996)</h3>
+    <p>
+        V<sub>1/2</sub> is too hyperpolarized.</p>
+        <table><tr><td>
+            <img alt="Voltage and Current Traces" height="447" src="Images/06.png" width="336" /></td><td>
+                <img alt="GV Curve" height="223" src="Images/07.png" width="334" /></td><td>
+                <img alt="Time Constant" height="223" src="Images/08.png" width="334" /></td></tr><tr><td>
+                &nbsp;</td><td>Vhalf = -41.7 (mV); k = -1.4 (mV)</td><td>&nbsp;</td></tr></table>
+    <hr />
+    <h3>
+        Payne&#39;s Model</h3>
+    <p>
+        g = gbar * n^4 * l</p>
+    <p>
+        Target Activation Curve:<br />
+        Vhalf = 2 (mV) (Ref: Chen (2004)<br />
+        k = 7 (mV) (Ref: 
+        Chen (2004)</p>
+    <p>
+        n (activation particle):<br />
+        Vhalf = -13.9 (mV)<br />
+        k = -9.1 (mV)<br />
+        tau = 1.8 (ms) (Ref: Hoffman (1997))</p>
+    <p>
+        l (inactivation particle):<br />
+        Vhalf = -28.8 (mV) (Ref: Mohapatra (2009)<br />
+        k = 11.4 (mV) (Ref: Mohapatra (2009)<br />
+        tau = 
+        500 (ms) (Ref: Mohapatra (2009)<br />
+        P = 0.25 (1) (Ref: Mohapatra (2009)</p>
+    <p>
+        Program used to find parameters for n: <a href="BoltzmannPowerFit.py">BoltzmannPowerFit.py</a><br />
+        Command to run the program in the cmd console: <strong>ipython3 BoltzmannPowerFit.py -- pylab</strong></p>
+    <p>
+        <img alt="Control Panel" height="189" src="Images/10.png" width="214" />
+        <img alt="Curves" height="262" src="Images/11.png" width="336" /></p>
+    <p>
+        NMODL file: <a href="kdr_p.mod">kdr_p.mod</a></p>
+    <p>
+        Results</p>
+        <table><tr><td>
+            <img alt="Voltage and Current Traces" height="476" src="Images/12.png" 
+                width="344" /></td><td>
+                <img alt="Normalized Conductance" height="248" src="Images/13.png" 
+                    width="338" /></td><td>
+                <img alt="Inactivation Tau" height="248" src="Images/14.png" width="338" /><br />
+                <img alt="Activation Tau" height="248" src="Images/15.png" width="338" /></td></tr><tr><td>
+                &nbsp;</td><td>Vhalf = 1.9 (mV); k = -6.9 (mV)</td><td>&nbsp;</td></tr></table>
+    <hr />
+    <h2>
+        References:</h2>
+    <ul>
+        <li>On the mechanisms underlying the depolarization block in the spiking dynamics of CA1 pyramidal neurons. Bianchi D, Marasco A, Limongiello A, Marchetti 
+            C, Marie H, Tirozzi B, Migliore M. J Comput Neurosci. 2012 Feb 5.</li>
+        <li>Gómez González JF, Mel BW, Poirazi P. Distinguishing Linear vs. Non-Linear Integration in CA1 Radial Oblique Dendrites: It&#39;s about Time. Front Comput 
+            Neurosci. 2011;5:44.</li>
+        <li>Modeling the attenuation and failure of action potentials in the dendrites of hippocampal neurons. Migliore M. Biophys J. 1996 Nov;71(5):2394-403.</li>
+        <li>Regulation of intrinsic excitability in hippocampal neurons by activity-dependent modulation of the KV2.1 potassium channel. Mohapatra DP, Misonou H, 
+            Pan SJ, Held JE, Surmeier DJ, Trimmer JS. Channels (Austin). 2009 Jan-Feb;3(1):46-56.</li>
+        <li>K+ channel regulation of signal propagation in dendrites of hippocampal pyramidal neurons. Hoffman DA, Magee JC, Colbert CM, Johnston D. Nature. 1997 
+            Jun 26;387(6636):869-75.</li>
+        <li>Chen X, Johnston D. Properties of single voltage-dependent K+ channels in dendrites
+            of CA1 pyramidal neurones of rat hippocampus. J Physiol. 2004 Aug 15;559(Pt 1):187-203.</li>
+    </ul>
+    <hr />
+    </body>
+</html>
