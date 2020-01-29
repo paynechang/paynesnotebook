@@ -1,0 +1,416 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Note #26</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Note #26</h1>
+    <hr />
+    <h2>
+        Goals: Create a model for the fast, transient A-type potassium current (I<sub>A</sub>)</h2>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        A-type potassium current (I<sub>A</sub>) is important for signal processing and excitability
+        tuning in dendrites. Thus, it is critical to have a good I<sub>A</sub> model to
+        simulate signals in dendrites. I examined two I<sub>A</sub> models and found they
+        did not match published results very well. Therefore, I created an I<sub>A</sub>
+        model based on the data in two articles, Hoffman et al (1997) and Chen et al (2004).</p>
+    <hr />
+    <h2>
+        Notes about methods:</h2>
+    <p>
+        e<sub>K</sub> = -85 (mV)</p>
+    <hr />
+    <h2>
+        Results:</h2>
+    <h3>
+        Summary</h3>
+    <table>
+        <tr>
+            <td>
+            </td>
+            <td>
+                Bianchi
+            </td>
+            <td>
+                Royeck
+            </td>
+            <td>
+                Payne
+            </td>
+            <td>
+                Hoffman
+            </td>
+            <td>
+                Chen
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Activation Vhalf (mV)
+            </td>
+            <td>
+                22.1
+            </td>
+            <td>
+                -21.9
+            </td>
+            <td>
+                6.3
+            </td>
+            <td>
+                11
+            </td>
+            <td>
+                5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Activation k (mV)
+            </td>
+            <td>
+                -17.6
+            </td>
+            <td>
+                -15.5
+            </td>
+            <td>
+                -15.3
+            </td>
+            <td>
+                -18
+            </td>
+            <td>
+                -16
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Inactivation Vhalf (mV)
+            </td>
+            <td>
+                -56.0
+            </td>
+            <td>
+                -79.9
+            </td>
+            <td>
+                -64.0
+            </td>
+            <td>
+                -56
+            </td>
+            <td>
+                -64
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Inactivation k (mV)
+            </td>
+            <td>
+                8.8
+            </td>
+            <td>
+                6.0
+            </td>
+            <td>
+                9.0
+            </td>
+            <td>
+                8
+            </td>
+            <td>
+                9
+            </td>
+        </tr>
+    </table>
+    <p>
+        <img alt="Activation and Inactivation" height="366" src="Images/26.png" width="516" /><br />
+        <img alt="Activation Tau" height="366" src="Images/27.png" width="516" />
+        <img alt="Inactivation Tau" height="366" src="Images/28.png" width="516" /></p>
+    <hr />
+    <h3>
+        Bianchi (2012)</h3>
+    <p>
+        kap (Proximal K<sub>A</sub>)</p>
+    <p>
+        gka = gkabar * n * l</p>
+    <h4>
+        Calculated from the model</h4>
+    <table>
+        <tr>
+            <td>
+                <img alt="Gating Particle State" height="366" src="Images/01.png" width="476" />
+            </td>
+            <td>
+                <img alt="Tau" height="366" src="Images/02.png" width="466" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                n (activation): V<sub>1/2</sub> = 11.2 (mV); k = -17.1 (mV)<br />
+                l (inactivation): V<sub>1/2</sub> = -56.0 (mV); k = 8.8 (mV)
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Activation</h4>
+    <table>
+        <tr>
+            <td>
+                <img alt="Voltage and Current Traces" height="447" src="Images/03.png" width="336" />
+            </td>
+            <td>
+                <img alt="GV Curve" height="223" src="Images/04.png" width="334" /><br />
+            </td>
+            <td>
+                <img alt="Activation Tau" height="223" src="Images/05.png" width="334" /><br />
+                <img alt="Tau" height="223" src="Images/06.png" width="334" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Activation: V<sub>1/2</sub> = 22.1 (mV); k = -17.6 (mV)
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Inactivation</h4>
+    <table>
+        <tr>
+            <td>
+                <img alt="Voltage and Current Traces" height="447" src="Images/08.png" width="336" />
+            </td>
+            <td>
+                <br />
+                <img alt="Inactivation GV Curve" height="223" src="Images/07.png" width="334" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Inactivation: V<sub>1/2</sub> = -56.0 (mV); k = 8.8 (mV)
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <h3>
+        Royeck (2008)</h3>
+    <p>
+        g = gbar * n<sup>3</sup> * l</p>
+    <h4>
+        Calculated from the model</h4>
+    <table>
+        <tr>
+            <td>
+                <img alt="State" height="366" src="Images/09.png" width="466" />
+            </td>
+            <td>
+                <img alt="Tau" height="366" src="Images/10.png" width="466" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                n (activation): V<sub>1/2</sub> = -50.0 (mV); k = -20 (mV)<br />
+                l (inactivation): V<sub>1/2</sub> = -80.0 (mV); k = 6.0 (mV)
+            </td>
+            <td>
+                Activation: 0.5 (ms)<br />
+                Inactivation: 15 (ms)
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Activation</h4>
+    <table>
+        <tr>
+            <td>
+                <img alt="Voltage and Current" height="447" src="Images/11.png" width="336" />
+            </td>
+            <td>
+                <img alt="GV Curve" height="223" src="Images/12.png" width="334" />
+            </td>
+            <td>
+                <img alt="Tau" height="223" src="Images/13.png" width="334" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Activation: V<sub>1/2</sub> = -21.9 (mV); k = -15.5 (mV)
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Inactivation</h4>
+    <table>
+        <tr>
+            <td>
+                <img alt="Voltage and Current Traces" height="447" src="Images/14.png" width="336" />
+            </td>
+            <td>
+                <img alt="GV Curve" height="223" src="Images/15.png" width="334" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Inactivation: V<sub>1/2</sub> = -79.9 (mV); k = 6.0 (mV)
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <h3>
+        Payne&#39;s K<sub>A</sub> model</h3>
+    <p>
+        g = gbar * m<sup>4</sup> * h</p>
+    <p>
+        NMODL file: <a href="ka_p.mod">ka_p.mod</a></p>
+    <h4>
+        Calculate Vhalf and k</h4>
+    <table>
+        <tr>
+            <td>
+                &nbsp;<img alt="Control Panel" height="189" src="Images/16.png" width="214" />
+            </td>
+            <td>
+                &nbsp;<img alt="Curve Fitting" height="262" src="Images/17.png" width="365" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                V<sub>1/2</sub> = -31.3 (mV); k = -20.8 (mV)
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Calculated from the model</h4>
+    <table>
+        <tr>
+            <td>
+                &nbsp;<img alt="States" height="366" src="Images/18.png" width="466" />
+            </td>
+            <td>
+                &nbsp;<img alt="Tau" height="366" src="Images/19.png" width="466" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                m (activation): V<sub>1/2</sub> = -31.3 (mV); k = -20.8 (mV)<br />
+                h (inactivation): V<sub>1/2</sub> = -64.0 (mV); k = 9 (mV)
+            </td>
+            <td>
+                Activation: 0.2 (ms)
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Activation</h4>
+    <table>
+        <tr>
+            <td>
+                &nbsp;<img alt="Voltage and Current Traces" height="476" src="Images/20.png" width="344" />
+            </td>
+            <td>
+                &nbsp;<img alt="GV Curve" height="248" src="Images/21.png" width="338" />
+            </td>
+            <td>
+                &nbsp;<img alt="Tau" height="248" src="Images/22.png" width="338" /><br />
+                <img alt="Activation Tau" height="248" src="Images/23.png" width="338" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Activation: V<sub>1/2</sub> = 6.3 (mV); k = -15.3 (mV)
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+    </table>
+    <h4>
+        Inactivation</h4>
+    <table>
+        <tr>
+            <td>
+                &nbsp;<img alt="Voltage and Current Traces" height="476" src="Images/24.png" width="344" />
+            </td>
+            <td>
+                &nbsp;<img alt="Inactivation Curve" height="248" src="Images/25.png" width="338" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Inactivation: V<sub>1/2</sub> = -64.0 (mV); k = 9.0 (mV)
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <h2>
+        References:</h2>
+    <ul>
+        <li>Bianchi D, Marasco A, Limongiello A, Marchetti C, Marie H, Tirozzi B, Migliore M.
+            On the mechanisms underlying the depolarization block in the spiking dynamics of
+            CA1 pyramidal neurons. J Comput Neurosci. 2012 Feb 5.</li>
+        <li>Royeck M, Horstmann MT, Remy S, Reitze M, Yaari Y, Beck H. Role of axonal NaV1.6
+            sodium channels in action potential initiation of CA1 pyramidal neurons. J Neurophysiol.
+            2008 Oct;100(4):2361-80.</li>
+        <li>Hoffman DA, Magee JC, Colbert CM, Johnston D. K+ channel regulation of signal propagation
+            in dendrites of hippocampal pyramidal neurons. Nature. 1997 Jun 26;387(6636):869-75.</li>
+        <li>Chen X, Johnston D. Properties of single voltage-dependent K+ channels in dendrites
+            of CA1 pyramidal neurones of rat hippocampus. J Physiol. 2004 Aug 15;559(Pt 1):187-203.</li>
+    </ul>
+    <hr />
+</body>
+</html>
