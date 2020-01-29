@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Note #24</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+            width: 1000px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+            width:50%;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Note #24</h1>
+    <hr />
+    <h2>
+        Goals: The Influence of 
+        Gating Variable&#39;s Power in Hodgkin-Huxley Model</h2>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        In Hodgkin-Huxley model, power of some gating variables is higher than one. It is important to know how the power of gating variables affects GV curve 
+        and time constants. In this note, I used a model potassium current to examine the influence of 
+        gating variables&#39; power. You will see that higher power shifts Vhalf to the 
+        right and reduces the slope factor, k. Higher power of gating variables also slows the activation but accelerates the deactivation.</p>
+    <hr />
+    <h2>
+        Methods:</h2>
+    <p>
+        Boltzmann&#39;s equation is used to descrive the activation rate constant (alpha) and the deactivation rate constant (beta).
+        <br />
+        Alpha = Alpha0 / (1 + exp((v - (-40(mV))) / (-10(mV))))<br />
+        Beta = Beta0 / (1 + exp((v - (-60(mV))) /( 10(mV))))<br />
+        Ginf = Alpha / (Alpha + Beta)<br />
+        Gtau = 1 / (Alpha + Beta)</p>
+    <h3>
+        Files:</h3>
+    <ul>
+        <li>NMODL file for the potassium current: <a href="kx.mod">kx.mod</a></li>
+    </ul>
+    <hr />
+    <h2>
+        Results:</h2>
+    <h3>
+        Alpha and Beta</h3>
+    <table><tr><td> 
+        <img alt="Alpha and Beta" height="316" src="Images/04.png" width="466" /></td><td>
+            The steady-state rates vs. the voltage. Alpha is the rate for the forward 
+            direction. Beta is for the backward direction.</td></tr></table>
+    <h3>
+        Normalized Conductance</h3>
+    <table><tr><td> 
+        <img alt="Normalized Conductance" height="316" src="Images/03.png" width="466" /></td><td>
+            The steady-state conductance is shifted to the depolarizing direction when the 
+            power of the gating variable is higher. The slope becomes steeper.</td></tr></table>
+    <h3>
+        Time Constant</h3>
+    <table><tr><td> 
+        <img alt="Activation Time Constant" height="316" src="Images/01.png" width="466" /></td><td>
+            <img alt="Deactivation Time Constant" height="316" src="Images/02.png" width="466" /></td></tr><tr><td> 
+            Activation time constant is slower with higher gating variable power.</td><td>
+                Deactivation time constant is faster with higher gating variable power.</td></tr></table>
+    <hr />
+    <h3>
+        First Power</h3>
+    <p>
+        <img alt="GV Curve" height="316" src="Images/07.png" width="466" />
+        <img alt="Tau" height="316" src="Images/08.png" width="466" /></p>
+    <p>
+        Vhalf = -50.1 (mV), k = -7.1 (mV)</p>
+    <hr />
+    <h3>
+        Second Power</h3>
+    <p>
+        <img alt="GV Curve" height="316" src="Images/09.png" width="506" />
+        <img alt="Tau" height="316" src="Images/10.png" width="466" /></p>
+    <p>
+        Vhalf = -43.5 (mV), k = -5.9 (mV)</p>
+    <hr />
+    </body>
+</html>
