@@ -1,0 +1,160 @@
+//======================================
+// Title: Tutorial #10
+// Author: Payne Y. Chang
+// File Name: Main.hoc
+
+// NEURON main menu
+load_file("nrngui.hoc")				// Display main menu
+
+//======================================
+// Parameters
+experimentDuration = 400	// Experiment duration [ms]
+gBarH = 5.3e-5	// (S/cm2)
+iAmp = -0.1		// Amplitude of injected current [nA]
+vCmd = -50
+
+//======================================
+// Object references
+//======================================
+
+// Create soma section
+create soma
+
+// Set soma properties
+proc SetSomaProperties() {
+	soma {
+		nseg = 1		// Number of segments = 1
+		diam = 100		// Diameter [um]
+		L = 100			// Length [um]
+		Ra = 100		// Axial risistance [ohm-cm]
+		cm = 1			// Capacitance of membrane [uF/cm2]
+		
+		insert pas		// Insert passive properties
+		g_pas = 1/30000	// [S/cm2]. Tau = 30 ms
+		e_pas = -70	// Reversal potential. [mV]
+		
+		insert h1ms2		// Insert Ih
+		gbar_h1ms2 = gBarH	// Maximun conductions of Ih
+	}
+}
+
+SetSomaProperties()	// Set soma properties
+
+//======================================
+// I-clamp electrode
+objref electrodeIC
+soma electrodeIC = new IClamp(0.5)
+
+// V-clamp electrodeIC
+objref electrodeVC
+soma electrodeVC = new SEClamp(0.5)
+
+//======================================
+// Vectors for recording time and voltage
+objref vecT, vecV	
+vecT = new Vector()	// Time vector
+vecV = new Vector()	// Voltage vector
+
+// Vector for injected current
+objref vecICElectrodeI
+vecICElectrodeI = new Vector()
+
+// Vector for electrode current (Voltage Clamp)
+objref vecVCElectrodeI
+vecVCElectrodeI = new Vector()
+
+//======================================
+// Fitting vectors
+objref vecFitX0, vecFitY0, vecFitResultX, vecFitResultY
+vecFitX0 = new Vector()
+vecFitY0 = new Vector()
+vecFitResultX = new Vector()
+vecFitResultY = new Vector()
+
+// Exponential Decay: Tau
+objref vecTau
+vecTau = new Vector()
+
+//======================================
+// Voltage step and conductance
+objref vecVcmd, vecG
+vecVcmd = new Vector()	// Vector for voltage command
+vecG = new Vector()	// Vector for steady-state current
+
+//======================================
+// Graph Box, comprising voltage and current graphs
+objref vBoxVI
+vBoxVI = new VBox()
+
+// Voltage graph
+objref graphV			
+graphV = new Graph(0)
+
+// Current graph
+objref graphI			
+graphI = new Graph(0)
+
+//======================================
+// Output File
+objref outputFile
+outputFile = new File()
+
+//======================================
+// Experiment Control Box
+objref hBoxExperimentControl
+hBoxExperimentControl = new HBox()
+
+//======================================
+// Parameters Control Box
+objref hBoxParameterControl
+hBoxParameterControl = new HBox()
+
+//=============================
+// Graph for fitting
+objref graphFitting
+graphFitting = new Graph(0)
+graphFitting.view(0, 0, 10, 10, 1300, 500, 400, 300)
+
+//======================================
+// (1) Pulse Box
+objref hBoxPulse
+hBoxPulse = new HBox()
+
+//======================================
+// (2) Step Box
+objref hBoxStep
+hBoxStep = new HBox()
+
+//======================================
+// (3) Alpha Box
+objref hBoxAlpha
+hBoxAlpha = new HBox()
+
+//======================================
+// (4) Chirp Box
+objref hBoxChirp
+hBoxChirp = new HBox()
+
+//======================================
+// (5) Voltage Clamp Box
+objref hBoxVoltageClamp
+hBoxVoltageClamp = new HBox()
+
+//======================================
+// Create panels
+load_file("ExperimentControl.hoc")	// Display experiment control panel
+load_file("ParameterControl.hoc")	// Display parameter control panel
+load_file("GraphVI.hoc")			// A graph containing voltage and current
+load_file("Fitting.hoc")			// Fitting window
+
+load_file("1_Pulse.hoc")		// Assemble pulse experiment box
+load_file("2_Step.hoc")			// Assemble step experiment box
+load_file("3_Alpha.hoc")		// Assemble alpha experiment box
+load_file("4_Chirp.hoc")		// Assemble chirp experiment box
+load_file("5_VoltageClamp.hoc")	// Assemble voltage clamp experiment box
+
+//======================================
+// Set recording vectors
+vecT.record(&t)				// Record t
+vecV.record(&soma.v(0.5))	// Record v at soma
+vecVCElectrodeI.record(&electrodeVC.i)	// Record voltage clamp electrode current

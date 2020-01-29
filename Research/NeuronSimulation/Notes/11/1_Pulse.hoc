@@ -1,0 +1,67 @@
+//======================================
+// File Name: 1_Pulse.hoc
+// Assemble Pulse Box
+
+//======================================
+// Start of the box
+hBoxPulse.intercept(1)
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		xbutton("Calculate Tau","CalculateTau()")	// Calculate Tau button
+		xlabel("After simulation")	// Display "After simulation"
+		xbutton("Fit Decay", "FitDecay()")	// Fit Decay button
+	}
+	xpanel() // Close the xpanel
+
+}
+hBoxPulse.intercept(0) // End of the box
+
+//======================================
+// Calculate Tau
+proc CalculateTau() {
+	// Display information
+	print "\nCalculated Tau"
+	print "C = ", soma.cm, " (uF/cm^2)"
+	print "R = ", 1/soma.g_pas, " (ohm cm^2)"
+	print "Tau = C * R = ", soma.cm / soma.g_pas * 1e-3, " (ms)"
+}
+
+//======================================
+// Fit Decay
+proc FitDecay() {
+	print "== Fit Decay =="
+	y0 = -65
+	amp = -5
+	x0 = 101
+	tau = 20
+	
+	index1 = vecT.indwhere(">", 101)	// Get the index of the response (>101 ms)
+	index2 = vecV.max_ind(index1, vecV.size()-1)	// Index of max
+
+	vecFitX0 = vecT.c(index1, index2)		// Create time vector
+	vecFitY0 = vecV.c(index1, index2)		// Create voltage vector
+	
+	FitExponentialDecay(vecFitX0, vecFitY0, &y0, &amp, &x0, &tau)
+	
+	vecFitResultY.resize(0)
+	
+	for(i=0; i<vecFitX0.size(); i+=1){
+		x = vecFitX0.x[i]
+		vecFitResultY.append(y0+amp*exp(-(x-x0)/tau))
+	}
+	
+	graphFitting.erase()
+	vecFitY0.plot(graphFitting, vecFitX0, 1, 1)
+	vecFitResultY.plot(graphFitting, vecFitX0, 2, 1)
+	graphFitting.exec_menu("View = plot")
+	
+	print "Fit decay - Done."	// Display Done information
+}
+

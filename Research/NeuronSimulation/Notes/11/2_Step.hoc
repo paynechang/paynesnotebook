@@ -1,0 +1,128 @@
+//======================================
+// File Name: 2_Step.hoc
+// Assemble Step Box
+
+//======================================
+// Start of the box
+hBoxStep.intercept(1)
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		xbutton("Calculate Rin","CalculateRin()")	// Calculate Rin button
+		xlabel("After simulation")					// Display "After simulation"
+		xbutton("Measure Rin & Sag","MeasureRinSag()")		// Measure Rin & Sag button
+		xlabel("Step Family")					// Display "Step Family"
+		xbutton("Run Step Family","RunStepFamily()")		// Run step family
+		xlabel("After running step family")
+		xbutton("Measure Rin (LR)", "MeasureRinLR()")
+	}
+	xpanel() // Close the panel
+
+}
+hBoxStep.intercept(0)// End of the box
+
+//======================================
+// Calculate Rin
+proc CalculateRin() {
+	R = 1/soma.g_pas					// Resistance [ohm.cm^2]
+	SurfaceArea = soma.diam*PI*soma.L	// Surface Area [um^2]
+
+	// Display Rin information
+	print "=== Calculated Rin ==="
+	print "Surface Area = ", SurfaceArea, " (um^2)"
+	print "R = ", R, " (ohm cm^2)"
+	print "Rin = ", R/(SurfaceArea*1e-8)*1e-6, " (Mega ohm)\n"
+}
+
+//======================================
+// Measure Rin and Sag
+proc MeasureRinSag() {
+	v1 = vecV.mean(50/dt, 100/dt-1)		// Baseline voltage (50~100 ms)
+	v2 = vecV.min(100/dt, 600/dt-1)		// Minimun voltage (100~600 ms)
+	v3 = vecV.mean(550/dt, 600/dt-1)		// Voltage at steady state (550~600 ms)
+	
+	// Display Rin information
+	print "=== Measured Rin & Sag ==="
+	print "Rin = ", (v3-v1)/iAmp, " (Mega Ohm)"
+	print "Sag = ", 100*(1-(v1-v3)/(v1-v2)), " (%)\n"
+}
+
+//======================================
+// Run step family
+objref vSS, iStep, vecRebound
+vSS = new Vector()	// Vector for steady-state voltage
+iStep = new Vector()	// Vector for step current
+vecRebound = new Vector()	// Vector for rebound
+mean = 0
+deltaI = 0.02	// [nA]
+
+proc RunStepFamily() {
+	print "=== Run step family ==="	// Notification
+
+	vSS.resize(0)		// Remove old data
+	iStep.resize(0)		// Remove old data
+	
+	graphV.family(1)	// Keep traces
+	graphI.family(1)	// Keep traces
+	
+	for(i=-0.1; i<=0.1; i+=deltaI) {
+		iAmp = i
+		electrodeIC.amp = iAmp
+		doNotify()
+		run()
+		
+		mean = vecV.mean(50/dt, 100/dt-1)
+		iStep.append(iAmp)
+		vSS.append(vecV.mean(550/dt, 600/dt-1) - mean)
+		vecRebound.append(vecV.max(600/dt, vecV.size() - 1) - mean)
+	}
+	
+	//======================================
+	// Save rebound vs. i to rebound_i.dat
+	outputFile.wopen("rebound_i.dat")
+	
+	count = 0
+	
+	for(i=0; i<= 0.1; i+=deltaI) {
+		count += 1
+	}
+	
+	outputFile.printf("%d", count)
+	
+	count = 0
+	
+	for(i=0; i<= 0.1; i+=deltaI) {
+		outputFile.printf("\n%g %g", vSS.x[count], vecRebound.x[count])
+		count += 1
+	}
+	
+	outputFile.close()
+	
+	//======================================
+	// Notification
+	print "Run step family - Done!\n"
+}
+
+//======================================
+// MeasureRinLR
+proc MeasureRinLR(){local y0, slope, x0
+	print "=== Measured Rin (Linear Regression) ==="
+	// iStep.x[i], vSS.x[i]
+	
+	FitLine(iStep, vSS, &y0, &slope, &x0)	// vecFitX0, vecFitY0, vecFitResultY are updated.
+	
+	// Plot
+	graphFitting.erase()
+	vecFitY0.mark(graphFitting, vecFitX0)
+	vecFitResultY.line(graphFitting, vecFitX0, 2, 1)
+	graphFitting.exec_menu("View = plot")
+	
+	// Print result
+	printf("Rin = %g (M Ohm)\n\n", slope)
+}

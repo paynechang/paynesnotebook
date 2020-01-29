@@ -1,0 +1,333 @@
+// Fitting.hoc
+//
+
+//=============================
+// Vectors and variables
+objref vecFitX0, vecFitY0
+vecFitX0 = new Vector()
+vecFitY0 = new Vector()
+
+double fitVar[7]
+
+//================================================================================
+// Exponential decay
+
+// Error Function
+func ErrorExponentialDecay() {local amp, x0, y0, tau, error
+	y0 = $&2[0]
+	amp = $&2[1]
+	x0 = $&2[2]
+	tau = $&2[3]
+	
+	error = 0
+
+	for(i=0; i<vecFitX0.size(); i+=1){
+		error += (vecFitY0.x[i] - (y0+amp*exp(-(vecFitX0.x[i]-x0)/tau)))^2
+	}
+	
+	//print vecFitY0.x[0], " ", (y0+amp*exp(-(vecFitX0.x[0]-x0)/tau))
+
+	return error
+}
+
+// Procedure
+proc FitExponentialDecay(){local error, y0, amp, x0, tau
+	// X and Y coordinates
+	vecFitX0 = $o1
+	vecFitY0 = $o2
+	
+	// Set fitting parameters
+	fitVar[0] = $&3
+	fitVar[1] = $&4
+	fitVar[2] = $&5
+	fitVar[3] = $&6
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(4, "ErrorExponentialDecay", &fitVar[0])
+	
+	$&3 = fitVar[0]
+	$&4 = fitVar[1]
+	$&5 = fitVar[2]
+	$&6 = fitVar[3]
+	
+	y0 = fitVar[0]
+	amp = fitVar[1]
+	x0 = fitVar[2]
+	tau = fitVar[3]
+
+	//printf("y0=%g amp=%g x0=%g tau=%g error=%g\n", fitVar[0], fitVar[1], fitVar[2], fitVar[3], error)
+	
+	vecFitResultX.resize(0)
+	vecFitResultY.resize(0)
+	
+	for(i=0; i<vecFitX0.size(); i+=1){
+		x = vecFitX0.x[i]
+		vecFitResultX.append( x )
+		vecFitResultY.append( y0 + amp * exp(-(x-x0)/tau) )
+	}
+}
+
+//================================================================================
+// Line
+// y = y0 + slope * (x - x0)
+
+// Error Function
+func ErrorLine() {local x, y, y0, slope, x0
+	y0 = $&2[0]
+	slope = $&2[1]
+	x0 = $&2[2]
+	
+	error = 0
+
+	for(i=0; i<vecFitX0.size(); i+=1){
+		x = vecFitX0.x[i]
+		y = vecFitY0.x[i]
+		error += (y - (y0 + slope * (x - x0)))^2
+	}
+	
+	return error
+}
+
+// Procedure
+proc FitLine(){local error
+	// X and Y coordinates
+	vecFitX0 = $o1
+	vecFitY0 = $o2
+	
+	// Set fitting parameters
+	fitVar[0] = $&3
+	fitVar[1] = $&4
+	fitVar[2] = $&5
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(3, "ErrorLine", &fitVar[0])
+	
+	$&3 = fitVar[0]
+	$&4 = fitVar[1]
+	$&5 = fitVar[2]
+	
+	// Fit result
+	vecFitResultY.resize(0)
+	
+	for(i=0; i<vecFitX0.size(); i+=1){
+		x = vecFitX0.x[i]
+		vecFitResultY.append(fitVar[0] + fitVar[1] * (x - fitVar[2]))
+	}
+	
+	// Print result
+	printf("Y0 = %g; Slope = %g; X0 = %g; Error = %g\n", fitVar[0], fitVar[1], fitVar[2], error)
+}
+
+//================================================================================
+// Six Order Polynomial
+// y = a0 + a1*x + a2*x^2 + a3*x^3 + a4*x^4 + a5*x^5 + a6*x^6
+
+// Error Function
+func ErrorSixOrderPolynomial() {local x, y, a0, a1, a2, a3, a4, a5, a6
+	a0 = $&2[0]
+	a1 = $&2[1]
+	a2 = $&2[2]
+	a3 = $&2[3]
+	a4 = $&2[4]
+	a5 = $&2[5]
+	a6 = $&2[6]
+	
+	error = 0
+
+	for(i=0; i<vecFitX0.size(); i+=1){
+		x = vecFitX0.x[i]
+		y = vecFitY0.x[i]
+		error += (y - (a0 + a1*x + a2*x^2 + a3*x^3 + a4*x^4 + a5*x^5 + a6*x^6) )^2
+	}
+	
+	return error
+}
+
+// Procedure
+proc FitSixOrderPolynomial(){local error, startPt, a0, a1, a2, a3, a4, a5, a6
+	// X and Y coordinates
+	vecFitX0 = $o1
+	vecFitY0 = $o2
+	
+	// Set fitting parameters
+	fitVar[0] = 1
+	fitVar[1] = 1
+	fitVar[2] = 1
+	fitVar[3] = 1
+	fitVar[4] = 1
+	fitVar[5] = 1
+	fitVar[6] = 1
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(7, "ErrorSixOrderPolynomial", &fitVar[0])
+	
+	a0 = fitVar[0]
+	a1 = fitVar[1]
+	a2 = fitVar[2]
+	a3 = fitVar[3]
+	a4 = fitVar[4]
+	a5 = fitVar[5]
+	a6 = fitVar[6]
+	
+	// Fit result
+	vecFitResultX.resize(0)
+	vecFitResultY.resize(0)
+	
+	startPt = (int(vecFitX0.x[0] * 10) - 1)*0.1
+	
+	for(x = startPt; x <= 10; x += 0.1){
+		vecFitResultX.append(x)
+		vecFitResultY.append(a0 + a1*x + a2*x^2 + a3*x^3 + a4*x^4 + a5*x^5 + a6*x^6)
+	}
+}
+
+//================================================================================
+// Boltzmann equation
+// y = 1/(1+exp((x - x0)/k))
+
+// Error Function
+func ErrorBoltzmannEquation() {local x, y, x0, k
+	x0 = $&2[0]
+	k = $&2[1]
+	
+	error = 0
+
+	for(i=0; i<vecFitX0.size(); i+=1){
+		x = vecFitX0.x[i]
+		y = vecFitY0.x[i]
+		error += (y - (1/(1+exp((x - x0)/k))) )^2
+	}
+	
+	return error
+}
+
+// Procedure
+proc FitBoltzmannEquation(){local error, x0, k
+	// X and Y coordinates
+	vecFitX0 = $o1
+	vecFitY0 = $o2
+	
+	// Set fitting parameters
+	fitVar[0] = -100
+	fitVar[1] = 10
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(2, "ErrorBoltzmannEquation", &fitVar[0])
+	
+	x0 = fitVar[0]
+	k = fitVar[1]
+	
+	// Fit result
+	vecFitResultX.resize(0)
+	vecFitResultY.resize(0)
+	
+	for(x = -150; x <= 0; x += 1){
+		vecFitResultX.append(x)
+		vecFitResultY.append(1/(1+exp((x - x0)/k)))
+	}
+	
+	printf("vhalf = %g (mV); k = %g (mV)\n", x0, k)
+}
+
+//================================================================================
+// Fit State
+// y = 1/(1+exp((x - x0)/k))
+x0State = -80.5
+kState = 6.7
+
+// Error Function
+func ErrorState() {local x0, k, y0, y1
+	x0 = $&2[0]
+	k = $&2[1]
+	
+	error = 0
+
+	for(x=-150; x<=0; x+=1){
+		y0 = 1/(1+exp((x - x0State)/kState))
+		y1 = 1/(1+exp((x - x0)/k))
+		error += ( y0 - y1 )^2
+	}
+	
+	return error
+}
+
+// Procedure
+proc FitState(){local error
+	// Set fitting parameters
+	fitVar[0] = -100
+	fitVar[1] = 10
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(2, "ErrorState", &fitVar[0])
+	
+	printf("State: vhalf = %g (mV); k = %g (mV); error = %g\n", fitVar[0], fitVar[1], error)
+}
+
+//================================================================================
+// Fit State^2
+// y = 1/(1+exp((x - x0)/k))^2
+x0State = -80.5
+kState = 6.7
+
+// Error Function
+func ErrorState2() {local x0, k, y0, y1
+	x0 = $&2[0]
+	k = $&2[1]
+	
+	error = 0
+
+	for(x=-150; x<=0; x+=1){
+		y0 = 1/(1+exp((x - x0State)/kState))
+		y1 = 1/(1+exp((x - x0)/k))^2
+		error += ( y0 - y1 )^2
+	}
+	
+	return error
+}
+
+// Procedure
+proc FitState2(){local error
+	// Set fitting parameters
+	fitVar[0] = -100
+	fitVar[1] = 10
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(2, "ErrorState2", &fitVar[0])
+	
+	printf("State^2: vhalf = %g (mV); k = %g (mV); error = %g\n", fitVar[0], fitVar[1], error)
+}
+
+//================================================================================
+// Fit 1 - State^2
+// y = 1 - 1/(1+exp((x - x0)/k))^2
+x0State = -80.5
+kState = 6.7
+
+// Error Function
+func Error1mState2() {local x0, k, y0, y1
+	x0 = $&2[0]
+	k = $&2[1]
+	
+	error = 0
+
+	for(x=-150; x<=0; x+=1){
+		y0 = 1/(1+exp((x - x0State)/kState))
+		y1 = 1 - 1/(1+exp((x - x0)/k))^2
+		error += ( y0 - y1 )^2
+	}
+	
+	return error
+}
+
+// Procedure
+proc Fit1mState2(){local error
+	// Set fitting parameters
+	fitVar[0] = -100
+	fitVar[1] = 10
+	
+	attr_praxis(1e-5, 1, 0)
+	error = fit_praxis(2, "Error1mState2", &fitVar[0])
+	
+	printf("1 - State^2: vhalf = %g (mV); k = %g (mV); error = %g\n", fitVar[0], fitVar[1], error)
+}
+

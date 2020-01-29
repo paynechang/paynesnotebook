@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #11</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+        .style1
+        {
+            border-collapse: collapse;
+            border: 1px solid #000000;
+            padding: 4px
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #11</h1>
+    <hr />
+    <h2>
+        Goals: Examine activation and deactivation kinetics of Ih.</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ul>
+        <li>Add voltage clamp experiment.</li>
+        <li>Fit current traces and get tau.</li>
+        <li>Compare tau in different situations.</li>
+        <li>Examined situations: s, (1 - s), s<sup>2</sup>, (1 - s)<sup>2</sup>, 1 - s<sup>2</sup></li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li>&nbsp;<a href="_Main.hoc">_Main.hoc</a> - Program start here</li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a> - Experiment contols</li>
+        <li><a href="ParameterControl.hoc">ParameterControl.hoc</a> - Parameter controls</li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a> - Run controls</li>
+        <li><a href="Fitting.hoc">Fitting.hoc</a> - Procedures for fitting</li>
+        <li><a href="GraphVI.hoc">GraphVI.hoc</a> - Voltage and current plot</li>
+        <li><a href="1_Pulse.hoc">1_Pulse.hoc</a> - For pulse experiment (membrane time connstant)</li>
+        <li><a href="2_Step.hoc">2_Step.hoc</a> - For step experiment (Rin, sag, rebound slope)</li>
+        <li><a href="3_Alpha.hoc">3_Alpha.hoc</a> - For alpha experiment ( alpha summation)</li>
+        <li><a href="4_Chirp.hoc">4_Chirp.hoc</a> - For chirp experiment</li>
+        <li><a href="5_VoltageClamp.hoc">5_VoltageClamp.hoc</a> - Voltage clamp experiment</li>
+        <li><a href="11.zip">11.zip</a> - Comprises all files.</li>
+    </ul>
+    <hr />
+    <table class="style1">
+        <tr>
+            <td>
+                <img alt="Order" height="460" src="Images/01.png" width="582" /></td>
+            <td>
+                Comparison:<br />
+                s<sup>2</sup> shifts the curve to the left.<br />
+                (1 - s<sup>2</sup>) shifts the curve to the right.</td>
+        </tr>
+        </table>
+    <br />
+    <table class="style1">
+        <tr>
+            <td>
+                s (control)</td>
+            <td>
+                s<sup>2</sup></td>
+            <td>
+                1 - s<sup>2</sup></td>
+        </tr>
+        <tr>
+            <td>
+                gbar_h = 5.3e-5 (S/cm2)<br />
+                vhalf = -80.5 (mV)<br />
+                k = 6.7 (mV)</td>
+            <td>
+                gbar_h = 6.7e-5 (S/cm2)<br />
+                vhalf = -73.05 (mV)<br />
+                k = 7.97 (mV)</td>
+            <td>
+                gbar_h = 4.6e-5 (S/cm2)<br />
+                vhalf = -87.95 (mV)<br />
+                k = -7.97 (mV)</td>
+        </tr>
+        <tr>
+            <td>
+                Tau = 24.34 (ms)<br />
+                Rin = 44.51 (M&Omega;)<br />
+                Sag = 21.47 (%)<br />
+                Temporal Summation = 7.31 (%)<br />
+                Depolarizing Resonance Frequency = 4.2 (Hz)<br />
+                Hyperpolarizing Resonance Frequency = 4.8 (Hz)</td>
+            <td>
+                Tau = 24.30 (ms)<br />
+                Rin = 38.37 (M&Omega;)<br />
+                Sag = 28.64 (%)<br />
+                Temporal Summation = 1.61 (%)<br />
+                Depolarizing Resonance Frequency = 4.9 (Hz)<br />
+                Hyperpolarizing Resonance Frequency = 5.4 (Hz)</td>
+            <td>
+                Tau = 24.41 (ms)<br />
+                Rin = 48.03 (M&Omega;)<br />
+                Sag = 18.35 (%)<br />
+                Temporal Summation = 
+                10.13 (%)<br />
+                Depolarizing Resonance Frequency = 3.7 (Hz)<br />
+                Hyperpolarizing Resonance Frequency = 4.5 (Hz)</td>
+        </tr>
+        </table>
+    <p>
+        Activation Tau</p>
+    <p>
+        <img alt="Activation" height="400" src="Images/02.JPG" width="500" /></p>
+    <p>
+        Deactivation Tau</p>
+    <p>
+        <img alt="Deactivation Tau" height="400" src="Images/03.JPG" width="500" /></p>
+    <p>
+        The results of time constants are not satisfactory.</p>
+</body>
+</html>
