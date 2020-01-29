@@ -1,0 +1,976 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #19</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #19</h1>
+    <hr />
+    <h2>
+        Goals: Compare Four Models</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ul>
+        <li>Compare the following models:<ul>
+            <li>No Ih</li>
+            <li>Sonia&#39;s model</li>
+            <li>Payne&#39;s C&lt;-&gt;O model</li>
+            <li>Payne&#39;s (C&lt;-&gt;O)2 model</li>
+            <li>Altomare&#39;s model</li>
+            <li>Modified Altomare&#39;s Model 1</li>
+            <li>Modified Altomare&#39;s Model 2</li>
+            <li>Modified Altomare&#39;s Model 3</li>
+        </ul>
+        </li>
+    </ul>
+    <hr />
+    <h2>
+        Summary:</h2>
+    <p>
+        Fixed variable (except No Ih):
+        gbar_h = 3e-5 (S/cm2)<br />
+        e_pas was adjusted so the resting membrane potential is -65 mV.</p>
+    <table>
+        <tr>
+            <td>
+            </td>
+            <td>
+                No Ih</td>
+            <td>
+                Sonia&#39;s Model
+            </td>
+            <td>
+                Sonia&#39;s Model 2</td>
+            <td>
+                Payne&#39;s (C&lt;-&gt;O) model
+            </td>
+            <td>
+                Payne&#39;s (C&lt;-&gt;O)2 model
+            </td>
+            <td>
+                Altomare&#39;s Model
+            </td>
+            <td>
+                Modefied Altomare&#39;s Model
+                1</td>
+            <td>
+                Modefied Altomare&#39;s Model 2
+            </td>
+            <td>
+                Modefied Altomare&#39;s Model 3
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tutorial #<td>
+                    &nbsp;</td>
+            <td>
+                    13
+                </td>
+            <td>
+                13.a</td>
+            <td>
+                14
+            </td>
+            <td>
+                16
+            </td>
+            <td>
+                17
+            </td>
+            <td>
+                18
+            </td>
+            <td>
+                18
+            </td>
+            <td>
+                18</td>
+        </tr>
+        <tr>
+            <td>
+                e_pas (mV)<td>
+                    -65</td>
+            <td>
+                    -68.8</td>
+            <td>
+                -68.8</td>
+            <td>
+                -68.0</td>
+            <td>
+                -69.0</td>
+            <td>
+                -78.5</td>
+            <td>
+                -67.1</td>
+            <td>
+                -67.1</td>
+            <td>
+                -66.9</td>
+        </tr>
+        <tr>
+            <td>
+                Membrane Time Constant (ms)<td>
+                    30.01</td>
+            <td>
+                    25.10</td>
+            <td>
+                25.48</td>
+            <td>
+                25.66</td>
+            <td>
+                24.04</td>
+            <td>
+                20.94</td>
+            <td>
+                28.53</td>
+            <td>
+                28.27</td>
+            <td>
+                27.45</td>
+        </tr>
+        <tr>
+            <td>
+                Rin (M Ohm)<td>
+                    95.49</td>
+            <td>
+                    63.07</td>
+            <td>
+                63.07</td>
+            <td>
+                65.7</td>
+            <td>
+                58.2</td>
+            <td>
+                42.8</td>
+            <td>
+                66.8</td>
+            <td>
+                66.8</td>
+            <td>
+                68.42</td>
+        </tr>
+        <tr>
+            <td>
+                Rebound Slope (mV/mV)<td>
+                    0.0</td>
+            <td>
+                    -0.12</td>
+            <td>
+                -0.14</td>
+            <td>
+                -0.12</td>
+            <td>
+                -0.12</td>
+            <td>
+                -0.19</td>
+            <td>
+                -0.25</td>
+            <td>
+                -0.22</td>
+            <td>
+                -0.15</td>
+        </tr>
+        <tr>
+            <td>
+                Temporal Summation (%)<td>
+                    43.68</td>
+            <td>
+                    17.16</td>
+            <td>
+                16.73</td>
+            <td>
+                20.35</td>
+            <td>
+                12.52</td>
+            <td>
+                -4.57</td>
+            <td>
+                21.43</td>
+            <td>
+                21.54</td>
+            <td>
+                24.08</td>
+        </tr>
+        <tr>
+            <td>
+                Depolarizing Resonance Frequency (Hz)<td>
+                    0.6</td>
+            <td>
+                    0.6</td>
+            <td>
+                2.8</td>
+            <td>
+                0.6</td>
+            <td>
+                0.7</td>
+            <td>
+                5.3</td>
+            <td>
+                2.7</td>
+            <td>
+                0.6</td>
+            <td>
+                0.6</td>
+        </tr>
+        <tr>
+            <td>
+                Hyperpolarizing Resonance Frequency (Hz)<td>
+                    1.1</td>
+            <td>
+                    3.9</td>
+            <td>
+                3.8</td>
+            <td>
+                3.7</td>
+            <td>
+                4.7</td>
+            <td>
+                5.7</td>
+            <td>
+                3.2</td>
+            <td>
+                3.5</td>
+            <td>
+                3.6</td>
+        </tr>
+        <tr>
+            <td>
+                Vhalf (mV)<td>
+                    &nbsp;</td>
+            <td>
+                    -81.0</td>
+            <td>
+                -81.0</td>
+            <td>
+                -81.3</td>
+            <td>
+                -79.4</td>
+            <td>
+                -68.9</td>
+            <td>
+                -80.5</td>
+            <td>
+                -80.4</td>
+            <td>
+                -80.9</td>
+        </tr>
+        <tr>
+            <td>
+                k (mV)<td>
+                    &nbsp;</td>
+            <td>
+                    7.8</td>
+            <td>
+                7.8</td>
+            <td>
+                7.3</td>
+            <td>
+                8.3</td>
+            <td>
+                9.4</td>
+            <td>
+                6.5</td>
+            <td>
+                6.5</td>
+            <td>
+                6.5</td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;<td>
+                    &nbsp;</td>
+            <td>
+                    &nbsp;
+                </td>
+            <td>
+                tau = 45 (ms)</td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                delta_0 = 80
+            </td>
+            <td>
+                gamma_0 = 0.2619</td>
+        </tr>
+    </table>
+    <p>
+        &nbsp;</p>
+    <table>
+        <tr>
+            <td>
+            </td>
+            <td>
+                No Ih</td>
+            <td>
+                Sonia&#39;s Model
+            </td>
+            <td>
+                Sonia&#39;s Model 2</td>
+            <td>
+                Payne&#39;s (C&lt;-&gt;O) model
+            </td>
+            <td>
+                Payne&#39;s (C&lt;-&gt;O)2 model
+            </td>
+            <td>
+                Altomare&#39;s Model
+            </td>
+            <td>
+                Modefied Altomare&#39;s Model
+                1</td>
+            <td>
+                Modefied Altomare&#39;s Model 2
+            </td>
+            <td>
+                Modefied Altomare&#39;s Model 3
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tutorial #<td>
+                    &nbsp;</td>
+            <td>
+                    13
+                </td>
+            <td>
+                13.a</td>
+            <td>
+                14
+            </td>
+            <td>
+                16
+            </td>
+            <td>
+                17
+            </td>
+            <td>
+                18
+            </td>
+            <td>
+                18
+            </td>
+            <td>
+                18</td>
+        </tr>
+        <tr>
+            <td>
+                Impedance Magnitude<td>
+                    <img alt="No Ih" height="258" src="Images/01.png" width="370" /></td>
+            <td>
+                    <img alt="Sonia's Ih Model" height="259" src="Images/03.png" width="371" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="260" src="Images/06.png" width="370" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="258" src="Images/09.png" width="372" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="265" src="Images/12.png" width="376" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="255" src="Images/15.png" width="367" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="260" src="Images/18.png" width="370" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="261" src="Images/21.png" width="373" /></td>
+            <td>
+                <img alt="Impedance Magnitude" height="258" src="Images/24.png" width="368" /></td>
+        </tr>
+        <tr>
+            <td>
+                Voltage Lag<td>
+                    <img alt="No Ih" height="267" src="Images/02.png" width="379" /></td>
+            <td>
+                    <img alt="Sonia's Ih - Voltage lag" height="266" src="Images/04.png" width="377" /></td>
+            <td>
+                <img alt="Voltage Lag" height="265" src="Images/07.png" width="380" /></td>
+            <td>
+                <img alt="Voltage Lab" height="264" src="Images/10.png" width="377" /></td>
+            <td>
+                <img alt="Voltage Lag" height="266" src="Images/13.png" width="373" /></td>
+            <td>
+                <img alt="Voltage Lag" height="263" src="Images/16.png" width="384" /></td>
+            <td>
+                <img alt="Voltage Lag" height="264" src="Images/19.png" width="379" /></td>
+            <td>
+                <img alt="Voltage Lag" height="265" src="Images/22.png" width="375" /></td>
+            <td>
+                <img alt="Voltage Lag" height="264" src="Images/25.png" width="374" /></td>
+        </tr>
+        <tr>
+            <td>
+                Time Constant<td>
+                    &nbsp;</td>
+            <td>
+                    <img alt="Sonia's Ih Model - Time Constant" height="273" src="Images/05.png" width="379" /></td>
+            <td>
+                <img alt="Time Constant" height="273" src="Images/08.png" width="387" /></td>
+            <td>
+                <img alt="Time Constant" height="272" src="Images/11.png" width="382" /></td>
+            <td>
+                <img alt="Time Constant" height="271" src="Images/14.png" width="386" /></td>
+            <td>
+                <img alt="Time Constant" height="268" src="Images/17.png" width="377" /></td>
+            <td>
+                <img alt="Time Constant" height="273" src="Images/20.png" width="389" /></td>
+            <td>
+                <img alt="Time Constant" height="271" src="Images/23.png" width="389" /></td>
+            <td>
+                <img alt="Time Constant" height="270" src="Images/26.png" width="384" /></td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;<td>
+                    &nbsp;</td>
+            <td>
+                    &nbsp;
+                </td>
+            <td>
+                tau = 45 (ms)</td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                delta_0 = 80
+            </td>
+            <td>
+                gamma_0 = 0.2619</td>
+        </tr>
+    </table>
+    <hr />
+    <p>
+        Fixed variable:
+        gbar_h = 5e-5 (S/cm2)<br />
+        e_pas is adjusted so the resting membrane potential is -65 mV.</p>
+    <table>
+        <tr>
+            <td>
+            </td>
+            <td>
+                Sonia&#39;s Model
+            </td>
+            <td>
+                Payne&#39;s (C&lt;-&gt;O) model
+            </td>
+            <td>
+                Payne&#39;s (C&lt;-&gt;O)2 model
+            </td>
+            <td>
+                Altomare&#39;s Model
+            </td>
+            <td>
+                Modefied Altomare&#39;s Model
+            </td>
+            <td>
+                Modefied Altomare&#39;s Model 2
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Tutorial #<td>
+                    13
+                </td>
+            <td>
+                14
+            </td>
+            <td>
+                16
+            </td>
+            <td>
+                17
+            </td>
+            <td>
+                18
+            </td>
+            <td>
+                18
+            </td>
+        </tr>
+        <tr>
+            <td>
+                e_pas (mV)<td>
+                    -71.3
+                </td>
+            <td>
+                -70
+            </td>
+            <td>
+                -71.7
+            </td>
+            <td>
+                -87.5
+            </td>
+            <td>
+                -68.5
+            </td>
+            <td>
+                -68.5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Membrane Time Constant (ms)<td>
+                    23.5
+                </td>
+            <td>
+                24.3
+            </td>
+            <td>
+                22.5
+            </td>
+            <td>
+                18.1
+            </td>
+            <td>
+                28.0
+            </td>
+            <td>
+                27.7
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Rin (M Ohm)<td>
+                    51.7
+                </td>
+            <td>
+                54.9
+            </td>
+            <td>
+                46.1
+            </td>
+            <td>
+                31.1
+            </td>
+            <td>
+                56.5
+            </td>
+            <td>
+                56.5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Rebound Slope (mV/mV)<td>
+                    -0.21
+                </td>
+            <td>
+                -0.21
+            </td>
+            <td>
+                -0.22
+            </td>
+            <td>
+                -0.32
+            </td>
+            <td>
+                -0.39
+            </td>
+            <td>
+                -0.35
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Temporal Summation (%)<td>
+                    5.60
+                </td>
+            <td>
+                9.25
+            </td>
+            <td>
+                0.27
+            </td>
+            <td>
+                -13.9
+            </td>
+            <td>
+                9.50
+            </td>
+            <td>
+                9.76
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Depolarizing Resonance Frequency (Hz)<td>
+                    4.3
+                </td>
+            <td>
+                3.8
+            </td>
+            <td>
+                5.3
+            </td>
+            <td>
+                6.9
+            </td>
+            <td>
+                3.6
+            </td>
+            <td>
+                3.8
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Hyperpolarizing Resonance Frequency (Hz)<td>
+                    5
+                </td>
+            <td>
+                4.7
+            </td>
+            <td>
+                6
+            </td>
+            <td>
+                7.1
+            </td>
+            <td>
+                3.9
+            </td>
+            <td>
+                4.1
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Vhalf (mV)<td>
+                    -81.1
+                </td>
+            <td>
+                -81.4
+            </td>
+            <td>
+                -79.7
+            </td>
+            <td>
+                -69.0
+            </td>
+            <td>
+                -80.7
+            </td>
+            <td>
+                -80.5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                k (mV)<td>
+                    7.9
+                </td>
+            <td>
+                7.4
+            </td>
+            <td>
+                8.5
+            </td>
+            <td>
+                9.5
+            </td>
+            <td>
+                6.6
+            </td>
+            <td>
+                6.6
+            </td>
+        </tr>
+        <tr>
+            <td>
+                &nbsp;<td>
+                    &nbsp;
+                </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                delta_0 = 80
+            </td>
+        </tr>
+    </table>
+    <hr />
+    <p>
+        Fixed variable:
+        e_pas = -70 (mV)<br />
+        gbar_h is adjusted so the resting membrane potential is -65 mV.</p>
+    <table>
+        <td>
+            <td>
+                Sonia&#39;s Model
+            </td>
+        </td>
+        <td>
+            Payne&#39;s (C&lt;-&gt;O) model
+        </td>
+        <td>
+            Payne&#39;s (C&lt;-&gt;O)2 model
+        </td>
+        <td>
+            Altomare&#39;s Model
+        </td>
+        <td>
+            Modefied Altomare&#39;s Model
+        </td>
+        <td>
+            Modefied Altomare&#39;s Model 2
+        </td>
+        <tr>
+            <td>
+                Tutorial #<td>
+                    13
+                </td>
+            <td>
+                14
+            </td>
+            <td>
+                16
+            </td>
+            <td>
+                17
+            </td>
+            <td>
+                18
+            </td>
+            <td>
+                18
+            </td>
+        </tr>
+        <tr>
+            <td>
+                gbar_h (S/cm2)<td>
+                    4e-5
+                </td>
+            <td>
+                5e-5
+            </td>
+            <td>
+                3.7e-5
+            </td>
+            <td>
+                1.1e-5
+            </td>
+            <td>
+                7.2e-5
+            </td>
+            <td>
+                7.1e-5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Membrane Time Constant (ms)<td>
+                    24.3
+                </td>
+            <td>
+                24.3
+            </td>
+            <td>
+                23.4
+            </td>
+            <td>
+                24.9
+            </td>
+            <td>
+                27.4
+            </td>
+            <td>
+                27.1
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Rin (M Ohm)<td>
+                    56.9
+                </td>
+            <td>
+                54.9
+            </td>
+            <td>
+                53.3
+            </td>
+            <td>
+                66.0
+            </td>
+            <td>
+                48.3
+            </td>
+            <td>
+                48.4
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Rebound Slope (mV/mV)<td>
+                    -0.17
+                </td>
+            <td>
+                -0.21
+            </td>
+            <td>
+                -0.15
+            </td>
+            <td>
+                -0.05
+            </td>
+            <td>
+                -0.52
+            </td>
+            <td>
+                -0.47
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Temporal Summation (%)<td>
+                    11.0
+                </td>
+            <td>
+                9.2
+            </td>
+            <td>
+                7.5
+            </td>
+            <td>
+                16.9
+            </td>
+            <td>
+                -0.98
+            </td>
+            <td>
+                -0.19
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Depolarizing Resonance Frequency (Hz)<td>
+                    3.5
+                </td>
+            <td>
+                3.8
+            </td>
+            <td>
+                3.5
+            </td>
+            <td>
+                2.3
+            </td>
+            <td>
+                4.2
+            </td>
+            <td>
+                4.6
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Hyperpolarizing Resonance Frequency (Hz)<td>
+                    4.5
+                </td>
+            <td>
+                4.7
+            </td>
+            <td>
+                5.2
+            </td>
+            <td>
+                3.3
+            </td>
+            <td>
+                4.4
+            </td>
+            <td>
+                4.7
+            </td>
+        </tr>
+        <tr>
+            <td>
+                Vhalf (mV)<td>
+                    -81.1
+                </td>
+            <td>
+                -81.4
+            </td>
+            <td>
+                -79.7
+            </td>
+            <td>
+                -69.0
+            </td>
+            <td>
+                -80.7
+            </td>
+            <td>
+                -80.5
+            </td>
+        </tr>
+        <tr>
+            <td>
+                k (mV)<td>
+                    7.9
+                </td>
+            <td>
+                7.4
+            </td>
+            <td>
+                8.5
+            </td>
+            <td>
+                9.5
+            </td>
+            <td>
+                6.6
+            </td>
+            <td>
+                6.6
+            </td>
+        </tr>
+    </table>
+    <hr />
+</body>
+</html>
