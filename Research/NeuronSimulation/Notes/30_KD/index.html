@@ -1,0 +1,71 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Note #30</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Note #30</h1>
+    <hr />
+    <h2>
+        Goals: D-type Voltage-gated Potassium Current</h2>
+    <hr />
+    <h2>
+        Introduction:</h2>
+    <p>
+        The goal of this short project is to create a KD model, which can reproduce the 
+        data presented in Mathews et al&#39;s article (<a href="http://www.nature.com/neuro/journal/v13/n5/full/nn.2530.html">http://www.nature.com/neuro/journal/v13/n5/full/nn.2530.html</a>).&nbsp;The 
+        liquid potential is not corrected. The activation GV curve is shifted to 
+        depolarization direction to simulate the condition in whole cell recording.</p>
+    <hr />
+    <h2>
+        Results:</h2>
+    <h3>
+        Target Parameters for KD</h3>
+    <p>
+        mV1/2 = -28<br />
+        mK = 7.4</p>
+    <p>
+        hV1/2 = -57.1<br />
+        hK = 6.2</p>
+    <h3>
+        Model</h3>
+    <p>
+        g = gbar * m<sup>4</sup> * h</p>
+    <p>
+        Mod file: <a href="kd_pyc.mod">kd_pyc.mod</a></p>
+    <h3>
+        Activation and Inactivation Conductance Curves</h3>
+        <table><tr><th colspan="2">Voltage and Current Traces</th></tr><tr><th>Activation</th><th>
+            Inactivation</th></tr><tr><td>
+                <img alt="Voltage and Current Traces" height="440" src="Images/02.png" 
+                    width="327" /></td><td>
+                    <img alt="Inactivation" height="442" src="Images/03.png" width="331" /></td></tr></table>
+    <p>
+        <img alt="GV Curves" height="314" src="Images/01.png" width="551" /></p>
+    <h3>
+        Time Constants</h3>
+        <table><tr><th>Deactivation</th><th>Time Constant</th></tr><tr><td><img alt="Deactivation" height="442" src="Images/05.png" width="329" /></td><td>
+        <img alt="Time Constant" height="328" src="Images/04.png" width="520" /></td></tr></table>
+    <hr />
+    </body>
+</html>
