@@ -1,0 +1,225 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Nernst Equation</title>
+
+  <script type="text/javascript">      function Button1_onclick() {
+          var form = document.getElementById("form0");
+          var rr = 8.314472;
+          var tt = 273.15 + parseFloat(form.Temp.value);    // form.Temp.value
+          var zz = form.Charge.value;   // form.Charge.value
+          var ff = 96485.3399;
+          var cOut = form.Cout.value;
+          var cIn = form.Cin.value;
+          var ee = rr * tt / zz / ff * Math.log(cOut / cIn) * 1000;
+          ee *= 100;
+          ee = Math.round(ee);
+          ee /= 100;
+
+          document.getElementById("EP").innerHTML = ee;
+      }  </script>
+
+</head>
+<body onload="Button1_onclick()">
+  <h1>
+    Nernst Equation</h1>
+  <table>
+    <tr>
+      <td>
+        <img alt="Nernst Equation" src="NernstEquation-1.PNG" />
+      </td>
+      <td>
+        <ul>
+          <li>R (Gas Constant) = 8.314472 (J/K&middot;mol)</li>
+          <li>T (Absolute Temperature) = t °C + 273.15 (°K)</li>
+          <li>Z (Number of Charge)</li>
+          <li>F (Faraday's Constant) = 9.6485309×10<sup>4</sup> (C/mol)</li>
+          <li>[C]out (Outside Concentration, mM)</li>
+          <li>[C]in (Inside Concentration, mM)</li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <table border="1" style="border-color: #000000; border-collapse: collapse; text-align: center; float: left; margin-right: 20px;" cellpadding="5">
+    <caption>
+      Typical Mammalian Cell</caption>
+    <tr>
+      <td>
+        &nbsp;
+      </td>
+      <th>
+        Outside (mM)
+      </th>
+      <th>
+        Inside (mM)
+      </th>
+      <th>
+        E (mV)(37 &deg;C)
+      </th>
+      <th>
+        E (mV)(32 °C)
+      </th>
+    </tr>
+    <tr>
+      <td>
+        K<sup>+</sup>
+      </td>
+      <td>
+        5
+      </td>
+      <td>
+        140
+      </td>
+      <td>
+        -89.06
+      </td>
+      <td>
+        -87.6
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Na<sup>+</sup>
+      </td>
+      <td>
+        145
+      </td>
+      <td>
+        5 ~ 15
+      </td>
+      <td>
+        90 ~ 60.63
+      </td>
+      <td>
+        88.5 ~ 59.7
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Cl<sup>-</sup>
+      </td>
+      <td>
+        110
+      </td>
+      <td>
+        4
+      </td>
+      <td>
+        -88.58
+      </td>
+      <td>
+        -87.1
+      </td>
+    </tr>
+  </table>
+  <table border="1" style="border-color: #000000; border-collapse: collapse; text-align: center;" cellpadding="5">
+    <caption>
+      Experimental Solutions</caption>
+    <tr>
+      <td>
+        &nbsp;
+      </td>
+      <th>
+        Outside (mM)
+      </th>
+      <th>
+        Inside (mM)
+      </th>
+      <th>
+        E (mV)(32 °C)
+      </th>
+    </tr>
+    <tr>
+      <td>
+        K<sup>+</sup>
+      </td>
+      <td>
+        3
+      </td>
+      <td>
+        140
+      </td>
+      <td>
+        -101.1
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Na<sup>+</sup>
+      </td>
+      <td>
+        151.25
+      </td>
+      <td>
+        4
+      </td>
+      <td>
+        95.5
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Cl<sup>-</sup>
+      </td>
+      <td>
+        134
+      </td>
+      <td>
+        24
+      </td>
+      <td>
+        -45.2
+      </td>
+    </tr>
+  </table>
+
+  <p>
+  </p>
+
+  <form action="" id="form0">
+  <table>
+    <tr>
+      <td>
+        Temperature (°C)
+      </td>
+      <td>
+        <input id="Temp" type="text" value="37" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Charge
+      </td>
+      <td>
+        <input id="Charge" type="text" value="1" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Outside Concentration (mM)
+      </td>
+      <td>
+        <input id="Cout" type="text" value="5" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Inside Concentration (mM)
+      </td>
+      <td>
+        <input id="Cin" type="text" value="140" />
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <input id="Button1" type="button" value="Calculate" onclick="return Button1_onclick()" /></p>
+
+  <p>
+    Equalibrium Potential = <b><span id="EP"></span></b>(mV)
+  </p>
+
+  </form>
+  <hr />
+</body>
+</html>
