@@ -1,0 +1,70 @@
+//==============================================================================
+// File Name: Alpha.hoc
+// Temporal summation experiment
+
+//==============================================================================
+// Control box
+objref hBoxAlpha
+hBoxAlpha = new HBox()
+
+// Start of the box
+hBoxAlpha.intercept(1)
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		// Display "After simulation"
+		xlabel("After simulation")	
+		
+		// Measure temporal summation
+		xbutton("Measure Temporal Summation", "MeasureTemporalSummation()")	
+	}
+	xpanel() // Close the panel
+
+}
+// End of the box
+hBoxAlpha.intercept(0)
+
+//==============================================================================
+// Set Alpha current
+proc SetAlphaCurrent() {
+	numPts = experimentDuration/dt + 1	// Calculate total number of points
+	vecICElectrodeI.resize(numPts)	// Change the size of vecICElectrodeI
+	vecICElectrodeI.fill(0)			// Initialize vecICElectrodeI
+	intervalPts = 50 / dt	// Number of points between two injections, 50 ms
+	startPts = 100 / dt		// The start point for the first injection
+	alpha = 0.1				// 10 ms
+	
+	for(j = 0; j < 5; j += 1) {
+		k=0
+		
+		for(i = startPts + j * intervalPts; i < vecICElectrodeI.size();\
+			i += 1) {
+			relativeTime = k * dt
+			vecICElectrodeI.x(i) += \
+				iAmp * relativeTime * exp(-alpha * relativeTime)
+			k += 1
+		}
+	}
+}
+
+//==============================================================================
+// Measure temporal summation
+proc MeasureTemporalSummation() {
+	print "=== Measure Temporal Summation ==="
+	
+	vBase = vecV.mean(50 / dt, 100 / dt - 1)			// Baseline
+	vMax1 = vecV.max(100 / dt, 150 / dt) - vBase		// First EPSP
+	vMax5 = vecV.max(300 / dt, 350 / dt) - vBase		// Fifth EPSP
+	
+	temporalSummation = (vMax5 - vMax1) / vMax1 * 100	// Temporal summation
+	
+	print "Temporal Summation = ", temporalSummation, " (%)\n"	// Display data
+}
+
+//==============================================================================

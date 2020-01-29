@@ -1,0 +1,253 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #13</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+        .style1
+        {
+            border-collapse: collapse;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #13</h1>
+    <hr />
+    <h2>
+        Goals: Develop an integrated environment to test one Ih model.</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ul>
+        <li>Develop an integrated environment for the following measurements.<ul>
+            <li>Membrane time constant.</li>
+            <li>Input resistance.</li>
+            <li>Rebound slope.</li>
+            <li>Temporal summation.</li>
+            <li>Impedance magnitude profile.</li>
+            <li>Voltage lag (phase).</li>
+            <li>GV curve.</li>
+            <li>Activation time constant.</li>
+            <li>Deactivation time constant.</li>
+            </ul>
+        </li>
+        <li>Test Sonia&#39;s Ih model (J.Neurosci. 24:11046-11056 (2004)).</li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Alpha.hoc">Alpha.hoc</a> - For temporal summation experiment (alpha EPSCs)</li>
+        <li><a href="Chirp.hoc">Chirp.hoc</a> - For chirp experiment</li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a> - Experiment contols</li>
+        <li><a href="Fitting.hoc">Fitting.hoc</a> - Procedures for curve fitting</li>
+        <li><a href="GraphVI.hoc">GraphVI.hoc</a> - Voltage and current graphs</li>
+        <li><a href="Main.hoc">Main.hoc</a> - Program start here</li>
+        <li><a href="ParameterControl.hoc">ParameterControl.hoc</a> - Parameter controls</li>
+        <li><a href="Pulse.hoc">Pulse.hoc</a> - For pulse experiment (membrane time connstant)</li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a> - Run controls</li>
+        <li><a href="Step.hoc">Step.hoc</a> - For current step experiment (Rin, sag, rebound slope)</li>
+        <li><a href="VoltageClamp.hoc">VoltageClamp.hoc</a> - Voltage clamp experiment</li>
+        <li><a href="13.zip">13.zip</a> - Contains all files.</li>
+    </ul>
+    <hr />
+    <h2>
+        Steps and Notes:</h2>
+    <table class="style1">
+        <tr>
+            <td style="width: 350px">
+                <p>
+                    Let&#39;s check Sonia&#39;s Ih.</p>
+                <p>
+                    Parameters:</p>
+                <ul>
+                    <li>e_h = -30 mV</li>
+                    <li>Temperature = 33 &deg;C</li>
+                </ul>
+                <p>
+                    Start &quot;Main.hoc&quot;.</p>
+            </td>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Measure membrane time constant:embrane time constant:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                <ul>
+                    <li>Click &quot;Pulse (1 ms)&quot; button.</li>
+                    <li>Click &quot;Initiate &amp; Run&quot; button.</li>
+                </ul>
+                The parameters:<br />gbar_h = 2.15e-5<br />e_pas = -70<br />
+                <br />With this set of parameters, the resting membrane potential is hyperpolarized. To have a resting potential at -65 mV, change gbar_h to 4e-5 and you will
+                have the resting membrane potential at -65 mV. The assumption is that when Ih is blocked, the membrane potential hyperpolarizes by 5 mV.
+            </td>
+            <td>
+                Voltage and Current Traces (gbar_h = 2.15e-5)<br />
+                <img alt="Before Adjusting gbar_h" height="438" src="Images/01.png" width="327" />
+            </td>
+            <td>
+                Voltage and Current Traces (gbar_h = 4e-5)<br />
+                <img alt="After Adjusting gbar_h" height="438" src="Images/02.png" width="327" />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                Click &quot;Fit Decay&quot; button.
+            </td>
+            <td>
+                Tau = 24.3 (ms)<br />
+                <img alt="Tau" height="225" src="Images/03.png" width="336" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Measure Rin and Rebound Slope:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                <ul>
+                    <li>Click &quot;Current Step (500 ms)&quot; button.</li>
+                    <li>Click &quot;Run Step Family&quot; button.</li>
+                    <li>Click &quot;Measure Rin (LR)&quot; button.</li>
+                    <li>Click &quot;Measure Rebound Slope (LR)&quot; button.</li>
+                </ul>
+            </td>
+            <td>
+                Voltage and Current Traces:<br />
+                <img alt="Current Step Family" height="438" src="Images/04.png" width="327" />
+            </td>
+            <td>
+                Rin = 56.9 (M Ohm) (Linear Regression)<br />
+                <img alt="Rin by Linear Regression" height="225" src="Images/05.png" width="336" /><br />
+                <br />
+                Rebound Slope = -0.17 (mV/mV) (Linear Regression)<br />
+                <img alt="Rebound Slope" height="225" src="Images/06.png" width="336" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Temporal Summation:</h3>
+&nbsp;</td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                <ul>
+                    <li>Click &quot;Five Alpha EPSCs (20 Hz)&quot; button.</li>
+                    <li>Click &quot;Initiate &amp; Run&quot; button.</li>
+                    <li>Click &quot;Measure Temporal Summation&quot; button.</li>
+                </ul>
+            </td>
+            <td>
+                Temporal Summation = 11.0 (%)<br />
+                <img alt="Temporal Summation" height="438" src="Images/07.png" width="327" />
+            </td>
+            <td>
+                &nbsp;
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Chirp Experiment:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                <ul>
+                    <li>Click &quot;Chirp&quot; button.</li>
+                    <li>Click &quot;Initiate &amp; Run&quot; button.</li>
+                    <li>Click &quot;Characterize Chirp Response&quot; button.</li>
+                    <li>Click &quot;Fit Impedance Amplitude&quot; button.</li>
+                    <li>Click &quot;Plot Voltage Lag&quot;</li>
+                </ul>
+            </td>
+            <td>
+                Voltage and Current Traces:<br />
+                <img alt="Chirp" height="438" src="Images/08.png" width="327" />
+            </td>
+            <td>
+                Impedance Amplitude:<br />
+                Depolarizing Resonance Frequency = 3.5 (Hz)<br />
+                Hyperpolarizing Resonance Frequency = 4.5 (Hz)<br />
+                <img alt="Impedance Amplitude" height="225" src="Images/09.png" width="336" /><br />
+                <br />
+                Voltage Lag:<br />
+                <img alt="Voltage Lag" height="225" src="Images/10.png" width="336" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <h3>
+                    Voltage Clamp Experiment:</h3>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                <ul>
+                    <li>Click &quot;Voltage Clamp&quot; button.</li>
+                    <li>Click &quot;Run Activation Step Family&quot; button.</li>
+                    <li>Click &quot;Fit GV Curve&quot; button.</li>
+                </ul>
+            </td>
+            <td>
+                Voltage and Current Traces:<br />
+                <img alt="Voltage Clamp" height="438" src="Images/11.png" width="327" />
+            </td>
+            <td>
+                GV Curve:<br />
+                Vhalf = -81.1 (mV)<br />
+                k = 7.90 (mV)<br />
+                <img alt="GV Curve" height="225" src="Images/12.png" width="336" /><br />
+                <br />
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 350px">
+                <ul>
+                    <li>Click &quot;Run Deactivation Step Family&quot; button.</li>
+                    <li>Click &quot;Plot Tau&quot; button.</li>
+                </ul>
+            </td>
+            <td>
+                Voltage and Current Traces:<br />
+                <img alt="Deactivation Step Family" height="438" src="Images/13.png" width="327" />
+            </td>
+            <td>
+                Tau:<br />
+                <img alt="Tau" height="225" src="Images/14.png" width="336" />
+            </td>
+        </tr>
+    </table>
+    <hr />
+</body>
+</html>

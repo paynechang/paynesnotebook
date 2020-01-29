@@ -1,0 +1,40 @@
+//==============================================================================
+// File Name: GraphVI.hoc
+// Graph contains voltage and current traces
+
+// VI Graph
+objref vBoxVI
+vBoxVI = new VBox()
+
+// Voltage graph
+objref graphV			
+graphV = new Graph(0)
+
+// Current graph
+objref graphI			
+graphI = new Graph(0)
+
+vBoxVI.intercept(1)
+{
+	//======================================
+	// Voltage graph
+	// (x0, y0, width, height, window x, window y, window width, window height)
+	graphV.view(0, 0, 1, 1, 700, 400, 300, 200)
+		
+	graphList[0].append(graphV)	// Update during simulation
+	graphV.addexpr("v(.5)", 1, 1, 0.12, 0.97, 2)
+	
+	//======================================
+	// Current graph
+	// (x0, y0, width, height, window x, window y, window width, window height)
+	graphI.view(0, 0, 1, 1, 700, 400, 300, 200)
+	graphList[0].append(graphI) // Update during simulation
+	
+	// ("expression", color, thickness, x, y, 2)
+	graphI.addexpr("electrodeIC.i", 1, 1, 0.12, 0.97, 2)	
+	graphI.addexpr("electrodeVC.i", 1, 1, 0.12, 0.97, 2)
+}
+vBoxVI.intercept(0)	// End of graph box
+vBoxVI.map("Voltage and Current", 900, 500, 310, 410)	// Display the window
+
+//==============================================================================

@@ -1,0 +1,297 @@
+//==============================================================================
+// File Name: VoltageClamp.hoc
+// Voltage Clamp Experiment
+
+//==============================================================================
+// Exponential Decay: Activation Tau, Deactivation Tau
+objref vecActTau, vecDeactTau
+vecActTau = new Vector()
+vecDeactTau = new Vector()
+
+// Voltage command
+objref vecActVcmd, vecDeactVcmd
+vecActVcmd = new Vector()	// Vector for voltage command
+vecDeactVcmd = new Vector()	// Vector for voltage command
+
+// Conductance
+objref vecG
+vecG = new Vector()	// Vector for steady-state conductance
+
+//==============================================================================
+// Control Box
+objref hBoxVoltageClamp
+hBoxVoltageClamp = new HBox()
+
+hBoxVoltageClamp.intercept(1)	// Start of the box
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Start of the panel
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		// Run voltage step family
+		xbutton("Run Activation Step Family","RunActivationStepFamily()")
+		// After running voltage step family
+		xlabel("After running activation step family")
+		// Fit GI Curve
+		xbutton("Fit GV Curve", "FitGVCurve()")
+		// Run deactivation step family
+		xbutton("Run Deactivation Step Family","RunDeactivationStepFamily()")
+		// After running activation and deactivation step family
+		xlabel("After running activation & deactivation step family")
+		// Plot Tau
+		xbutton("Plot Tau", "PlotTau()")
+	}
+	xpanel() // End of the panel
+
+}
+hBoxVoltageClamp.intercept(0)// End of the box
+
+//==============================================================================
+// Run Activation step family
+proc RunActivationStepFamily() {local gMax
+	// Notification
+	print "=== Run Activation Step Family ==="	// Notification
+
+	// Initialization
+	vecActVcmd.resize(0)	// Remove old data
+	vecG.resize(0)		// Remove old data
+	vecActTau.resize(0)	// Remove old data
+	
+	// Voltage and current graphs
+	graphV.erase()			// Erase old traces
+	graphV.family(1)			// Keep traces
+	graphV.size(0, 600, -150, 0)	// Set the view
+	
+	graphI.erase()			// Erase old traces
+	graphI.family(1)			// Keep traces
+	graphI.size(0, 600, -3, 0)	// Set the view
+	
+	// Voltage command
+	electrodeVC.dur1 = 100
+	electrodeVC.dur2 = 500
+	electrodeVC.dur3 = 0
+	
+	electrodeVC.amp1 = -45
+	
+	// Simulation parameters
+	v_init = -45
+	tstop = 600
+	
+	// Start the voltage family
+	y0 = 0
+	amp = -1
+	x0 = 100.1
+	tau = 20
+	
+	for(vCmd = -125; vCmd <= -55; vCmd += 10){
+		electrodeVC.amp2 = vCmd
+		doNotify()
+		run()
+		
+		// Voltage Command
+		vecActVcmd.append(vCmd)
+		
+		// Steady-state Conductance
+		vecG.append((vecVCElectrodeI.mean(550 / dt, 600 / dt - 1) - \
+			vecVCElectrodeI.mean(50 / dt, 100 / dt - 1))/(vCmd - e_h))
+		
+		// Set vectors for fitting
+		vecFittingDataX = vecT.c(100.1 / dt, 200 / dt)
+		vecFittingDataY = vecVCElectrodeI.c(100.1 / dt, 200 / dt)
+		
+		// Fit
+		FitExponentialDecay(vecFittingDataX, vecFittingDataY, &y0, &amp, &x0, \
+			&tau)
+			
+		// Store Tau
+		vecActTau.append(tau)
+		
+		// Print result
+		printf("vCmd = %g, y0 = %g, amp = %g, x0 = %g, tau = %g\n", vCmd, y0, \
+			amp, x0, tau)
+			
+		// Plot
+		graphFitting.erase_all()
+		vecFittingDataY.line(graphFitting, vecFittingDataX, 1, 2)
+		vecFittingResultY.line(graphFitting, vecFittingResultX, 2, 1)
+		graphFitting.exec_menu("View = plot")
+		graphFitting.exec_menu("10% Zoom out")
+	}
+	
+	//======================================
+	// Normalize conductance
+	vecG.div(vecG.max())
+	
+	//======================================
+	// Save data to VCActivation.dat
+	ioFile.wopen("VCActivation.dat")
+	
+	ioFile.printf("V G Tau\n")
+	
+	for(i = 0; i < vecActVcmd.size(); i += 1) {
+		ioFile.printf("%g %g %g\n", vecActVcmd.x[i], vecG.x[i], vecActTau.x[i])
+	}
+	
+	ioFile.close()
+	
+	//======================================
+	// Notification
+	printf("Run voltage step family - Done!\n\n")
+}
+
+//==============================================================================
+// Run deactivation step family
+proc RunDeactivationStepFamily() {
+	// Notification
+	print "=== Run Deactivation Step Family ==="
+
+	// Initialization
+	vecDeactVcmd.resize(0)	// Remove old data
+	vecG.resize(0)			// Remove old data
+	vecDeactTau.resize(0)	// Remove old data
+	
+	// Voltage and current graphs
+	graphV.erase()			// Erase old traces
+	graphV.family(1)			// Keep traces
+	graphV.size(0, 300, -150, 0)
+	
+	graphI.erase()			// Erase old traces
+	graphI.family(1)			// Keep traces
+	graphI.size(0, 300, -3, 0)
+
+	// Voltage command
+	electrodeVC.dur1 = 100
+	electrodeVC.dur2 = 200
+	electrodeVC.dur3 = 0
+	
+	electrodeVC.amp1 = -125
+	
+	// Simulation parameters
+	v_init = -125
+	tstop = 300
+	
+	// Initial values for fitting
+	y0 = -0.7
+	amp = -0.01
+	x0 = 100.1
+	tau = 25
+	
+	// Start the voltage family
+	for(vCmd = -115; vCmd <= -45; vCmd += 10){
+		electrodeVC.amp2 = vCmd
+		doNotify()
+		run()
+		
+		// V Command
+		vecDeactVcmd.append(vCmd)
+		
+		// Set vectors for fitting
+		vecFittingDataX = vecT.c(100.1 / dt, 200 / dt)
+		vecFittingDataY = vecVCElectrodeI.c(100.1 / dt, 200 / dt)
+		
+		// Fit
+		FitExponentialDecay(vecFittingDataX, vecFittingDataY, &y0, &amp, &x0, \
+			&tau)
+		
+		// Tau
+		vecDeactTau.append(tau)
+		
+		// Display result
+		printf("vCmd = %g, y0 = %g, amp = %g, x0 = %g, tau = %g\n", vCmd, y0, \
+			amp, x0, tau)
+		graphFitting.erase_all()
+		
+		// Plot
+		vecFittingDataY.line(graphFitting, vecFittingDataX, 1, 2)
+		vecFittingResultY.line(graphFitting, vecFittingResultX, 2, 1)
+		graphFitting.exec_menu("View = plot")
+		graphFitting.exec_menu("10% Zoom out")
+	}
+	
+	// Normalize conductance
+	vecG.div(vecG.max())
+	
+	//======================================
+	// Save data to VCDeactivation.dat
+	ioFile.wopen("VCDeactivation.dat")
+	
+	ioFile.printf("V Tau\n")
+	
+	for(i = 0; i < vecDeactVcmd.size(); i += 1) {
+		ioFile.printf("%g %g\n", vecDeactVcmd.x[i], vecDeactTau.x[i])
+	}
+	
+	ioFile.close()
+	
+	//======================================
+	// Notification
+	printf("Run Deactivation Step Family - Done!\n\n")
+}
+
+//==============================================================================
+// Fit GI Curve
+proc FitGVCurve(){
+
+	// Notification
+	print "=== Fit GI curve ==="
+	
+	// Fit
+	FitBoltzmannEquation(vecActVcmd, vecG)
+	
+	// Reset fitting graph
+	graphFitting.erase_all()
+	
+	// Plot original data points
+	graphFitting.color(3)
+	graphFitting.label(0.1, 0.5, "+ g")
+	vecG.mark(graphFitting, vecActVcmd, "+", 9, 3, 2)
+	
+	// Plot fit curve
+	graphFitting.color(2)
+	graphFitting.label("Boltzmann Equation Fit")
+	vecFittingResultY.line(graphFitting, vecFittingResultX)
+	
+	ioFile.wopen("gv_fit.dat")	// Save data to gv_fit.dat
+	
+	for(i = 0; i < vecFittingResultX.size(); i += 1) {
+		ioFile.printf("%g %g\n", vecFittingResultX.x[i], vecFittingResultY.x[i])
+	}
+	
+	ioFile.close()
+	
+	// Resize the graph
+	graphFitting.size(-150, 0, 0, 1)
+	
+	// Notification
+	printf("Fit GI curve - Done!\n\n")
+}
+
+//==============================================================================
+// Plot Tau
+proc PlotTau(){
+	// Reset fitting graph
+	graphFitting.erase_all()
+	
+	// Plot activation tau
+	graphFitting.color(2)
+	graphFitting.label(0.1, 0.95, "+ Activation Tau")
+	vecActTau.mark(graphFitting, vecActVcmd, "+", 9, 2, 2)
+	vecActTau.line(graphFitting, vecActVcmd)
+
+	// Plot deactivation tau
+	graphFitting.color(3)
+	graphFitting.label("o Deactivation Tau")
+	vecDeactTau.mark(graphFitting, vecDeactVcmd, "o", 9, 3, 2)
+	vecDeactTau.line(graphFitting, vecDeactVcmd)
+
+	// Resize the graph
+	graphFitting.exec_menu("View = plot")
+	graphFitting.exec_menu("10% Zoom out")
+	graphFitting.exec_menu("10% Zoom out")
+}
+
+//==============================================================================
