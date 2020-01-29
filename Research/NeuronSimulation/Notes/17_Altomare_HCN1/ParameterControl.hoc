@@ -1,0 +1,49 @@
+//==============================================================================
+// File Name: ParameterControl.hoc
+// Parameter Control Box
+
+//==============================================================================
+// Control Box
+objref hBoxParameterControl
+hBoxParameterControl = new HBox()
+
+hBoxParameterControl.intercept(1)	// Start of the box
+{
+	//======================================
+	// Control panel 
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		// Current clamp
+		xlabel("Current Clamp")
+		xvalue("iAmp", "iAmp", 0, "SetIAmp()")	// iAmp
+		
+		//Voltage clamp
+		xlabel("Voltage Clamp")
+		xvalue("Vcmd", "vCmd", 0, "")
+		
+		// Passive leak
+		xlabel("Passive leak")
+		//e_pas = -74.5
+		xvalue("e_pas", "e_pas", 0, "")	// e_pas
+		xvalue("g_pas", "g_pas", 0, "")	// e_pas
+		
+		// Ih
+		xlabel("Ih")
+		xvalue("gbar_h", "gBarH", 0, "SetSomaProperties()")	// gbar_h
+		//xvalue("vhalfl_h", "vhalfl_h", 0, "")
+		//xvalue("kl_h", "kl_h", 0, "")
+
+	}
+	xpanel() // Close the xpanel
+}
+hBoxParameterControl.intercept(0) // End of the box
+hBoxParameterControl.map("Parameters", 1200, 0, 200, 300)	// Display the box
+
+//==============================================================================
+// Set injected current amplitude
+proc SetIAmp() {
+	electrodeIC.amp = iAmp
+	SetAlphaCurrent()
+}
+
+//==============================================================================

@@ -1,0 +1,283 @@
+//==============================================================================
+// File Name: Chirp.hoc
+// Chirp Experiment
+
+//==============================================================================
+// Control box
+objref hBoxChirp
+hBoxChirp = new HBox()
+
+hBoxChirp.intercept(1)	// Start of the box
+{
+	//======================================
+	// Add the run control panel
+	load_file(1, "RunControl.hoc")
+	
+	//======================================
+	// Start of the panel
+	xpanel("", 0)	// Start the panel("Title", 0: vertical lay out)
+	{
+		// Display "After simulation"
+		xlabel("After simulation")
+		
+		// Characterize chirp response
+		xbutton("Characterize Chirp Response","CharacterizeChirpResponse()")
+		
+		// After characterizing chirp response
+		xlabel("After characterizing chirp response")
+		xbutton("Fit Impedance Amplitude", "FitImpedanceMagnitude()")
+		xbutton("Plot voltage lag", "PlotVoltageLag()")
+	}
+	xpanel() // End of the panel
+}
+hBoxAlpha.intercept(0)	// End of the box
+
+//==============================================================================
+// Set chirp current
+objref vecPeakFrequency, vecFallingFrequency, \
+	vecTroughFrequency, vecRisingFrequency
+vecPeakFrequency = new Vector()
+vecFallingFrequency = new Vector()
+vecTroughFrequency = new Vector()
+vecRisingFrequency = new Vector()
+
+proc SetChirpCurrent() {local factor, startPts
+	numPts = experimentDuration/dt + 1	// Calculate total number of points
+	vecICElectrodeI.resize(numPts)	// Change the size of vecICElectrodeI
+	vecICElectrodeI.fill(0)			// Initialize vecICElectrodeI
+	startPts = 1000 / dt		// The start point for the first injection
+	
+	factor=(0.001 * dt)^2 * PI
+	
+	for(i = 0; i <= 10000 / dt; i += 1){	// 10 sec
+		vecICElectrodeI.x[i + startPts] = iAmp * sin(factor * i^2)
+	}
+	
+	vecPeakFrequency.resize(0)
+	vecFallingFrequency.resize(0)
+	vecTroughFrequency.resize(0)
+	vecRisingFrequency.resize(0)
+	
+	// Set reference frequency
+	for(i = 0; i < 50; i += 1){
+		vecPeakFrequency.append(sqrt(2 * i + 0.5))
+		vecFallingFrequency.append(sqrt(2 * i + 1))
+		vecTroughFrequency.append(sqrt(2 * i + 1.5))
+		vecRisingFrequency.append(sqrt(2 * i + 2))
+	}
+	
+	// Remove the last rising point, which is not valid.
+	vecRisingFrequency.remove(vecRisingFrequency.size() - 1)
+}
+
+//==============================================================================
+// Characterize chirp response
+objref vecPeakTime, vecPeak
+vecPeakTime = new Vector()
+vecPeak = new Vector()
+
+objref vecFallingTime
+vecFallingTime = new Vector()
+
+objref vecTroughTime, vecTrough
+vecTroughTime = new Vector()
+vecTrough = new Vector()
+
+objref vecRisingTime
+vecRisingTime = new Vector()
+
+proc CharacterizeChirpResponse() {local i
+	print "=== Characterize Chirp Response ==="
+	
+	// Reset vectors
+	vecPeakTime.resize(0)
+	vecPeak.resize(0)
+	vecFallingTime.resize(0)
+	vecTroughTime.resize(0)
+	vecTrough.resize(0)
+	vecRisingTime.resize(0)
+	
+	// Remove baseline
+	vBaseline = vecV.mean(500 / dt, 1000 / dt)
+	vecV.sub(vBaseline)
+	
+	// Start point
+	i = 1500 / dt
+	
+	// Search peaks, troughs, and crossings
+	while(i < 11000 / dt) {
+		//======================================
+		// Peak
+		while(vecV.x[i] < vecV.x[i + 1] && i < 11000 / dt){
+			i += 1
+		}
+		
+		vecPeakTime.append(i * dt * 0.001 - 1)
+		vecPeak.append(vecV.x[i])
+		
+		//======================================
+		// Falling
+		while(vecV.x[i] > 0 && i < 11000 / dt){
+			i += 1
+		}
+		
+		vecFallingTime.append(i * dt * 0.001 - 1)
+		
+		//======================================
+		// Trough
+		while(vecV.x[i] > vecV.x[i + 1] && i < 11000 / dt){
+			i += 1
+		}
+		
+		vecTroughTime.append(i * dt * 0.001 - 1)
+		vecTrough.append(vecV.x[i])
+		
+		//======================================
+		// Rising
+		while(vecV.x[i] < 0 && i < 11000 / dt){
+			i += 1
+		}
+		
+		vecRisingTime.append(i * dt * 0.001 - 1)
+	}
+	
+	// Remove the last point
+	vecRisingTime.remove(vecRisingTime.size() - 1)
+	
+	//======================================
+	// Save peaks to peaks.dat
+	ioFile.wopen("peak.dat")
+	ioFile.printf("Index Frequency Rin")
+	
+	vecPeak.div(iAmp)
+	
+	for(i = 0; i < 50; i += 1){
+		ioFile.printf("\n%d %g %g", i+1, vecPeakFrequency.x[i], vecPeak.x[i])
+	}
+	
+	ioFile.close()
+	
+	//======================================
+	// Save troughs to troughs.dat
+	ioFile.wopen("trough.dat")
+	ioFile.printf("Index Frequency Rin")
+	
+	vecTrough.div(-iAmp)
+	
+	for(i = 0; i < 50; i += 1){
+		ioFile.printf("\n%d %g %g", i+1, vecTroughFrequency.x[i], \
+			vecTrough.x[i])
+	}
+	
+	//======================================
+	// Save fallings to fallings.dat
+	ioFile.wopen("falling.dat")
+	ioFile.printf("Index Frequency Offset")
+	
+	vecFallingTime.sub(vecFallingFrequency)
+	vecFallingTime.mul(1000)
+	
+	for(i = 0; i < 50; i += 1){
+		ioFile.printf("\n%d %g %g", i+1, vecFallingFrequency.x[i], \
+			vecFallingTime.x[i])
+	}
+	
+	ioFile.close()
+	
+	//======================================
+	// Save risings to rising.dat
+	ioFile.wopen("rising.dat")
+	ioFile.printf("Index Frequency Offset")
+	
+	vecRisingTime.sub(vecRisingFrequency)
+	vecRisingTime.mul(1000)
+	
+	for(i = 0; i < 49; i += 1){
+		ioFile.printf("\n%d %g %g", i+1, vecRisingFrequency.x[i], \
+			vecRisingTime.x[i])
+	}
+	
+	ioFile.close()
+	
+	//======================================
+	// Notification
+	print "Depolarizing Resonance Frequency = ", \
+		vecPeakFrequency.x[vecPeak.max_ind()], " (Hz)"
+	print "Hyperpolarizing Resonance Frequency = ", \
+		vecTroughFrequency.x[vecTrough.max_ind()], " (Hz)"
+	print "Characterization of chirp response - Done!\n"
+}
+
+//==============================================================================
+// Fit Impedance Magnitude
+proc FitImpedanceMagnitude(){
+	// Notification
+	print "=== Fit Impedance Magnitude ==="
+	
+	// Clear graph
+	graphFitting.erase_all()
+	graphFitting.color(1)
+	
+	// Peak
+	vecPeak.mark(graphFitting, vecPeakFrequency, "+", 5)
+	FitSixOrderPolynomial(vecPeakFrequency, vecPeak)
+	vecFittingResultY.line(graphFitting, vecFittingResultX, 2, 1)
+	print "Depolarizing Resonance Frequency = ", \
+		vecFittingResultX.x[vecFittingResultY.max_ind()], " (Hz)"
+	
+	// Traough
+	vecTrough.mark(graphFitting, vecTroughFrequency, "o", 5)
+	FitSixOrderPolynomial(vecTroughFrequency, vecTrough)
+	vecFittingResultY.line(graphFitting, vecFittingResultX, 2, 1)
+	print "Hyperpolarizing Resonance Frequency = ", \
+		vecFittingResultX.x[vecFittingResultY.max_ind()], " (Hz)"
+	
+	// Resize
+	graphFitting.exec_menu("View = plot")
+	graphFitting.exec_menu("10% Zoom out")
+	
+	// Labels
+	graphFitting.color(1)
+	graphFitting.label(0.15, 0.95, "+ Peaks")
+	graphFitting.label("o Troughs")
+	graphFitting.color(2)
+	graphFitting.label("Fits")
+	
+	// Notification
+	print "Fit impedance amplitude - Done.\n"
+}
+
+//==============================================================================
+// Plot voltage lag
+proc PlotVoltageLag(){
+	// Notification
+	print "=== Plot voltage lag ==="
+	
+	// Clear graph
+	graphFitting.erase_all()
+	
+	// Falling
+	graphFitting.color(1)
+	vecFallingTime.line(graphFitting, vecFallingFrequency)
+	vecFallingTime.mark(graphFitting, vecFallingFrequency, "+", 5)
+	
+	// Rising
+	graphFitting.color(2)
+	vecRisingTime.line(graphFitting, vecRisingFrequency)
+	vecRisingTime.mark(graphFitting, vecRisingFrequency, "o", 5)
+	
+	// Resize
+	graphFitting.exec_menu("View = plot")
+	graphFitting.exec_menu("10% Zoom out")
+	
+	// Labels
+	graphFitting.color(1)
+	graphFitting.label(0.15, 0.95, "+ Falling Edge")
+	graphFitting.color(2)
+	graphFitting.label("o Rising Edge")
+	
+	// Notification
+	print "Plot voltage lag - Done."
+}
+
+//==============================================================================

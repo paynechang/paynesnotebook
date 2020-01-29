@@ -1,0 +1,264 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #17</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #17</h1>
+    <hr />
+    <h2>
+        Goals: Create a kinetic model based on Altomare&#39;s model</h2>
+    <h2>
+        Specific Aims:</h2>
+    <ul>
+        <li>Build the Altomare&#39;s model</li>
+        <li>Measure the following properties:<ul>
+            <li>Membrane time constant.</li>
+            <li>Input resistance.</li>
+            <li>Rebound slope.</li>
+            <li>Temporal summation.</li>
+            <li>Impedance magnitude profile and voltage lag.</li>
+            <li>GV curve.</li>
+            <li>Tau-V curve.</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>
+        Downloads:</h2>
+    <ul>
+        <li><a href="Alpha.hoc">Alpha.hoc</a> - For temporal summation experiment (alpha EPSCs)</li>
+        <li><a href="Chirp.hoc">Chirp.hoc</a> - For chirp experiment</li>
+        <li><a href="ExperimentControl.hoc">ExperimentControl.hoc</a> - Experiment contols</li>
+        <li><a href="Fitting.hoc">Fitting.hoc</a> - Procedures for curve fitting</li>
+        <li><a href="GraphVI.hoc">GraphVI.hoc</a> - Voltage and current graphs</li>
+        <li><a href="Main.hoc">Main.hoc</a> - Program start here</li>
+        <li><a href="ParameterControl.hoc">ParameterControl.hoc</a> - Parameter controls</li>
+        <li><a href="Pulse.hoc">Pulse.hoc</a> - For pulse experiment (membrane time connstant)</li>
+        <li><a href="RunControl.hoc">RunControl.hoc</a> - Run controls</li>
+        <li><a href="Step.hoc">Step.hoc</a> - For current step experiment (Rin, sag, rebound slope)</li>
+        <li><a href="VoltageClamp.hoc">VoltageClamp.hoc</a> - Voltage clamp experiment</li>
+        <li><a href="h_Altomare_HCN1.mod">h_Altomare_HCN1.mod</a>&nbsp;- mod file for the kinetic scheme</li>
+        <li><a href="17_Altomare_HCN1.zip">17_Altomare_HCN1.zip</a> - Contains all files.</li>
+    </ul>
+    <hr />
+    <h2>
+        Summary</h2>
+    <table>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>
+                Without Ih</td>
+            <td>
+                Ih in Sonia&#39;s model
+            </td>
+            <td>
+                Altomare&#39;s model</td>
+        </tr>
+        <tr>
+            <td>
+                gbar (S/cm<sup>2</sup>)
+            </td>
+            <td>
+                0</td>
+            <td>
+                4e-5
+            </td>
+            <td>
+                1.1e-5</td>
+        </tr>
+        <tr>
+            <td>
+                Time Constant (ms)
+            </td>
+            <td>
+                30.0</td>
+            <td>
+                24.3
+            </td>
+            <td>
+                24.9</td>
+        </tr>
+        <tr>
+            <td>
+                Rin (M&Omega;)
+            </td>
+            <td>
+                95.5</td>
+            <td>
+                56.9
+            </td>
+            <td>
+                66.0</td>
+        </tr>
+        <tr>
+            <td>
+                Rebound Slope (mV/mV)
+            </td>
+            <td>
+                0.00</td>
+            <td>
+                -0.17
+            </td>
+            <td>
+                -0.05</td>
+        </tr>
+        <tr>
+            <td>
+                Temporal Summation (%)
+            </td>
+            <td>
+                43.7</td>
+            <td>
+                11.0
+            </td>
+            <td>
+                16.9</td>
+        </tr>
+        <tr>
+            <td>
+                Depolarizing Resonance Frequency (Hz)
+            </td>
+            <td>
+                0.6</td>
+            <td>
+                3.5
+            </td>
+            <td>
+                2.3</td>
+        </tr>
+        <tr>
+            <td>
+                Hyperpolarizing Resonance Frequency (Hz)
+            </td>
+            <td>
+                1.1</td>
+            <td>
+                4.5
+            </td>
+            <td>
+                3.3</td>
+        </tr>
+        <tr>
+            <td>
+                Vhalf (mV)
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                -81.1
+            </td>
+            <td>
+                -69.0</td>
+        </tr>
+        <tr>
+            <td>
+                k (mV)
+            </td>
+            <td>
+                &nbsp;</td>
+            <td>
+                7.90
+            </td>
+            <td>
+                9.55</td>
+        </tr>
+        </table>
+    <p>
+        Conclusion: Both models are good.</p>
+    <hr />
+    <h2>
+        Steps and Notes:</h2>
+    <p>
+        Create &quot;h_Altomare_2001.mod&quot;.<br />
+        Create &quot;nrnmech.dll&quot;.<br />
+        Start &quot;Main.hoc&quot;.</p>
+    <h3>
+        Membrane Time Constant:</h3>
+    <p>
+        Click &quot;Pulse (1 ms)&quot; button.<br />
+        Click &quot;Initiate &amp; Run&quot; button.<br />
+        Change &quot;gbar_h&quot; to 1.1e-5 so the resting potential is at -65 mV.<br />
+        Click &quot;Fit Decay&quot; button.<br />
+        Tau = 24.9 (ms).</p>
+    <h3>
+        Input Resistance and Rebound Slope:</h3>
+    <p>
+        Click &quot;Current Step (500 ms)&quot; button.<br />
+        Click &quot;Run Step Family&quot; button.</p>
+    <p>
+        <img alt="I &amp; V" height="510" src="Images/01.png" width="352" /></p>
+    <p>
+        Click &quot;Measure Rin (LR)&quot; button.<br />
+        Rin = 66.0 (M Ohm).</p>
+    <p>
+        <img alt="Rin" height="282" src="Images/02.png" width="346" /></p>
+    <p>
+        Click &quot;Measure Rebound Slope (LR)&quot; button.<br />
+        Rebound Slope = -0.05 (mV/mV).</p>
+    <h3>
+        Temporal Summation:</h3>
+    <p>
+        Click &quot;Five Alpha EPSCs (20 Hz)&quot; button.<br />
+        Click &quot;Initiate &amp; Run&quot; button.<br />
+        Click &quot;Measure Temporal Summation&quot; button.<br />
+        Temporal Summation = 16.9 (%).</p>
+    <h3>
+        Impedance Magnitude Profile and Voltage Lag:</h3>
+    <p>
+        Click &quot;Chirp&quot; button.<br />
+        Click &quot;Initiate &amp; Run&quot; button.</p>
+    <p>
+        <img alt="Chirp" height="510" src="Images/03.png" width="352" /></p>
+    <p>
+        Click &quot;Characterize Chirp Response&quot; button.<br />
+        Click &quot;Fit Impedance Amplitude&quot; button.</p>
+    <p>
+        <img alt="Impedance Magnitude Profile" height="282" src="Images/04.png" width="346" /></p>
+    <p>
+        Depolarizing Resonance Frequency = 2.3 (Hz)<br />
+        Hyperpolarizing Resonance Frequency = 3.3 (Hz)</p>
+    <p>
+        Click &quot;Plot Voltage Lag&quot; button.</p>
+    <p>
+        <img alt="Voltage Delay" height="282" src="Images/05.png" width="346" /></p>
+    <h3>
+        G-V Curve and Tau-V Curve</h3>
+    <p>
+        Click &quot;Voltage Clamp&quot; button.<br />
+        Click &quot;Run Activation Step Family&quot; button.<br />
+        Click &quot;Fit GV Curve&quot; button.</p>
+    <p>
+        <img alt="GV Curve" height="282" src="Images/06.png" width="346" /></p>
+    <p>
+        vhalf = -69.0 (mV)<br />
+        k = 9.55 (mV)</p>
+    <p>
+        Click &quot;Run Deactivation Step Family&quot; button.<br />
+        Click &quot;Plot Tau&quot; button.</p>
+    <p>
+        <img alt="Time Constant" height="282" src="Images/07.png" width="346" /></p>
+    <hr />
+</body>
+</html>
