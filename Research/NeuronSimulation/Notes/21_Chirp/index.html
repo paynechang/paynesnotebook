@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #21</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+        .style1
+        {
+            text-decoration: underline;
+            color: Red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #21</h1>
+    <hr />
+    <h2>
+        Goals: Examine The Properties of Fourier Transform of Chirp Current and Voltage 
+        Response</h2>
+    <h2>
+        Contents:</h2>
+    <ol>
+        <li><a href="#1">Current and voltage traces.</a></li>
+        <li><a href="#2">Fourier transform of current trace.</a></li>
+        <li><a href="#3">Fourier transform of voltage trace.</a></li>
+        <li><a href="#4">Impedance magnitude, impedance phase, and voltage lag.</a></li>
+    </ol>
+    <hr />
+    <h2>
+        Conditions:</h2>
+    <p>
+        e_pas = -65 (mV)<br />
+        gbar_h = 0 (S/cm2)</p>
+    <h2>
+        Summary:</h2>
+    <h3 id="1">
+        1. Current and voltage traces</h3>
+    <p>
+        Baseline in voltage is removed.</p>
+    <p>
+        <img alt="Current" height="362" src="Images/01.png" width="512" />
+        <img alt="Voltage" height="362" src="Images/02.png" width="512" /></p>
+    <hr />
+    <h3 id="2">
+        2.
+        Fourier Transform of Current Trace</h3>
+    <p>
+        <img alt="Current Magnitude" height="362" src="Images/03.png" width="512" /></p>
+    <p>
+        <img alt="Current's Phase" height="362" src="Images/04.png" width="512" />
+        <img alt="Unwrapped" height="362" src="Images/07.png" width="512" /></p>
+    <hr />
+    <h3 id="3">
+        3.
+        Fourier Transform of Voltage Trace</h3>
+    <p>
+        <img alt="Voltage's Magnitude" height="362" src="Images/05.png" width="512" /></p>
+    <p>
+        <img alt="Voltage's Phase" height="362" src="Images/06.png" width="512" />
+        <img alt="Unwrapped" height="362" src="Images/08.png" width="512" /></p>
+    <hr />
+    <h3 id="4">
+        4.
+        Impedance Magnitude, Impedance Phase, and Voltage Lag</h3>
+    <h4>
+        Notes</h4>
+    <p>
+        It is surprising that the magnitude profiles of current&#39;s and voltage&#39;s Fourier transform are <span class="style1">zigzag</span>, but 
+        the profile of impedance magnitude is <span class="style1">smooth</span>!<br />
+        Another surprising finding is that the impedance phase is <span class="style1">small</span> at lower frequency, but the voltage lag is
+        <span class="style1">large</span> there.</p>
+    <p>
+        <img alt="Impedance Magnitude" height="362" src="Images/09.png" width="512" /></p>
+    <p>
+        <img alt="Impedance Phase" height="362" src="Images/10.png" width="512" />
+        <img alt="Voltage lag" height="362" src="Images/11.png" width="512" /></p>
+    <hr />
+    </body>
+</html>
