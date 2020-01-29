@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>NEURON Tutorial #22</title>
+    <style type="text/css">
+        table
+        {
+            border-collapse: collapse;
+            border-style: solid;
+            border-color: Black;
+            border-width: 1px;
+            border: 1px solid #000000;
+            padding: 4px;
+        }
+        td
+        {
+            vertical-align: top;
+            border-width: 1px;
+            border-color: Black;
+            border-style: solid;
+            padding: 4px;
+        }
+        </style>
+</head>
+<body>
+    <h1>
+        NEURON Tutorial #22</h1>
+    <hr />
+    <h2>
+        Goals: Compare Fourier Transform of Impedance in Models without and with Ih</h2>
+    <h2>
+        Contents:</h2>
+    <ol>
+        <li><a href="#1">Voltage traces.</a></li>
+        <li><a href="#2">Impedance magnitude.</a></li>
+        <li><a href="#3">Impedance phase</a>.</li>
+        <li><a href="#4">Voltage lag.</a></li>
+    </ol>
+    <hr />
+    <h2>
+        Conditions:</h2>
+    <p>
+        Without Ih:<br />
+        e_pas = -65 (mV)<br />
+        gbar_h = 0 (S/cm2)</p>
+    <p>
+        With Ih:<br />
+        e_pas = -70 (mV)<br />
+        gbar_h = 4e-5 (S/cm2)<br />
+        Sonia&#39;s Ih model</p>
+    <h2>
+        Summary:</h2>
+    <h3 id="1">
+        1. Voltage traces</h3>
+    <p>
+        Baseline in voltage is removed.</p>
+    <p>
+        <img alt="Voltage Traces" height="362" src="Images/01.png" width="512" /></p>
+    <hr />
+    <h3 id="2">
+        2. Impedance Magnitude</h3>
+    <p>
+        <img alt="Impedance Magnitude" height="362" src="Images/02.png" width="512" /></p>
+    <hr />
+    <h3 id="3">
+        3. Impedance Phase</h3>
+    <p>
+        <img alt="Impedance Phase" height="362" src="Images/03.png" width="512" /></p>
+    <hr />
+    <h3 id="4">
+        4.
+        Voltage Lag</h3>
+    <h4>
+        Notes</h4>
+    <p>
+        The voltage lag (phase) information is not reliable below 1 Hz.</p>
+    <p>
+        <img alt="Voltage Lag" height="362" src="Images/04.png" width="512" /></p>
+    <hr />
+    </body>
+</html>
